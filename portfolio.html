@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bhuvana K S ~ Portfolio</title>
+  <meta name="description" content="Bhuvana K S - software engineer building AI agents, graph databases and backend systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="marquee" aria-hidden="true">
+    <span>★ welcome to bhuvana's little corner of the internet ★ open for cool projects ★ best viewed with a cup of chai ★ welcome to bhuvana's little corner of the internet ★ open for cool projects ★ best viewed with a cup of chai ★</span>
+  </div>
+
+  <nav class="taskbar">
+    <a href="index.html">⌂ home</a>
+    <a href="#about">about</a>
+    <a href="#quest-log">quest log</a>
+    <a href="#inventory">inventory</a>
+    <a href="#school">school</a>
+    <a href="#trophies">trophies</a>
+    <a href="#contact">contact</a>
+    <a href="resume.html">resume</a>
+    <span class="clock" id="clock">--:--</span>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="window hero" id="about">
+      <div class="titlebar"><span>~/about_me.exe</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body hero-grid">
+        <div class="avatar" role="img" aria-label="Pixel art cat avatar">
+          <pre class="pixel-cat">
+ /\_/\
+( ^.^ )
+ &gt; ♥ &lt;</pre>
+          <div class="hp">LVL 24 &nbsp;|&nbsp; HP ♥♥♥♥♥</div>
+        </div>
+        <div>
+          <h1>Hi, I'm Bhuvana K S<span class="blink">_</span></h1>
+          <p class="typed" id="typed" data-lines='["software engineer","AI agent tinkerer","graph database nerd","backend builder"]'></p>
+          <p>
+            I build AI agents, graph databases and backend systems. I've shipped
+            multi-database integrations and graph-based analytics across
+            production and POC environments, and I love teaching small language
+            models new tricks.
+          </p>
+          <p class="meta">📍 Bengaluru, India &nbsp; ✉ <a href="mailto:work.bhuvanaks@gmail.com">work.bhuvanaks@gmail.com</a></p>
+          <div class="cta">
+            <a class="btn" href="Bhuvana_KS_Resume.pdf" download>⬇ download resume</a>
+            <a class="btn alt" href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn alt" href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="window" id="quest-log">
+      <div class="titlebar"><span>~/quest_log.txt</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body">
+        <h2>★ Quest Log ★</h2>
+        <p class="sub">technical experience, newest quest first. click a quest to expand!</p>
+
+        <details class="quest" open>
+          <summary>
+            <span class="badge pink">CURRENT</span>
+            <strong>Software Engineer (Specialist Programmer)</strong>
+            <em>Infosys Ltd., Bengaluru · Dec 2024 – Present</em>
+          </summary>
+          <ul>
+            <li>Fine-tuned small language models (<b>Phi-4-mini 3.8B</b>, <b>Qwen3</b>) with <b>LoRA/QLoRA</b> via <b>Unsloth</b> on ~1,500 curated Q&amp;A pairs across ~20 business domains, specialising responses for support-automation workflows.</li>
+            <li>Paired the SLMs with <b>RAG</b> over vector DBs (<b>ChromaDB</b>, <b>Pinecone</b>) to keep knowledge fresh without retraining, and deployed 4-bit quantised (~4 GB) models locally with <b>Ollama</b> for private, low-cost inference and no cloud dependency.</li>
+            <li>Built multi-database API integrations and backend services with <b>FastAPI</b> and <b>WebSockets</b> across 3+ heterogeneous databases (document, graph, relational).</li>
+            <li>Built an end-to-end ML pipeline in <b>Python</b> and <b>MongoDB</b>: ingestion, preprocessing, training and serialisation.</li>
+            <li>Developed a human-in-the-loop validation UI in <b>Gradio</b> with automated retraining and champion model selection, <span class="hl">cutting manual review effort by ~30%</span>.</li>
+            <li>Integrated AI agent workflows using <b>MAF</b> for intelligent automation across backend modules.</li>
+          </ul>
+        </details>
+
+        <details class="quest">
+          <summary>
+            <span class="badge mint">LEVEL UP</span>
+            <strong>Software Engineer</strong>
+            <em>Knowledge Lens Pvt Ltd., Bengaluru · Aug 2024 – Dec 2024</em>
+          </summary>
+          <ul>
+            <li>Owned the <b>Root Cause Analysis (RCA)</b> module for manufacturing-plant asset-malfunction analysis, modelling and storing graph data in <b>Neo4j</b> and <b>JanusGraph</b>.</li>
+            <li>Built V1 of the company's internal backend <b>SDK</b> so engineers can visualise multiple graph layouts with one function call, <span class="hl">cutting visualisation boilerplate by ~50%</span>.</li>
+          </ul>
+        </details>
+
+        <details class="quest">
+          <summary>
+            <span class="badge yellow">TUTORIAL</span>
+            <strong>Software Engineer Intern</strong>
+            <em>Knowledge Lens Pvt Ltd., Bengaluru · Feb 2024 – Aug 2024</em>
+          </summary>
+          <ul>
+            <li>Handled the <b>WebSocket API</b> for the FTDM chatbot feature; optimised <b>Cypher</b> and <b>Gremlin</b> queries in Neo4j and JanusGraph for <span class="hl">40% faster queries and 25% less data-retrieval time</span>.</li>
+            <li>Built a Gremlin graph visualiser with <b>vis.js</b> and Python; led the <b>Kafka</b> version upgrade for Jublient's client module.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="window" id="inventory">
+      <div class="titlebar"><span>~/inventory.dat</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body">
+        <h2>♦ Inventory ♦</h2>
+        <div class="grid">
+          <div class="item"><h3>⚔ Languages</h3><p><span class="chip">Python</span><span class="chip">C++</span><span class="chip">SQL</span><span class="chip">Gremlin</span><span class="chip">Cypher</span></p></div>
+          <div class="item"><h3>✨ AI &amp; ML</h3><p><span class="chip">SLM Fine-tuning</span><span class="chip">Unsloth</span><span class="chip">Hugging Face</span><span class="chip">Ollama</span><span class="chip">RAG</span><span class="chip">MAF</span><span class="chip">Object Detection</span></p></div>
+          <div class="item"><h3>🛠 Backend</h3><p><span class="chip">FastAPI</span><span class="chip">WebSockets</span></p></div>
+          <div class="item"><h3>💾 Databases</h3><p><span class="chip">MongoDB</span><span class="chip">Neo4j</span><span class="chip">JanusGraph</span><span class="chip">ChromaDB</span><span class="chip">Pinecone</span></p></div>
+          <div class="item"><h3>🎒 Tools</h3><p><span class="chip">Git</span><span class="chip">vis.js</span><span class="chip">Gradio</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION + PUBLICATION -->
+    <section class="window" id="school">
+      <div class="titlebar"><span>~/school.doc</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body two">
+        <div>
+          <h2>🎓 Education</h2>
+          <p><strong>B.E. in Computer Science</strong><br>Global Academy of Technology, Bengaluru<br>2020 – 2024</p>
+          <div class="cgpa">CGPA <b>9.17</b></div>
+        </div>
+        <div>
+          <h2>📜 Publication</h2>
+          <p><strong>ML-Based Graduate Admission Prediction</strong><br>IEEE International Conference on Intelligent Systems, Communication and Applications (CIISCA 2023)</p>
+          <p><a class="btn small" href="#" target="_blank" rel="noopener">view paper →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="window" id="trophies">
+      <div class="titlebar"><span>~/trophies.exe</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body">
+        <h2>🏆 Trophy Room</h2>
+        <div class="grid three">
+          <div class="item trophy"><div class="big">🥇</div><h3>Evolve 2024</h3><p>1st place, office hackathon at Knowledge Lens.</p></div>
+          <div class="item trophy"><div class="big">🥇</div><h3>College Hackathon 2021</h3><p>1st place. Built a complete front-end website in HTML &amp; CSS.</p></div>
+          <div class="item trophy"><div class="big">⚖️</div><h3>Hackathon Judge</h3><p>Invited to judge 3 hackathons at Global Academy of Technology and Dayananda Sagar University (twice).</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="window" id="contact">
+      <div class="titlebar"><span>~/contact.msg</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body center">
+        <h2>✉ Press Start</h2>
+        <p>Got a project, a paper or a hackathon idea? Say hi!</p>
+        <a class="btn" href="mailto:work.bhuvanaks@gmail.com">send me mail</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>made with ♥ and too much chai · © <span id="year"></span> Bhuvana K S · <button id="konami-hint" class="linkbtn" title="try the konami code!">?</button></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

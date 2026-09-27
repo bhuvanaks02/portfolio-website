@@ -1,0 +1,48 @@
+.resume-main { max-width: 860px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.toolbar .btn { font-family: 'Press Start 2P', monospace; }
+button.btn { font-family: 'Press Start 2P', monospace; }
+
+.paper .body { padding: 28px 32px; }
+.r-head { text-align: center; border-bottom: 4px double var(--ink); padding-bottom: 14px; margin-bottom: 8px; }
+.r-head h1 { font-size: clamp(18px, 4.5vw, 28px); margin-bottom: 10px; }
+.contact { margin: 0 0 10px; }
+.summary { margin: 0; text-align: left; }
+
+.paper section { margin-top: 20px; }
+.paper h2 {
+  font-size: 12px; background: var(--lav); border: 3px solid var(--ink);
+  padding: 8px 10px; margin: 0 0 12px; text-transform: uppercase; box-shadow: 3px 3px 0 var(--ink);
+}
+.row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.row strong { font-size: 26px; font-weight: 400; }
+.date { background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); padding: 0 8px; white-space: nowrap; }
+.org { color: var(--pink-d); margin-bottom: 4px; }
+.job { margin-bottom: 18px; }
+.paper ul { margin: 6px 0 0; padding-left: 24px; list-style: square; }
+.paper li { margin-bottom: 6px; }
+
+.skills { display: grid; grid-template-columns: 130px 1fr; gap: 6px 14px; margin: 0; }
+.skills dt { font-family: 'Press Start 2P', monospace; font-size: 10px; padding-top: 6px; }
+.skills dd { margin: 0; }
+
+.modal { position: fixed; inset: 0; z-index: 100; background: #082a32cc; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal[hidden] { display: none; }
+.modal-box { width: min(900px, 100%); height: min(92vh, 1000px); display: flex; flex-direction: column; margin: 0; }
+.modal-box iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+.modal-foot { display: flex; gap: 12px; flex-wrap: wrap; padding: 10px 12px; border-top: 4px solid var(--ink); background: var(--paper); }
+.close { font-family: 'Press Start 2P', monospace; font-size: 10px; width: 24px; height: 24px; background: var(--paper); color: var(--ink); border: 2px solid var(--ink); cursor: pointer; }
+.close:hover { background: var(--pink); }
+
+@media (max-width: 640px) {
+  .paper .body { padding: 18px 14px; }
+  .skills { grid-template-columns: 1fr; }
+  .skills dt { padding-top: 6px; }
+}
+
+@media print {
+  .marquee, .taskbar, .toolbar, .modal, footer { display: none !important; }
+  body { background: #fff; font-size: 16px; }
+  .window { box-shadow: none; border: 0; }
+  .titlebar { display: none; }
+}

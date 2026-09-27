@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bhuvana K S ~ Press Start</title>
+  <meta name="description" content="Bhuvana K S - software engineer. AI agents, graph databases and backend systems. Press start to explore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="monitor">
+    <div class="crt" id="crt">
+      <div class="scanlines" aria-hidden="true"></div>
+
+      <!-- Phase 1: boot log -->
+      <div id="boot" class="boot" aria-live="polite"></div>
+
+      <!-- Phase 2: landing -->
+      <div id="home" class="home" hidden>
+        <pre class="logo" aria-label="Bhuvana K S">
+ ____  _   _ _   _ __     ___    _   _    _
+| __ )| | | | | | |\ \   / / \  | \ | |  / \
+|  _ \| |_| | | | | \ \ / / _ \ |  \| | / _ \
+| |_) |  _  | |_| |  \ V / ___ \| |\  |/ ___ \
+|____/|_| |_|\___/    \_/_/   \_\_| \_/_/   \_\</pre>
+        <p class="role"><span id="typed"></span><span class="cursor">█</span></p>
+        <p class="pitch">I build AI agents, graph databases &amp; backend systems.<br>Small models, big ideas. Bengaluru, India.</p>
+
+        <div class="stats" aria-label="Highlights">
+          <div><b>3</b><span>quests</span></div>
+          <div><b>9.17</b><span>cgpa</span></div>
+          <div><b>2</b><span>1st places</span></div>
+          <div><b>1</b><span>IEEE paper</span></div>
+        </div>
+
+        <a class="start" id="start" href="portfolio.html">▶ PRESS START</a>
+        <p class="hint">or hit <kbd>Enter</kbd></p>
+
+        <nav class="menu" aria-label="Jump to section">
+          <a href="portfolio.html#quest-log">▸ quest log</a>
+          <a href="portfolio.html#inventory">▸ inventory</a>
+          <a href="portfolio.html#trophies">▸ trophies</a>
+          <a href="resume.html">▸ resume</a>
+          <a href="portfolio.html#contact">▸ contact</a>
+        </nav>
+      </div>
+
+      <button id="skip" class="skip" type="button">skip ▸▸</button>
+    </div>
+    <div class="stand" aria-hidden="true"><span class="led"></span></div>
+  </div>
+
+  <p class="foot">© BHUVANA-OS · best viewed in 256 colours</p>
+  <script src="landing.js"></script>
+</body>
+</html>

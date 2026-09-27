@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bhuvana K S ~ Resume</title>
+  <meta name="description" content="Resume of Bhuvana K S - software engineer, AI agents, graph databases and backend systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+  <nav class="taskbar">
+    <a href="index.html">⌂ home</a>
+    <a href="portfolio.html">portfolio</a>
+    <a href="resume.html">resume</a>
+    <span class="clock" id="clock">--:--</span>
+  </nav>
+
+  <main class="resume-main">
+    <div class="toolbar">
+      <button class="btn" id="previewBtn" type="button">👁 preview resume</button>
+      <a class="btn alt" href="Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
+      <button class="btn small" type="button" onclick="window.print()">🖨 print</button>
+    </div>
+
+    <article class="window paper">
+      <div class="titlebar"><span>~/Bhuvana_KS_Resume.doc</span><span class="btns"><i>_</i><i>□</i><i>x</i></span></div>
+      <div class="body">
+
+        <header class="r-head">
+          <h1>Bhuvana K S</h1>
+          <p class="contact">✉ <a href="mailto:work.bhuvanaks@gmail.com">work.bhuvanaks@gmail.com</a> · 📍 Bengaluru, India ·
+            <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a> ·
+            <a href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener">GitHub</a></p>
+          <p class="summary">Software engineer with experience in AI agents, graph databases, and backend systems. Skilled in building multi-database integrations and graph-based analytics across production and POC environments.</p>
+        </header>
+
+        <section>
+          <h2>Work Experience</h2>
+
+          <div class="job">
+            <div class="row"><strong>Software Engineer (Specialist Programmer)</strong><span class="date">Dec 2024 – Present</span></div>
+            <div class="org">Infosys Ltd., Bengaluru</div>
+            <ul>
+              <li>Fine-tuned small language models (SLMs) such as Phi-4-mini (3.8B) and Qwen3 using parameter-efficient techniques (LoRA/QLoRA) with Unsloth on ~1,500 curated domain-specific Q&amp;A pairs across ~20 business domains, specialising responses for support-automation workflows.</li>
+              <li>Integrated fine-tuned SLMs with Retrieval-Augmented Generation (RAG) over vector databases (ChromaDB, Pinecone) to keep domain knowledge current without full retraining, and deployed quantised (4-bit, ~4 GB) models locally via Ollama for private, low-cost inference with no cloud dependency.</li>
+              <li>Built multi-database API integrations and backend services using FastAPI and WebSockets across 3+ heterogeneous database systems (document, graph, and relational).</li>
+              <li>Built an end-to-end ML pipeline using Python and MongoDB for data ingestion, preprocessing, model training, and serialisation.</li>
+              <li>Developed a human-in-the-loop validation interface using Gradio with automated retraining and champion model selection, cutting manual model-review effort by ~30%.</li>
+              <li>Integrated AI agent workflows using MAF for intelligent automation across backend modules.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="row"><strong>Software Engineer</strong><span class="date">Aug 2024 – Dec 2024</span></div>
+            <div class="org">Knowledge Lens Pvt Ltd., Bengaluru</div>
+            <ul>
+              <li>Owned the Root Cause Analysis (RCA) module for manufacturing plant asset-malfunction analysis, modelling and storing graph data in Neo4j and JanusGraph.</li>
+              <li>Built V1 of the company's internal backend SDK enabling engineers to visualise multiple graph layouts through a single unified function call, cutting graph-visualisation boilerplate by ~50%.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="row"><strong>Software Engineer Intern</strong><span class="date">Feb 2024 – Aug 2024</span></div>
+            <div class="org">Knowledge Lens Pvt Ltd., Bengaluru</div>
+            <ul>
+              <li>Handled WebSocket API for the FTDM chatbot feature; optimised Cypher and Gremlin queries in Neo4j and JanusGraph achieving 40% faster query performance and 25% reduction in data retrieval time.</li>
+              <li>Built a Gremlin graph visualiser using vis.js and Python; led the Kafka version upgrade for Jublient's client module.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Skills</h2>
+          <dl class="skills">
+            <dt>Languages</dt><dd>Python, C++, SQL, Gremlin, Cypher</dd>
+            <dt>AI &amp; ML</dt><dd>Object Detection, MAF, SLM Fine-tuning, Unsloth, Hugging Face, Ollama, RAG</dd>
+            <dt>Backend</dt><dd>FastAPI, WebSockets</dd>
+            <dt>Databases</dt><dd>MongoDB, Neo4j, JanusGraph, ChromaDB, Pinecone</dd>
+            <dt>Tools</dt><dd>Git, vis.js, Gradio</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <div class="row"><strong>Bachelor of Engineering in Computer Science</strong><span class="date">2020 – 2024</span></div>
+          <div class="org">Global Academy of Technology, Bengaluru · CGPA: 9.17</div>
+        </section>
+
+        <section>
+          <h2>Publications</h2>
+          <ul>
+            <li><strong>ML-Based Graduate Admission Prediction.</strong> Published at the IEEE International Conference on Intelligent Systems, Communication and Applications (CIISCA 2023). <a href="#" target="_blank" rel="noopener">View paper</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Achievements</h2>
+          <ul>
+            <li><strong>Hackathon Judge:</strong> Invited as a judge at 3 college hackathons across Global Academy of Technology and Dayananda Sagar University (twice).</li>
+            <li><strong>Hackathon Winner, Evolve 2024:</strong> 1st place in the office hackathon at Knowledge Lens.</li>
+            <li><strong>1st Place, College Hackathon 2021:</strong> Built a complete front-end website using HTML and CSS.</li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- PDF preview modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="window modal-box" role="dialog" aria-modal="true" aria-label="Resume preview">
+      <div class="titlebar"><span>preview: Bhuvana_KS_Resume.pdf</span>
+        <button class="close" id="closeBtn" type="button" aria-label="Close preview">x</button></div>
+      <iframe id="pdf" title="Resume PDF preview"></iframe>
+      <div class="modal-foot">
+        <a class="btn alt" href="Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
+        <a class="btn small" href="Bhuvana_KS_Resume.pdf" target="_blank" rel="noopener">open in new tab ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>made with ♥ and too much chai · © <span id="year"></span> Bhuvana K S</footer>
+
+  <script>
+    (function () {
+      var clock = document.getElementById('clock');
+      function tick() { clock.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+      tick(); setInterval(tick, 30000);
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      var modal = document.getElementById('modal'), pdf = document.getElementById('pdf');
+      function open() { if (!pdf.src) pdf.src = 'Bhuvana_KS_Resume.pdf#view=FitH'; modal.hidden = false; document.getElementById('closeBtn').focus(); }
+      function close() { modal.hidden = true; document.getElementById('previewBtn').focus(); }
+      document.getElementById('previewBtn').addEventListener('click', open);
+      document.getElementById('closeBtn').addEventListener('click', close);
+      modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) close(); });
+    })();
+  </script>
+</body>
+</html>
