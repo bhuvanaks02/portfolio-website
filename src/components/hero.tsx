@@ -2,8 +2,12 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 import { site, socials } from "@/content/site";
+
+const isDev = process.env.NODE_ENV === "development";
 
 /** Splits the tagline so the em-dash clause can be set in italic serif. */
 function Tagline() {
@@ -25,6 +29,8 @@ function Tagline() {
 
 export function Hero() {
   const reduced = useReducedMotion();
+  // In dev, clicking the portrait flips its shape so the two can be compared.
+  const [shape, setShape] = useState(site.avatarShape);
 
   const rise = (delay: number) =>
     reduced
@@ -65,12 +71,22 @@ export function Hero() {
           </div>
 
           <motion.div {...rise(0.05)} className="shrink-0">
-            <div className="relative size-24 overflow-hidden rounded-full border border-rule bg-paper-raised sm:size-28">
+            <div
+              onClick={
+                isDev
+                  ? () => setShape((s) => (s === "circle" ? "square" : "circle"))
+                  : undefined
+              }
+              title={isDev ? `Click to toggle shape (${shape})` : undefined}
+              className={`relative size-32 overflow-hidden border border-rule bg-paper-raised transition-[border-radius] duration-300 sm:size-40 ${
+                shape === "circle" ? "rounded-full" : "rounded-2xl"
+              } ${isDev ? "cursor-pointer" : ""}`}
+            >
               <Image
                 src="/avatar.jpg"
                 alt={`Portrait of ${site.name}`}
                 fill
-                sizes="(min-width: 640px) 7rem, 6rem"
+                sizes="(min-width: 640px) 10rem, 8rem"
                 className="object-cover"
                 priority
               />
@@ -89,20 +105,18 @@ export function Hero() {
           {...rise(0.24)}
           className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3"
         >
-          <a
-            href={site.resume}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/work"
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Résumé
+            Work
             <span
               aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
             >
-              ↗
+              →
             </span>
-          </a>
+          </Link>
           <a
             href={`mailto:${site.email}`}
             className="link-underline text-sm text-ink-soft"

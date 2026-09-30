@@ -1,3 +1,4 @@
+import { RetroDoor } from "@/components/retro-door";
 import { site, socials } from "@/content/site";
 
 export function SiteFooter() {
@@ -42,13 +43,6 @@ export function SiteFooter() {
                   </a>
                 </li>
               ))}
-              {links.length <= 1 && (
-                <li className="text-sm text-ink-muted">
-                  GitHub and LinkedIn links pending — add them in{" "}
-                  <code className="font-mono text-xs">src/content/site.ts</code>
-                  .
-                </li>
-              )}
             </ul>
           </div>
         </div>
@@ -57,7 +51,10 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {site.name}. {site.location}.
           </p>
-          <p className="font-mono">Built with Next.js &amp; Tailwind.</p>
+          <p className="font-mono">
+            Built with Next.js &amp; Tailwind.
+            <RetroDoor />
+          </p>
         </div>
       </div>
     </footer>

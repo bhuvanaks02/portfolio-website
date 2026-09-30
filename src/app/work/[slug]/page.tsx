@@ -49,7 +49,7 @@ export default async function WorkPage({
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-3xl">
           <Link
-            href="/#work"
+            href="/work#work"
             className="label inline-flex items-center gap-2 transition-colors hover:text-ink"
           >
             <span aria-hidden="true">←</span> All work

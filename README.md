@@ -21,7 +21,9 @@ You should never need to touch a component to update the site.
 | Name, tagline, email, résumé path, availability badge | `site` |
 | GitHub / LinkedIn / X links | `socials` |
 | Roles + their full case studies | `work` |
-| Side projects | `projects` |
+| Projects (from GitHub) | `projects` |
+| Short roles with no case study | `internships` |
+| Non-tech roles, languages, toolkit | `sideQuests` |
 | Skill groups | `skills` |
 | Degree, CGPA | `education` |
 | Papers | `publications` |
@@ -30,15 +32,15 @@ You should never need to touch a component to update the site.
 
 ### Still to fill in (marked `TODO` in the file)
 
-- [ ] `socials` — GitHub and LinkedIn hrefs (any left as `null` is hidden)
+- [x] `socials` — LinkedIn href (any left as `null` is hidden)
 - [ ] `publications[0].href` — link to the CIISCA 2023 paper
-- [ ] `projects` — 2–4 side projects
 - [ ] `site.url` — the real deployed URL, once it exists
 
 ### Adding a project
 
-Push an object into `projects`; the section on the home page builds itself.
-While the array is empty it shows a quiet placeholder instead of a gap.
+Push an object into `projects`; the section on `/work` builds itself.
+The retro site is plain HTML, so add the project to
+`public/retro/portfolio.html` by hand as well.
 
 ```ts
 {
@@ -54,8 +56,7 @@ While the array is empty it shows a quiet placeholder instead of a gap.
 ### Adding a role / case study
 
 Add an entry to `work` with a unique `slug`. A page appears at
-`/work/<slug>`, it joins the numbered index on the home page and the
-timeline on `/about`, and it gets wired into the "next" link at the bottom
+`/work/<slug>`, it joins the numbered index on `/work`, and it gets wired into the "next" link at the bottom
 of the neighbouring case study. Keep `index` values sequential (`01`, `02`, …).
 
 ## Structure
@@ -63,19 +64,23 @@ of the neighbouring case study. Keep `index` values sequential (`01`, `02`, …)
 ```
 src/
   app/
-    page.tsx              home — hero, work index, projects, stack, recognition
-    about/page.tsx        long-form bio + timeline
+    page.tsx              landing — hero, bio, doors to the other pages
+    work/page.tsx         experience, projects, stack, education, achievements
+    side-quests/page.tsx  everything that is not tech
     work/[slug]/page.tsx  one case study per role (SSG)
     layout.tsx            fonts, metadata, header/footer shell
     globals.css           design tokens + custom utilities
     sitemap.ts robots.ts
   components/             hero, work-index, project-grid, section, reveal,
-                          site-header, site-footer, theme-toggle
+                          site-header, site-footer, theme-toggle, retro-door
   content/site.ts         ← all content
 public/
   Bhuvana_KS_Resume.pdf
-archive/retro/            the earlier pixel-art site, kept for reference
+  retro/                  the hidden pixel-art site, served at /retro
 ```
+
+The retro site is not in the nav. It opens from the Konami code
+(↑ ↑ ↓ ↓ ← → ← → B A) on any page, or the faint `▸` at the end of the footer.
 
 ## Design notes
 

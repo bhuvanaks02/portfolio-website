@@ -17,14 +17,18 @@ export const site = {
 
   // The one-liner under your name on the home page.
   tagline:
-    "I build AI agents, graph databases and backend systems — teaching small models new tricks and making messy data answer questions.",
+    "I fine-tune small language models and build graph-backed systems — and I have run marketing campaigns and hackathons on the side.",
 
-  // Longer version, used on /about.
+  // Longer version, used in the About section of the landing page.
   bio: [
     "I'm a software engineer in Bengaluru working where language models meet real data. Most of my time goes to fine-tuning small language models, wiring them to retrieval over vector stores, and making the whole thing run privately on hardware you already own.",
     "Before that I spent a year inside graph databases — modelling manufacturing plant failures in Neo4j and JanusGraph, tuning Cypher and Gremlin queries until they stopped being the bottleneck, and building the SDK that let the rest of the team draw graphs without writing the same hundred lines again.",
     "I like problems where the constraint is the interesting part: a 4 GB model instead of an API call, a graph traversal instead of a join, a human in the loop instead of blind trust in a benchmark.",
+    "Outside engineering I have run marketing campaigns, organised hackathons, moderated communities and learned five languages. That work is on the side quests page.",
   ],
+
+  // Shape of the portrait on the home page: "circle" or "square".
+  avatarShape: "circle" as "circle" | "square",
 
   availability: {
     open: true,
@@ -38,11 +42,19 @@ export type SocialLink = {
   handle: string;
 };
 
-// TODO: fill in the hrefs. Any entry left as null is skipped at render time.
+// Any entry left as null is skipped at render time.
 export const socials: SocialLink[] = [
-  { label: "GitHub", href: null, handle: "@bhuvanaks" },
-  { label: "LinkedIn", href: null, handle: "in/bhuvanaks" },
-  { label: "X", href: null, handle: "@bhuvanaks" },
+  {
+    label: "GitHub",
+    href: "https://github.com/bhuvanaks02",
+    handle: "@bhuvanaks02",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/bhuvana-ks/",
+    handle: "in/bhuvana-ks",
+  },
+  { label: "X", href: "https://x.com/KsBhuvana", handle: "@KsBhuvana" },
   { label: "Email", href: "mailto:" + site.email, handle: site.email },
 ];
 
@@ -239,24 +251,166 @@ export type Project = {
   year: string;
 };
 
-/**
- * TODO: your projects go here.
- *
- * Add 2–4 entries in this shape and the Projects section fills itself in:
- *
- *   {
- *     name: "Graph Whisperer",
- *     pitch: "Ask a Neo4j database questions in English; get Cypher back.",
- *     stack: ["Python", "FastAPI", "Neo4j", "Ollama"],
- *     repo: "https://github.com/…",
- *     live: null,
- *     year: "2025",
- *   },
- *
- * While the array is empty the section renders a quiet placeholder rather
- * than an empty hole.
- */
-export const projects: Project[] = [];
+const github = "https://github.com/bhuvanaks02";
+
+/** Pulled from github.com/bhuvanaks02, newest first. */
+export const projects: Project[] = [
+  {
+    name: "graph-viz",
+    pitch:
+      "Turns JanusGraph Gremlin traversal paths into interactive node-and-edge graphs with vis.js, so you can see what a query actually walked.",
+    stack: ["Python", "Jupyter", "Gremlin", "JanusGraph", "vis.js"],
+    repo: `${github}/graph-viz`,
+    live: null,
+    year: "2026",
+  },
+  {
+    name: "HackSeek",
+    pitch:
+      "Find hackathons worldwide: scrapers pull listings from Devpost, Unstop, Devfolio and MLH, and you filter by place, date and theme — or just ask the chatbot.",
+    stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Docker"],
+    repo: `${github}/Hack-Seek`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "FinVoice",
+    pitch:
+      "Voice-first money management: say what you spent or want to order, split the bill with a group, and settle it on-chain on Base.",
+    stack: ["Python", "React", "TypeScript", "Solidity", "Neo4j"],
+    repo: `${github}/FinVoice`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "Twitter content tool",
+    pitch:
+      "Pick viral tweets from your niche, add your own raw thoughts, and get drafts back in your voice. Still a product plan — no code yet.",
+    stack: ["Product plan"],
+    repo: `${github}/twitter-content-tool`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "graph-layouts",
+    pitch:
+      "A Python SDK that loads a graph layout by name — Kamada-Kawai, hierarchy and others — with room to register your own.",
+    stack: ["Python", "SDK design", "Graph layouts"],
+    repo: `${github}/layout-generator`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Travel Book",
+    pitch:
+      "A digital scrapbook for storing the places you have been and the memories that came with them.",
+    stack: ["JavaScript", "Full-stack"],
+    repo: `${github}/travel_book`,
+    live: "https://travel-book-ten.vercel.app",
+    year: "2024",
+  },
+  {
+    name: "WebSockets messenger",
+    pitch:
+      "A small React chat front-end built to practise real-time messaging over Pusher.",
+    stack: ["React", "JavaScript", "Pusher"],
+    repo: `${github}/webockets-messenger-app`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Blog sentiment analysis",
+    pitch:
+      "Scrapes a list of blog links with BeautifulSoup and scores the sentiment of each article with NLTK.",
+    stack: ["Python", "BeautifulSoup", "NLTK"],
+    repo: `${github}/NLP-sentiment-analysis`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Graduate admission prediction",
+    pitch:
+      "Data exploration plus a head-to-head of logistic regression, SVM, random forest and k-nearest neighbours on admission data — the code behind the CIISCA 2023 paper.",
+    stack: ["Python", "Jupyter", "Machine learning"],
+    repo: `${github}/Graduate-Admission-Prediction`,
+    live: null,
+    year: "2023",
+  },
+  {
+    name: "Speech recognition",
+    pitch:
+      "Listens, transcribes speech to text, then reads it back in a synthesised voice.",
+    stack: ["Python", "SpeechRecognition", "pyttsx3"],
+    repo: `${github}/speech-recognition`,
+    live: null,
+    year: "2023",
+  },
+];
+
+/* --------------------------- earlier experience -------------------------- */
+
+/** Short roles that do not get a full case study page. */
+export const internships: {
+  company: string;
+  title: string;
+  period: string;
+  location: string;
+  points: string[];
+}[] = [
+  {
+    company: "Technofly Pvt Ltd.",
+    title: "Data Science Intern",
+    period: "Nov 2023 — Dec 2023",
+    location: "Bengaluru",
+    points: [
+      "Worked in Python with NumPy, Pandas, Tkinter and TensorFlow.",
+      "Explored machine learning and deep learning algorithms, including YOLO and Keras classification.",
+      "Built a mini-project on the Google Speech API that converts voice to text and back to an automated voice.",
+    ],
+  },
+];
+
+/* ------------------------------ side quests ------------------------------ */
+
+/** Everything that is not tech. More to come. */
+export const sideQuests = {
+  intro:
+    "The parts of me that do not compile. Marketing campaigns, hackathon floors, community servers and a few too many languages.",
+
+  roles: [
+    {
+      org: "Under25",
+      title: "Intern",
+      period: "Feb 2023 — Mar 2023",
+      location: "Bengaluru",
+      points: [
+        "Managed multiple marketing campaigns for the Under25 Summit 2023.",
+        "Raised on-ground awareness of the Under25 community and ran on-ground operations during the summit.",
+      ],
+    },
+    {
+      org: "Warpspeed 2023, Devfolio",
+      title: "Organizer",
+      period: "May 2023",
+      location: "Bengaluru",
+      points: [
+        "Helped manage partners for the Warpspeed hackathon.",
+        "Handled on-ground ops and marketing.",
+      ],
+    },
+  ],
+
+  languages: ["English", "Hindi", "Kannada", "Marathi", "Korean"],
+
+  toolkit: [
+    "Event management",
+    "Discord & Telegram moderation",
+    "Figma",
+    "Canva",
+    "Notion",
+    "Google Sheets & Slides",
+  ],
+};
 
 /* ---------------------------- everything else ---------------------------- */
 
@@ -328,7 +482,6 @@ export const achievements = [
 ];
 
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Work", href: "/#work" },
-  { label: "About", href: "/about" },
-  { label: "Résumé", href: site.resume, external: true },
+  { label: "Work", href: "/work" },
+  { label: "Side quests", href: "/side-quests" },
 ];

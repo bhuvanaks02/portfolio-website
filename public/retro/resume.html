@@ -22,7 +22,7 @@
   <main class="resume-main">
     <div class="toolbar">
       <button class="btn" id="previewBtn" type="button">👁 preview resume</button>
-      <a class="btn alt" href="Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
+      <a class="btn alt" href="/Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
       <button class="btn small" type="button" onclick="window.print()">🖨 print</button>
     </div>
 
@@ -33,8 +33,7 @@
         <header class="r-head">
           <h1>Bhuvana K S</h1>
           <p class="contact">✉ <a href="mailto:work.bhuvanaks@gmail.com">work.bhuvanaks@gmail.com</a> · 📍 Bengaluru, India ·
-            <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a> ·
-            <a href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener">GitHub</a></p>
+            <a href="https://github.com/bhuvanaks02" target="_blank" rel="noopener">GitHub</a></p>
           <p class="summary">Software engineer with experience in AI agents, graph databases, and backend systems. Skilled in building multi-database integrations and graph-based analytics across production and POC environments.</p>
         </header>
 
@@ -71,6 +70,27 @@
               <li>Built a Gremlin graph visualiser using vis.js and Python; led the Kafka version upgrade for Jublient's client module.</li>
             </ul>
           </div>
+
+          <div class="job">
+            <div class="row"><strong>Data Science Intern</strong><span class="date">Nov 2023 – Dec 2023</span></div>
+            <div class="org">Technofly Pvt Ltd., Bengaluru</div>
+            <ul>
+              <li>Worked in Python with NumPy, Pandas, Tkinter and TensorFlow; explored machine learning and deep learning algorithms including YOLO and Keras classification.</li>
+              <li>Built a mini-project on the Google Speech API that converts voice to text and back to an automated voice.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Projects</h2>
+          <ul>
+            <li><strong>graph-viz:</strong> JanusGraph Gremlin traversal paths as interactive graphs with vis.js.</li>
+            <li><strong>HackSeek:</strong> hackathon discovery with smart filters and an AI chatbot (Next.js, FastAPI, PostgreSQL).</li>
+            <li><strong>FinVoice:</strong> voice-first money management with group bill splitting and on-chain settlement.</li>
+            <li><strong>graph-layouts:</strong> Python SDK that loads graph layouts by name.</li>
+            <li><strong>Travel Book:</strong> a digital scrapbook for travel memories.</li>
+            <li>More on <a href="https://github.com/bhuvanaks02" target="_blank" rel="noopener">github.com/bhuvanaks02</a>, or the <a href="portfolio.html#projects">full list</a>.</li>
+          </ul>
         </section>
 
         <section>
@@ -93,7 +113,7 @@
         <section>
           <h2>Publications</h2>
           <ul>
-            <li><strong>ML-Based Graduate Admission Prediction.</strong> Published at the IEEE International Conference on Intelligent Systems, Communication and Applications (CIISCA 2023). <a href="#" target="_blank" rel="noopener">View paper</a></li>
+            <li><strong>ML-Based Graduate Admission Prediction.</strong> Published at the IEEE International Conference on Intelligent Systems, Communication and Applications (CIISCA 2023).</li>
           </ul>
         </section>
 
@@ -116,8 +136,8 @@
         <button class="close" id="closeBtn" type="button" aria-label="Close preview">x</button></div>
       <iframe id="pdf" title="Resume PDF preview"></iframe>
       <div class="modal-foot">
-        <a class="btn alt" href="Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
-        <a class="btn small" href="Bhuvana_KS_Resume.pdf" target="_blank" rel="noopener">open in new tab ↗</a>
+        <a class="btn alt" href="/Bhuvana_KS_Resume.pdf" download="Bhuvana_KS_Resume.pdf">⬇ download pdf</a>
+        <a class="btn small" href="/Bhuvana_KS_Resume.pdf" target="_blank" rel="noopener">open in new tab ↗</a>
       </div>
     </div>
   </div>
@@ -132,7 +152,7 @@
       document.getElementById('year').textContent = new Date().getFullYear();
 
       var modal = document.getElementById('modal'), pdf = document.getElementById('pdf');
-      function open() { if (!pdf.src) pdf.src = 'Bhuvana_KS_Resume.pdf#view=FitH'; modal.hidden = false; document.getElementById('closeBtn').focus(); }
+      function open() { if (!pdf.src) pdf.src = '/Bhuvana_KS_Resume.pdf#view=FitH'; modal.hidden = false; document.getElementById('closeBtn').focus(); }
       function close() { modal.hidden = true; document.getElementById('previewBtn').focus(); }
       document.getElementById('previewBtn').addEventListener('click', open);
       document.getElementById('closeBtn').addEventListener('click', close);

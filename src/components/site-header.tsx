@@ -56,6 +56,27 @@ export function SiteHeader() {
             </Link>
           ))}
           <span className="mx-1 hidden h-4 w-px bg-rule sm:block" />
+          <a
+            href={site.resume}
+            download
+            aria-label="Download résumé (PDF)"
+            title="Download résumé (PDF)"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="size-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14" />
+            </svg>
+            <span className="hidden sm:inline">Résumé</span>
+          </a>
           <ThemeToggle />
         </nav>
       </div>

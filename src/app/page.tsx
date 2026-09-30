@@ -1,143 +1,159 @@
 import Link from "next/link";
 
 import { Hero } from "@/components/hero";
-import { ProjectGrid } from "@/components/project-grid";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
-import { WorkIndex } from "@/components/work-index";
 import {
   achievements,
   education,
-  publications,
+  projects,
+  sideQuests,
   site,
-  skills,
   work,
 } from "@/content/site";
+
+const glance = [
+  { label: "Now", value: work[0].company },
+  { label: "Based in", value: site.location },
+  { label: "Studied", value: education.degree },
+  { label: "Speaks", value: `${sideQuests.languages.length} languages` },
+];
+
+/** Everything in three strands; each one opens into its full page. */
+const gist = [
+  {
+    href: "/work",
+    label: "Technical",
+    title: "Engineering",
+    body: "Small language models, graph databases and the APIs that connect them.",
+    items: work.map((role) => ({
+      head: role.headline,
+      sub: `${role.company} · ${role.period}`,
+    })),
+    note: `${work.length} roles · ${projects.length} projects · ${achievements.length} wins`,
+    cta: "Work",
+  },
+  {
+    href: "/side-quests#quests",
+    label: "Growth",
+    title: "Campaigns & community",
+    body: "Marketing and on-ground operations for a summit and a hackathon.",
+    items: sideQuests.roles.map((role) => ({
+      head: role.points[0],
+      sub: `${role.org} · ${role.period}`,
+    })),
+    note: `${sideQuests.roles.length} roles so far`,
+    cta: "Growth work",
+  },
+  {
+    href: "/side-quests",
+    label: "Side quests",
+    title: "Everything else",
+    body: "Judging hackathons, moderating communities and learning languages.",
+    items: [
+      {
+        head: achievements[0].title,
+        sub: achievements[0].year,
+      },
+      {
+        head: `Speaks ${sideQuests.languages.length} languages`,
+        sub: sideQuests.languages.join(" · "),
+      },
+      {
+        head: "Community moderation and design",
+        sub: "Discord · Telegram · Figma · Canva",
+      },
+    ],
+    note: `${sideQuests.languages.length} languages · ${sideQuests.toolkit.length} tools`,
+    cta: "Side quests",
+  },
+];
 
 export default function HomePage() {
   return (
     <>
       <Hero />
 
-      <Section
-        id="work"
-        label="Selected work"
-        note={`${work.length} roles`}
-        title="Three years of shipping AI, graphs and the plumbing in between."
-      >
-        <WorkIndex />
-      </Section>
-
-      <Section id="projects" label="Projects" note="Side work">
-        <ProjectGrid />
-      </Section>
-
-      <Section
-        id="stack"
-        label="Stack"
-        title="What I reach for."
-      >
-        <dl className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-2">
-          {skills.map((group, i) => (
-            <Reveal
-              key={group.group}
-              delay={i * 0.05}
-              className={`bg-paper p-6 sm:p-7 ${
-                i === skills.length - 1 && skills.length % 2 === 1
-                  ? "sm:col-span-2"
-                  : ""
-              }`}
-            >
-              <dt className="label">{group.group}</dt>
-              <dd className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-rule px-3 py-1 text-sm text-ink-soft"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </dd>
-            </Reveal>
-          ))}
-        </dl>
-      </Section>
-
-      <Section id="beyond" label="Beyond the job">
-        <div className="grid gap-12 sm:grid-cols-2">
-          <Reveal>
-            <h3 className="display text-2xl">Education</h3>
-            <p className="mt-4 text-ink-soft">{education.degree}</p>
-            <p className="mt-1 text-sm text-ink-muted">
-              {education.school}, {education.location}
-            </p>
-            <p className="label mt-3">
-              {education.period} · {education.detail}
-            </p>
-
-            <h3 className="display mt-12 text-2xl">Published</h3>
-            {publications.map((pub) => (
-              <div key={pub.title} className="mt-4">
-                <p className="text-ink-soft">
-                  {pub.href ? (
-                    <a
-                      href={pub.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-underline text-accent"
-                    >
-                      {pub.title} ↗
-                    </a>
-                  ) : (
-                    pub.title
-                  )}
+      <Section id="about" label="About" title="Software engineer, mostly on models and graphs.">
+        <div className="grid gap-12 sm:grid-cols-[1.6fr_1fr]">
+          <div className="space-y-6">
+            {site.bio.map((paragraph, i) => (
+              <Reveal key={i} delay={i * 0.05}>
+                <p
+                  className={
+                    i === 0
+                      ? "font-serif text-xl leading-snug text-ink sm:text-2xl"
+                      : "leading-relaxed text-ink-soft"
+                  }
+                >
+                  {paragraph}
                 </p>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-                  {pub.venue}
-                </p>
-              </div>
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.08}>
-            <h3 className="display text-2xl">Recognition</h3>
-            <ul className="mt-4 border-t border-rule">
-              {achievements.map((item) => (
-                <li key={item.title} className="border-b border-rule py-4">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="text-ink-soft">{item.title}</p>
-                    <span className="label shrink-0 tabular-nums">
-                      {item.year}
-                    </span>
-                  </div>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-                    {item.detail}
-                  </p>
-                </li>
+          <Reveal delay={0.1}>
+            <dl className="border-t border-rule">
+              {glance.map((item) => (
+                <div key={item.label} className="border-b border-rule py-4">
+                  <dt className="label">{item.label}</dt>
+                  <dd className="mt-1.5 text-ink-soft">{item.value}</dd>
+                </div>
               ))}
-            </ul>
+            </dl>
           </Reveal>
         </div>
       </Section>
 
-      <Section id="more" label="Read on">
+      <Section id="gist" label="The gist" title="What I do, in three parts.">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
+          {gist.map((strand, i) => (
+            <Reveal key={strand.label} delay={i * 0.06} className="bg-paper">
+              <Link
+                href={strand.href}
+                className="group flex h-full flex-col p-6 transition-colors duration-300 hover:bg-paper-raised sm:p-7"
+              >
+                <p className="label">{strand.label}</p>
+                <h3 className="display mt-4 text-3xl">{strand.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {strand.body}
+                </p>
+                <ul className="mt-6 flex-1 border-t border-rule">
+                  {strand.items.map((item) => (
+                    <li key={item.head} className="border-b border-rule py-3">
+                      <p className="text-sm leading-snug text-ink-soft">
+                        {item.head}
+                      </p>
+                      <p className="mt-1 text-xs text-ink-muted">{item.sub}</p>
+                    </li>
+                  ))}
+                </ul>
+                <p className="label mt-6">{strand.note}</p>
+                <p className="mt-3 text-sm text-ink-soft transition-colors duration-300 group-hover:text-accent">
+                  {strand.cta}{" "}
+                  <span
+                    aria-hidden="true"
+                    className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </p>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="off-the-clock" label="Off the clock">
         <Reveal>
-          <p className="max-w-xl font-serif text-xl italic leading-snug text-ink-soft">
-            There is a longer version of all this —
-            <Link href="/about" className="link-underline ml-1.5 text-accent">
-              the about page
-            </Link>
-            , or the{" "}
-            <a
-              href={site.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline text-accent"
-            >
-              one-page résumé ↗
-            </a>
-            .
+          <p className="max-w-2xl leading-relaxed text-ink-soft">
+            I have judged three college hackathons — one at Global Academy of
+            Technology and two at Dayananda Sagar University — and won two,
+            including the office-wide hackathon at Knowledge Lens.
+          </p>
+          <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+            Outside work I read about running models on limited hardware and
+            study languages; I speak {sideQuests.languages.length} so far.
           </p>
         </Reveal>
       </Section>
