@@ -54,13 +54,6 @@ function pathTo(id: string): GraphNode[] {
   return path;
 }
 
-/** The path written the way a graph query would print it. */
-function cypher(path: GraphNode[]): string {
-  return path
-    .map((n, i) => (i === 0 ? `(${n.label})` : `-[:${n.rel}]->(${n.label})`))
-    .join("");
-}
-
 const nodeStyle = [
   "bg-ink px-4 py-2 font-serif text-xl text-paper sm:text-2xl",
   "border border-rule-strong bg-paper px-3.5 py-1.5 font-serif text-lg text-ink sm:text-xl",
@@ -150,17 +143,6 @@ export function MeGraph() {
           );
         })}
       </div>
-
-      <figcaption className="label mt-3 flex min-h-8 flex-wrap items-baseline justify-between gap-x-6 gap-y-1 normal-case tracking-normal">
-        <span className={active ? "text-accent" : undefined}>
-          {active
-            ? cypher(path)
-            : "MATCH (me)-[*]->(everything) RETURN *"}
-        </span>
-        <span className="hidden sm:inline">
-          Hover a node to trace it · click to open
-        </span>
-      </figcaption>
     </figure>
   );
 }

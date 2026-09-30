@@ -35,8 +35,8 @@
   --ink-muted: #757165;
   --rule: #e4e0d5;
   --rule-strong: #cdc8ba;
-  --accent: #b2412a;
-  --accent-soft: #f0e2dc;
+  --accent: #2b7f8f;
+  --accent-soft: #dbedef;
   color-scheme: light;
 }
 
@@ -49,8 +49,8 @@
     --ink-muted: #8b877c;
     --rule: #272621;
     --rule-strong: #3c3a33;
-    --accent: #e4805f;
-    --accent-soft: #2a201c;
+    --accent: #6fd6de;
+    --accent-soft: #17292c;
     color-scheme: dark;
   }
 }
@@ -63,8 +63,8 @@
   --ink-muted: #8b877c;
   --rule: #272621;
   --rule-strong: #3c3a33;
-  --accent: #e4805f;
-  --accent-soft: #2a201c;
+  --accent: #6fd6de;
+  --accent-soft: #17292c;
   color-scheme: dark;
 }
 
@@ -98,6 +98,12 @@ body {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* Set by the custom cursor once it has mounted; it replaces the native one. */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
