@@ -21,10 +21,10 @@ export async function generateMetadata({
   if (!entry) return {};
 
   return {
-    title: `${entry.company} — ${entry.title}`,
+    title: `${entry.company} · ${entry.title}`,
     description: entry.summary,
     openGraph: {
-      title: `${entry.company} — ${entry.headline}`,
+      title: `${entry.company} · ${entry.headline}`,
       description: entry.summary,
       type: "article",
     },

@@ -9,20 +9,14 @@ import { site, socials } from "@/content/site";
 
 const isDev = process.env.NODE_ENV === "development";
 
-/** Splits the tagline so the em-dash clause can be set in italic serif. */
+/** The tagline, with its second sentence set in italic serif. */
 function Tagline() {
-  const [lead, ...rest] = site.tagline.split("—");
   return (
     <>
-      {lead.trim()}
-      {rest.length > 0 && (
-        <>
-          {" — "}
-          <span className="font-serif italic text-ink-soft">
-            {rest.join("—").trim()}
-          </span>
-        </>
-      )}
+      {site.tagline}{" "}
+      <span className="font-serif italic text-ink-soft">
+        {site.taglineAside}
+      </span>
     </>
   );
 }
@@ -48,7 +42,7 @@ export function Hero() {
   const links = socials.filter((s) => s.href);
 
   return (
-    <section className="px-4 pt-16 pb-16 sm:px-8 sm:pt-28 sm:pb-24">
+    <section className="px-4 pt-16 pb-12 sm:px-8 sm:pt-28 sm:pb-16">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
           <div className="min-w-0">
@@ -126,15 +120,27 @@ export function Hero() {
           {links
             .filter((s) => !s.href?.startsWith("mailto:"))
             .map((s) => (
-              <a
-                key={s.label}
-                href={s.href as string}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-underline text-sm text-ink-soft"
-              >
-                {s.label}
-              </a>
+              <span key={s.label} className="group relative">
+                <a
+                  href={s.href as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline text-sm text-ink-soft"
+                >
+                  {s.label}
+                </a>
+                {s.note && (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-full left-0 z-10 mb-3 w-max max-w-56 translate-y-1 rounded-xl border border-rule bg-paper-raised px-3.5 py-2.5 opacity-0 shadow-sm transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100"
+                  >
+                    <span className="label block">{s.handle}</span>
+                    <span className="mt-1 block text-sm leading-snug text-ink-soft">
+                      {s.note}
+                    </span>
+                  </span>
+                )}
+              </span>
             ))}
         </motion.div>
 

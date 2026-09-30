@@ -31,8 +31,8 @@ export default function ResumePage() {
             AI agents, graph databases and the backend systems around them.
           </h1>
           <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
-            {site.role} in {site.location}. Everything technical in one place
-            — each role opens into a full case study.
+            {site.role} in {site.location}. Everything technical in one place.
+            Each role opens into a full case study.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <a
@@ -81,7 +81,7 @@ export default function ResumePage() {
                 <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                   <p className="text-ink-soft">
                     <span className="font-medium">{role.company}</span>
-                    <span className="text-ink-muted"> — {role.title}</span>
+                    <span className="text-ink-muted"> · {role.title}</span>
                   </p>
                   <span className="label tabular-nums">{role.period}</span>
                 </div>

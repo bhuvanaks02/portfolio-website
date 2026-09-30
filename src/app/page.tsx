@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { Hero } from "@/components/hero";
+import { Journey } from "@/components/journey";
+import { MeGraph } from "@/components/me-graph";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import {
@@ -74,7 +76,13 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section id="about" label="About" title="Software engineer, mostly on models and graphs.">
+      <div className="px-4 pb-16 sm:px-8 sm:pb-24">
+        <div className="mx-auto max-w-5xl">
+          <MeGraph />
+        </div>
+      </div>
+
+      <Section id="about" label="01 · About" title="Software engineer, mostly on models and graphs.">
         <div className="grid gap-12 sm:grid-cols-[1.6fr_1fr]">
           <div className="space-y-6">
             {site.bio.map((paragraph, i) => (
@@ -105,7 +113,16 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section id="gist" label="The gist" title="What I do, in three parts.">
+      <Section
+        id="path"
+        label="02 · The path"
+        note="2020 – now"
+        title="From a first hackathon to fine-tuned models."
+      >
+        <Journey />
+      </Section>
+
+      <Section id="gist" label="03 · The gist" title="What I do, in three parts.">
         <div className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
           {gist.map((strand, i) => (
             <Reveal key={strand.label} delay={i * 0.06} className="bg-paper">
@@ -144,11 +161,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section id="off-the-clock" label="Off the clock">
+      <Section id="off-the-clock" label="04 · Off the clock">
         <Reveal>
           <p className="max-w-2xl leading-relaxed text-ink-soft">
-            I have judged three college hackathons — one at Global Academy of
-            Technology and two at Dayananda Sagar University — and won two,
+            I have judged three college hackathons, one at Global Academy of
+            Technology and two at Dayananda Sagar University, and won two,
             including the office-wide hackathon at Knowledge Lens.
           </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
