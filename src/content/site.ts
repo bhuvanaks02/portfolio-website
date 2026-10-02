@@ -24,10 +24,10 @@ export const site = {
 
   // Longer version, used in the About section of the landing page.
   bio: [
-    "I'm a software engineer in Bengaluru working where language models meet real data. Most of my time goes to backend APIs and AI systems: retrieval over vector stores, agent workflows, and the services around them, with fine-tuning small language models as one part of that, so the whole thing can run privately on hardware you already own.",
+    "I'm a software engineer who learns by building. Backend development is where I started, and right now it is all things AI: small language models, fine-tuning, and RAG and BM25 retrieval pipelines, with Python backend development underneath.",
     "Before that I spent a year inside graph databases: modelling manufacturing plant failures in Neo4j and JanusGraph, tuning Cypher and Gremlin queries until they stopped being the bottleneck, and building the SDK that let the rest of the team draw graphs without writing the same hundred lines again.",
-    "I like problems where the constraint is the interesting part: a 4 GB model instead of an API call, a graph traversal instead of a join, a human in the loop instead of blind trust in a benchmark.",
-    "Outside engineering I have run marketing campaigns, organised hackathons, moderated communities and learned five languages. That work is on the side quests page.",
+    "Alongside the day job I have published an IEEE paper on graduate admission prediction, won two hackathons, and been invited to judge three more.",
+    "Away from the keyboard I have run marketing campaigns, helped organise hackathons, moderated communities and learned five languages: English, Hindi, Kannada, Marathi and Korean.",
   ],
 
   // Shape of the portrait on the home page: "circle" or "square".

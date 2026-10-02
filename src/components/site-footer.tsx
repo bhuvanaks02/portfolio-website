@@ -15,7 +15,7 @@ export function SiteFooter() {
             <p className="label">Get in touch</p>
             <h2 className="display mt-4 text-section max-w-md">
               Working on something where small models, graphs or stubborn
-              backends are the hard part?
+              backend problems are the hard part?
             </h2>
             <a
               href={`mailto:${site.email}`}
