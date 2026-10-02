@@ -33,11 +33,11 @@ const gist = [
       sub: `${role.company} · ${role.period}`,
     })),
     note: `${work.length} roles · ${projects.length} projects · ${achievements.length} wins`,
-    cta: "Work",
+    cta: "Engineering",
   },
   {
-    href: "/side-quests#quests",
-    label: "Growth",
+    href: "/marketing",
+    label: "Marketing",
     title: "Campaigns & community",
     body: "Marketing and on-ground operations for a summit and a hackathon.",
     items: sideQuests.roles.map((role) => ({
@@ -45,7 +45,7 @@ const gist = [
       sub: `${role.org} · ${role.period}`,
     })),
     note: `${sideQuests.roles.length} roles so far`,
-    cta: "Growth work",
+    cta: "Marketing",
   },
   {
     href: "/side-quests",

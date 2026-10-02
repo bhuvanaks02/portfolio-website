@@ -17,15 +17,14 @@ export const site = {
 
   // The one-liner under your name on the home page.
   tagline:
-    "I fine-tune small language models and build graph-backed systems.",
+    "Backend developer exploring what AI can do inside real systems.",
 
   // Second sentence of the one-liner, set in italic serif.
-  taglineAside:
-    "On the side, I have run marketing campaigns and hackathons.",
+  taglineAside: "Based in Bengaluru.",
 
   // Longer version, used in the About section of the landing page.
   bio: [
-    "I'm a software engineer in Bengaluru working where language models meet real data. Most of my time goes to fine-tuning small language models, wiring them to retrieval over vector stores, and making the whole thing run privately on hardware you already own.",
+    "I'm a software engineer in Bengaluru working where language models meet real data. Most of my time goes to backend APIs and AI systems: retrieval over vector stores, agent workflows, and the services around them, with fine-tuning small language models as one part of that, so the whole thing can run privately on hardware you already own.",
     "Before that I spent a year inside graph databases: modelling manufacturing plant failures in Neo4j and JanusGraph, tuning Cypher and Gremlin queries until they stopped being the bottleneck, and building the SDK that let the rest of the team draw graphs without writing the same hundred lines again.",
     "I like problems where the constraint is the interesting part: a 4 GB model instead of an API call, a graph traversal instead of a join, a human in the loop instead of blind trust in a benchmark.",
     "Outside engineering I have run marketing campaigns, organised hackathons, moderated communities and learned five languages. That work is on the side quests page.",
@@ -281,8 +280,8 @@ export const journey: {
     verb: "Organising",
     text: "Marketing campaigns for the Under25 Summit, then partners and on-ground operations for Devfolio's Warpspeed hackathon.",
     place: "Under25 · Warpspeed 2023, Devfolio",
-    href: "/side-quests#quests",
-    cta: "Growth work",
+    href: "/marketing",
+    cta: "Marketing work",
   },
   {
     years: "Feb – Aug 2024",
@@ -556,6 +555,7 @@ export const achievements = [
 ];
 
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Work", href: "/work" },
+  { label: "Engineering", href: "/work" },
+  { label: "Marketing", href: "/marketing" },
   { label: "Side quests", href: "/side-quests" },
 ];

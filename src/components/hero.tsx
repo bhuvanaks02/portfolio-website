@@ -13,7 +13,8 @@ const isDev = process.env.NODE_ENV === "development";
 function Tagline() {
   return (
     <>
-      {site.tagline}{" "}
+      {site.tagline}
+      <br />
       <span className="font-serif italic text-ink-soft">
         {site.taglineAside}
       </span>
@@ -103,7 +104,7 @@ export function Hero() {
             href="/work"
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Work
+            Engineering
             <span
               aria-hidden="true"
               className="transition-transform duration-300 group-hover:translate-x-0.5"

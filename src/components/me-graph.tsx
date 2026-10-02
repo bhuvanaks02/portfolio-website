@@ -22,7 +22,7 @@ const nodes: GraphNode[] = [
   { id: "me", label: site.name.split(" ")[0], x: 50, y: 50, href: "#about" },
 
   { id: "tech", label: "Technical", x: 27, y: 50, href: "/work", parent: "me", rel: "WORKS_IN" },
-  { id: "growth", label: "Growth", x: 70, y: 27, href: "/side-quests#quests", parent: "me", rel: "RAN" },
+  { id: "growth", label: "Marketing", x: 70, y: 27, href: "/marketing", parent: "me", rel: "RAN" },
   { id: "quests", label: "Side quests", x: 70, y: 75, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
 
   { id: "slm", label: "Small language models", x: 13, y: 20, href: "/work/infosys", parent: "tech", rel: "FINE_TUNES" },
@@ -30,8 +30,8 @@ const nodes: GraphNode[] = [
   { id: "graphs", label: "Graph databases", x: 11, y: 78, href: "/work/knowledge-lens", parent: "tech", rel: "QUERIES" },
   { id: "backend", label: "Backend APIs", x: 33, y: 88, href: "/work#stack", parent: "tech", rel: "BUILDS" },
 
-  { id: "under25", label: "Under25 Summit", x: 87, y: 11, href: "/side-quests#quests", parent: "growth", rel: "MARKETED" },
-  { id: "warpspeed", label: "Warpspeed hackathon", x: 87, y: 40, href: "/side-quests#quests", parent: "growth", rel: "ORGANISED" },
+  { id: "under25", label: "Under25 Summit", x: 87, y: 11, href: "/marketing#campaigns", parent: "growth", rel: "MARKETED" },
+  { id: "warpspeed", label: "Warpspeed hackathon", x: 87, y: 40, href: "/marketing#campaigns", parent: "growth", rel: "ORGANISED" },
 
   { id: "judge", label: "Hackathon judge ×3", x: 89, y: 63, href: "/work#achievements", parent: "quests", rel: "JUDGED" },
   { id: "languages", label: "5 languages", x: 86, y: 90, href: "/side-quests#languages", parent: "quests", rel: "SPEAKS" },

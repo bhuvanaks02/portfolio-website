@@ -16,7 +16,7 @@ import {
 } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: "Engineering",
   description:
     "Experience, projects, stack, education, publications and achievements.",
 };
@@ -26,7 +26,7 @@ export default function ResumePage() {
     <>
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
-          <p className="label">Work</p>
+          <p className="label">Engineering</p>
           <h1 className="display mt-5 max-w-3xl text-title">
             AI agents, graph databases and the backend systems around them.
           </h1>
