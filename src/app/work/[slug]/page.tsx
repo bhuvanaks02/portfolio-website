@@ -104,8 +104,13 @@ export default async function WorkPage({
             <Reveal
               as="section"
               key={section.heading}
+              id={section.heading
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .trim()
+                .replace(/\s+/g, "-")}
               delay={i * 0.04}
-              className="border-b border-rule py-12 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
+              className="scroll-mt-20 border-b border-rule py-12 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
             >
               <h2 className="display text-2xl sm:sticky sm:top-24 sm:self-start">
                 {section.heading}

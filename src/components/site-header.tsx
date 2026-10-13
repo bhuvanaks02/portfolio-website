@@ -24,7 +24,7 @@ export function SiteHeader() {
     <header
       className={`sticky top-0 z-40 transition-colors duration-500 ${
         lifted
-          ? "border-b border-rule bg-paper/85 backdrop-blur-md"
+          ? "border-b border-rule/30 bg-paper/85 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
     >
@@ -32,19 +32,19 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-current={pathname === "/" ? "page" : undefined}
-          className="-ml-3 rounded-full px-3 py-1.5 text-sm text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
+          className="-ml-4 rounded-full px-4 py-1.5 text-sm text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
         >
           Home
         </Link>
 
-        <nav className="flex items-center gap-1 sm:gap-2">
+        <nav className="flex items-center gap-1.5 sm:gap-3">
           {nav.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="rounded-full px-3 py-1.5 text-sm text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
+              className="rounded-full px-3 py-1.5 text-sm text-ink-soft sm:px-4 transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
             >
               {item.label}
               {item.external && (
@@ -54,13 +54,13 @@ export function SiteHeader() {
               )}
             </Link>
           ))}
-          <span className="mx-1 hidden h-4 w-px bg-rule sm:block" />
+          <span className="mx-2 hidden h-4 w-px bg-rule/50 sm:block" />
           <a
             href={site.resume}
             download
             aria-label="Download résumé (PDF)"
             title="Download résumé (PDF)"
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
           >
             <svg
               viewBox="0 0 24 24"
@@ -76,14 +76,16 @@ export function SiteHeader() {
             </svg>
             <span className="hidden sm:inline">Résumé</span>
           </a>
-          <ThemeToggle />
+          <span className="ml-1 sm:ml-2">
+            <ThemeToggle />
+          </span>
         </nav>
       </div>
       {/* How far down the page you are, drawn along the header's edge. */}
       <motion.span
         aria-hidden="true"
         style={{ scaleX: scrollYProgress }}
-        className="absolute inset-x-0 -bottom-px h-px origin-left bg-accent"
+        className="absolute inset-x-0 -bottom-px h-px origin-left bg-accent/30"
       />
     </header>
   );

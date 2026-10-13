@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { ProjectGrid } from "@/components/project-grid";
 import { Reveal } from "@/components/reveal";
@@ -173,7 +174,11 @@ export default function ResumePage() {
             <h3 className="display text-2xl">Recognition</h3>
             <ul className="mt-4 border-t border-rule">
               {achievements.map((item) => (
-                <li key={item.title} className="border-b border-rule py-4">
+                <li
+                  key={item.title}
+                  id={item.id}
+                  className="scroll-mt-20 border-b border-rule py-4"
+                >
                   <div className="flex items-baseline justify-between gap-4">
                     <p className="text-ink-soft">{item.title}</p>
                     <span className="label shrink-0 tabular-nums">
@@ -183,6 +188,23 @@ export default function ResumePage() {
                   <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
                     {item.detail}
                   </p>
+                  {item.certificate && (
+                    <a
+                      href={item.certificate.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 block max-w-xs"
+                    >
+                      <Image
+                        src={item.certificate.src}
+                        alt={item.certificate.alt}
+                        width={item.certificate.width}
+                        height={item.certificate.height}
+                        sizes="20rem"
+                        className="h-auto w-full rounded-lg border border-rule"
+                      />
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

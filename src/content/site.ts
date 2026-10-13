@@ -20,14 +20,13 @@ export const site = {
     "Backend developer exploring what AI can do inside real systems.",
 
   // Second sentence of the one-liner, set in italic serif.
-  taglineAside: "Based in Bengaluru.",
+  taglineAside: "Currently learning a little about a lot of things.",
 
   // Longer version, used in the About section of the landing page.
   bio: [
-    "I'm a software engineer who learns by building. Backend development is where I started, and right now it is all things AI: small language models, fine-tuning, and RAG and BM25 retrieval pipelines, with Python backend development underneath.",
-    "Before that I spent a year inside graph databases: modelling manufacturing plant failures in Neo4j and JanusGraph, tuning Cypher and Gremlin queries until they stopped being the bottleneck, and building the SDK that let the rest of the team draw graphs without writing the same hundred lines again.",
-    "Alongside the day job I have published an IEEE paper on graduate admission prediction, won two hackathons, and been invited to judge three more.",
-    "Away from the keyboard I have run marketing campaigns, helped organise hackathons, moderated communities and learned five languages: English, Hindi, Kannada, Marathi and Korean.",
+    "I'm still learning, and I like it that way. Quick to pick things up, and keen to turn that into work people remember.",
+    "Backend development got me started, AI keeps me busy, and marketing and PR are what I explore out of curiosity.",
+    "For fun, I sing, dance and play badminton, which led me to build a badminton community and run it for a few months. I also speak 5 languages: English, Hindi, Kannada, Marathi and Korean.",
   ],
 
   // Shape of the portrait on the home page: "circle" or "square".
@@ -276,10 +275,10 @@ export const journey: {
     cta: "Education and the paper",
   },
   {
-    years: "2023",
+    years: "2023 – 2026",
     verb: "Organising",
-    text: "Marketing campaigns for the Under25 Summit, then partners and on-ground operations for Devfolio's Warpspeed hackathon.",
-    place: "Under25 · Warpspeed 2023, Devfolio",
+    text: "Marketing and PR, explored out of curiosity. Over a month of campaigns and summit-day operations for the Under25 Summit, on-ground volunteering at Devfolio's Warpspeed, PR for Dcodeblock with reels alongside influencers on Instagram and X, and social media and operations for ETHMumbai 2026 as part of its Mitra Mandal.",
+    place: "Under25 · Warpspeed · Dcodeblock · ETHMumbai",
     href: "/marketing",
     cta: "Marketing work",
   },
@@ -295,7 +294,7 @@ export const journey: {
   {
     years: "Aug – Dec 2024",
     verb: "Modelling",
-    text: role("knowledge-lens").summary,
+    text: `${role("knowledge-lens").summary} Won 1st place at Evolve 2024, the company's internal hackathon.`,
     place: "Knowledge Lens · Software Engineer",
     lesson:
       "When an asset malfunctions, the cause is rarely the thing that failed. It is two or three hops upstream.",
@@ -310,6 +309,14 @@ export const journey: {
     lesson: "Behaviour in the weights, knowledge in the index.",
     href: "/work/infosys",
     cta: "Case study",
+  },
+  {
+    years: "2024 – 2026",
+    verb: "Judging",
+    text: "Judged three college hackathons, one at Global Academy of Technology and two at Dayananda Sagar University, and mentored teams along the way.",
+    place: "Hackathon judge and mentor",
+    href: "/work#hackathon-judge",
+    cta: "Recognition",
   },
 ];
 
@@ -452,24 +459,63 @@ export const sideQuests = {
 
   roles: [
     {
+      id: "ethmumbai",
+      org: "ETHMumbai",
+      title: "Mitra Mandal member · Social media & operations",
+      period: "Sep 2025 – Mar 2026",
+      location: "Mumbai",
+      href: "https://www.ethmumbai.in/",
+      image: {
+        src: "/mitra-mandal.png",
+        alt: "The ETHMumbai Mitra Mandal team portraits on ethmumbai.in, including Bhuvana",
+        caption: "The ETHMumbai Mitra Mandal, as shown on ethmumbai.in.",
+        width: 1875,
+        height: 877,
+      },
+      points: [
+        "Part of the ETHMumbai Mitra Mandal, the community team behind ETHMumbai 2026, the Ethereum conference and hackathon held in March 2026.",
+        "Handled ETHMumbai's social media for around six months, from the build-up through to the conference and hackathon dates.",
+        "Worked on operations for the conference and hackathon.",
+      ],
+    },
+    {
+      id: "pr",
+      org: "Dcodeblock",
+      title: "Marketing & PR · Face of PR",
+      period: "",
+      location: "",
+      points: [
+        "Handled marketing and PR for Dcodeblock.",
+        "Tried being the face of PR: worked with a few influencers and community figures and made reels with them for Instagram and X.",
+      ],
+    },
+    {
+      id: "under25",
       org: "Under25",
       title: "Intern",
       period: "Feb 2023 – Mar 2023",
       location: "Bengaluru",
+      image: {
+        src: "/certificates/under25-internship.png",
+        alt: "Under 25 Summit 2023 internship completion certificate for Bhuvana K S, signed by the co-founders",
+        caption:
+          "Internship completion certificate, Under 25 Summit 2023. Open the PDF.",
+        href: "/certificates/under25-internship.pdf",
+        width: 910,
+        height: 1287,
+      },
       points: [
-        "Managed multiple marketing campaigns for the Under25 Summit 2023.",
-        "Raised on-ground awareness of the Under25 community and ran on-ground operations during the summit.",
+        "Worked for over a month on marketing and campaigns for the Under25 Summit 2023.",
+        "Raised on-ground awareness of the Under25 community and worked on-ground operations on the summit days.",
       ],
     },
     {
+      id: "warpspeed",
       org: "Warpspeed 2023, Devfolio",
-      title: "Organizer",
+      title: "Volunteer · On-ground operations",
       period: "May 2023",
       location: "Bengaluru",
-      points: [
-        "Helped manage partners for the Warpspeed hackathon.",
-        "Handled on-ground ops and marketing.",
-      ],
+      points: ["Volunteered on the ground for Devfolio's Warpspeed hackathon."],
     },
   ],
 
@@ -534,19 +580,49 @@ export const publications: {
   },
 ];
 
-export const achievements = [
+export const achievements: {
+  id: string;
+  title: string;
+  detail: string;
+  year: string;
+  /** Scan of the certificate. Optional. */
+  certificate?: { src: string; alt: string; width: number; height: number };
+}[] = [
   {
-    title: "Hackathon judge, three times over",
+    id: "hackathon-judge",
+    title: "Hackathon judge and mentor",
     detail:
-      "Invited to judge three college hackathons: one at Global Academy of Technology, and twice at Dayananda Sagar University.",
-    year: "2024 – 2025",
+      "Invited to judge three college hackathons: one at Global Academy of Technology, and twice at Dayananda Sagar University, including the 24-hour La Casa De Code (Techflix Season 2) in February 2026. Also mentored teams at hackathons.",
+    year: "2024 – 2026",
+    certificate: {
+      src: "/certificates/dsu-techflix-judge.jpg",
+      alt: "Certificate from Dayananda Sagar University recognising Bhuvana K S as a judge for the 24-hour internal hackathon La Casa De Code, 27th–28th February 2026",
+      width: 1600,
+      height: 1131,
+    },
   },
   {
+    id: "star-of-the-month",
+    title: "Star of the Month, Knowledge Lens",
+    detail:
+      "Recognised as Best New Comer for performance and excellence at work, October 2024.",
+    year: "2024",
+    certificate: {
+      src: "/certificates/knowledge-lens-star-of-the-month.jpg",
+      alt: "Knowledge Lens Star of the Month certificate of achievement for Bhuvana K S, Best New Comer, October 2024",
+      width: 800,
+      height: 589,
+    },
+  },
+  {
+    id: "evolve-2024",
     title: "1st place, Evolve 2024",
-    detail: "Won the office-wide hackathon at Knowledge Lens.",
+    detail:
+      "Won Evolve 2024, the internal company hackathon at Knowledge Lens, securing 1st place.",
     year: "2024",
   },
   {
+    id: "college-hackathon",
     title: "1st place, College Hackathon",
     detail:
       "Built a complete front-end website in HTML and CSS, from scratch, on the clock.",

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 import { Hero } from "@/components/hero";
 import { Journey } from "@/components/journey";
@@ -6,10 +6,7 @@ import { MeGraph } from "@/components/me-graph";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import {
-  achievements,
-  education,
   projects,
-  publications,
   sideQuests,
   site,
   socials,
@@ -18,9 +15,7 @@ import {
 
 const glance = [
   { label: "Now", value: work[0].company },
-  { label: "Based in", value: site.location },
-  { label: "Studied", value: education.degree },
-  { label: "Speaks", value: `${sideQuests.languages.length} languages` },
+  { label: "Speaks", value: sideQuests.languages.join(" · ") },
 ];
 
 type FindCard = {
@@ -32,7 +27,6 @@ type FindCard = {
 };
 
 const githubLink = socials.find((s) => s.label === "GitHub")!;
-const paper = publications[0];
 
 /** Where to find the work and the person, one card each. */
 const findCards: FindCard[] = [
@@ -42,13 +36,6 @@ const findCards: FindCard[] = [
     body: `${projects.length} public projects, from a graph visualiser to a hackathon finder and a voice-first money app.`,
     href: githubLink.href,
     cta: "See the code",
-  },
-  {
-    label: "Published",
-    title: paper.title,
-    body: `${paper.venue}, ${paper.year}.`,
-    href: paper.href,
-    cta: "Read the paper",
   },
   ...socials
     .filter((s) => s.label !== "GitHub" && s.href)
@@ -68,52 +55,30 @@ const findCards: FindCard[] = [
   },
 ];
 
-/** Everything in three strands; each one opens into its full page. */
+/** The three strands, one short card each; the detail lives on their pages. */
 const gist = [
   {
     href: "/work",
     label: "Technical",
     title: "Engineering",
-    body: "Small language models, graph databases and the APIs that connect them.",
-    items: work.map((role) => ({
-      head: role.headline,
-      sub: `${role.company} · ${role.period}`,
-    })),
-    note: `${work.length} roles · ${projects.length} projects · ${achievements.length} wins`,
+    body: "Case studies, projects and the stack behind them.",
+    note: `${work.length} roles · ${projects.length} projects`,
     cta: "Engineering",
   },
   {
     href: "/marketing",
     label: "Marketing",
     title: "Campaigns & community",
-    body: "Marketing and on-ground operations for a summit and a hackathon.",
-    items: sideQuests.roles.map((role) => ({
-      head: role.points[0],
-      sub: `${role.org} · ${role.period}`,
-    })),
-    note: `${sideQuests.roles.length} roles so far`,
+    body: "Marketing, PR and on-ground work, in full.",
+    note: `${sideQuests.roles.length} roles`,
     cta: "Marketing",
   },
   {
     href: "/side-quests",
     label: "Side quests",
     title: "Everything else",
-    body: "Judging hackathons, moderating communities and learning languages.",
-    items: [
-      {
-        head: achievements[0].title,
-        sub: achievements[0].year,
-      },
-      {
-        head: `Speaks ${sideQuests.languages.length} languages`,
-        sub: sideQuests.languages.join(" · "),
-      },
-      {
-        head: "Community moderation and design",
-        sub: "Discord · Telegram · Figma · Canva",
-      },
-    ],
-    note: `${sideQuests.languages.length} languages · ${sideQuests.toolkit.length} tools`,
+    body: "Community, languages and the things that do not compile.",
+    note: `${sideQuests.toolkit.length} tools`,
     cta: "Side quests",
   },
 ];
@@ -129,7 +94,11 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Section id="about" label="01 · About" title="Backend engineer, deep in AI.">
+      <Section
+        id="about"
+        label="01 · About"
+        title="Curious, quick to learn, here to build something real."
+      >
         <div className="grid gap-12 sm:grid-cols-[1.6fr_1fr]">
           <div className="space-y-6">
             {site.bio.map((paragraph, i) => (
@@ -216,7 +185,7 @@ export default function HomePage() {
         id="path"
         label="02 · The path"
         note="2020 – now"
-        title="From a first hackathon to fine-tuned models."
+        title="From back then to now, one step at a time."
       >
         <Journey />
       </Section>
@@ -231,19 +200,9 @@ export default function HomePage() {
               >
                 <p className="label">{strand.label}</p>
                 <h3 className="display mt-4 text-3xl">{strand.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
                   {strand.body}
                 </p>
-                <ul className="mt-6 flex-1 border-t border-rule">
-                  {strand.items.map((item) => (
-                    <li key={item.head} className="border-b border-rule py-3">
-                      <p className="text-sm leading-snug text-ink-soft">
-                        {item.head}
-                      </p>
-                      <p className="mt-1 text-xs text-ink-muted">{item.sub}</p>
-                    </li>
-                  ))}
-                </ul>
                 <p className="label mt-6">{strand.note}</p>
                 <p className="mt-3 text-sm text-ink-soft transition-colors duration-300 group-hover:text-accent">
                   {strand.cta}{" "}
@@ -260,19 +219,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section id="off-the-clock" label="04 · Off the clock">
-        <Reveal>
-          <p className="max-w-2xl leading-relaxed text-ink-soft">
-            I have judged three college hackathons, one at Global Academy of
-            Technology and two at Dayananda Sagar University, and won two,
-            including the office-wide hackathon at Knowledge Lens.
-          </p>
-          <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-            Outside work I read about running models on limited hardware and
-            study languages; I speak {sideQuests.languages.length} so far.
-          </p>
-        </Reveal>
-      </Section>
     </>
   );
 }
+

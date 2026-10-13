@@ -25,17 +25,23 @@ const nodes: GraphNode[] = [
   { id: "growth", label: "Marketing", x: 70, y: 27, href: "/marketing", parent: "me", rel: "RAN" },
   { id: "quests", label: "Side quests", x: 70, y: 75, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
 
-  { id: "slm", label: "Small language models", x: 13, y: 20, href: "/work/infosys", parent: "tech", rel: "FINE_TUNES" },
-  { id: "rag", label: "RAG", x: 34, y: 13, href: "/work/infosys", parent: "tech", rel: "RETRIEVES_WITH" },
-  { id: "graphs", label: "Graph databases", x: 11, y: 78, href: "/work/knowledge-lens", parent: "tech", rel: "QUERIES" },
-  { id: "backend", label: "Backend APIs", x: 33, y: 88, href: "/work#stack", parent: "tech", rel: "BUILDS" },
+  { id: "slm", label: "Small language models", x: 14, y: 14, href: "/work/infosys#fine-tuning-for-specificity", parent: "tech", rel: "FINE_TUNES" },
+  { id: "rag", label: "RAG", x: 36, y: 9, href: "/work/infosys#retrieval-so-the-model-doesnt-go-stale", parent: "tech", rel: "RETRIEVES_WITH" },
+  { id: "agents", label: "AI agents", x: 9, y: 34, href: "/work/infosys#agent-workflows", parent: "tech", rel: "ORCHESTRATES" },
+  { id: "paper", label: "IEEE paper", x: 9, y: 66, href: "/work#achievements", parent: "tech", rel: "PUBLISHED" },
+  { id: "graphs", label: "Graph databases", x: 14, y: 84, href: "/work/knowledge-lens#modelling-failure-as-a-graph", parent: "tech", rel: "QUERIES" },
+  { id: "backend", label: "Backend APIs", x: 36, y: 90, href: "/work/infosys#the-backend-around-it", parent: "tech", rel: "BUILDS" },
 
-  { id: "under25", label: "Under25 Summit", x: 87, y: 11, href: "/marketing#campaigns", parent: "growth", rel: "MARKETED" },
-  { id: "warpspeed", label: "Warpspeed hackathon", x: 87, y: 40, href: "/marketing#campaigns", parent: "growth", rel: "ORGANISED" },
+  { id: "ethmumbai", label: "ETHMumbai", x: 54, y: 9, href: "/marketing#ethmumbai", parent: "growth", rel: "RAN_SOCIALS_AT" },
+  { id: "under25", label: "Under25 Summit", x: 86, y: 7, href: "/marketing#under25", parent: "growth", rel: "MARKETED" },
+  { id: "dcodeblock", label: "Dcodeblock PR", x: 89, y: 21, href: "/marketing#pr", parent: "growth", rel: "HANDLED" },
+  { id: "reels", label: "Influencer reels", x: 90, y: 35, href: "/marketing#pr", parent: "growth", rel: "FRONTED" },
+  { id: "warpspeed", label: "Warpspeed hackathon", x: 84, y: 49, href: "/marketing#warpspeed", parent: "growth", rel: "VOLUNTEERED_AT" },
 
-  { id: "judge", label: "Hackathon judge ×3", x: 89, y: 63, href: "/work#achievements", parent: "quests", rel: "JUDGED" },
-  { id: "languages", label: "5 languages", x: 86, y: 90, href: "/side-quests#languages", parent: "quests", rel: "SPEAKS" },
-  { id: "community", label: "Communities", x: 54, y: 90, href: "/side-quests#toolkit", parent: "quests", rel: "MODERATES" },
+  { id: "judge", label: "Judge & mentor", x: 89, y: 62, href: "/work#hackathon-judge", parent: "quests", rel: "JUDGED" },
+  { id: "evolve", label: "Evolve 2024 · 1st", x: 90, y: 76, href: "/work#evolve-2024", parent: "quests", rel: "WON" },
+  { id: "languages", label: "5 languages", x: 84, y: 91, href: "/side-quests#languages", parent: "quests", rel: "SPEAKS" },
+  { id: "community", label: "Communities", x: 56, y: 91, href: "/side-quests#toolkit", parent: "quests", rel: "MODERATES" },
 ];
 
 const byId = new Map(nodes.map((n) => [n.id, n]));
@@ -173,7 +179,7 @@ const layouts: Record<LayoutId, Map<string, Point>> = (() => {
   leaves.forEach((l, i) =>
     tree.set(l.id, {
       x: 7 + i * (86 / (leaves.length - 1)),
-      y: i % 2 ? 90 : 76,
+      y: 66 + (i % 3) * 12,
     }),
   );
   strands.forEach((st) =>
@@ -423,7 +429,7 @@ export function MeGraph() {
     <figure>
       <div
         ref={plate}
-        className="relative aspect-[2/1] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[5/2]"
+        className="relative aspect-[2/1] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[16/9]"
         style={{
           backgroundImage:
             "radial-gradient(var(--rule) 1px, transparent 1px)",

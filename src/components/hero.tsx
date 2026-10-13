@@ -9,13 +9,13 @@ import { site, socials } from "@/content/site";
 
 const isDev = process.env.NODE_ENV === "development";
 
-/** The tagline, with its second sentence set in italic serif. */
+/** The tagline, with its second sentence on a new line. */
 function Tagline() {
   return (
     <>
       {site.tagline}
       <br />
-      <span className="font-serif italic text-ink-soft">
+      <span className="font-serif text-[1.15em] italic leading-snug text-ink-muted">
         {site.taglineAside}
       </span>
     </>

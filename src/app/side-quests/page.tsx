@@ -35,15 +35,16 @@ export default function SideQuestsPage() {
             <Reveal
               as="li"
               key={role.org}
+              id={role.id}
               delay={i * 0.06}
-              className="border-b border-rule py-7 sm:py-9"
+              className="scroll-mt-20 border-b border-rule py-7 sm:py-9"
             >
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="display text-2xl sm:text-3xl">{role.org}</h3>
                 <span className="label">{role.period}</span>
               </div>
               <p className="mt-1.5 text-sm text-ink-soft">
-                {role.title} · {role.location}
+                {[role.title, role.location].filter(Boolean).join(" · ")}
               </p>
               <ul className="mt-4 max-w-2xl list-disc space-y-1.5 pl-5 leading-relaxed text-ink-soft">
                 {role.points.map((point) => (

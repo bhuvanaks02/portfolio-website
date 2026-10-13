@@ -70,8 +70,10 @@
 
 /* -------------------------------- base ---------------------------------- */
 
-* {
-  border-color: var(--rule);
+@layer base {
+  * {
+    border-color: var(--rule);
+  }
 }
 
 html {
