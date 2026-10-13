@@ -77,8 +77,8 @@ const gist = [
     href: "/side-quests",
     label: "Side quests",
     title: "Everything else",
-    body: "Community, languages and the things that do not compile.",
-    note: `${sideQuests.toolkit.length} tools`,
+    body: "Crypto, badminton, running, languages and the things that do not compile.",
+    note: `${sideQuests.communities.length} communities · running`,
     cta: "Side quests",
   },
 ];

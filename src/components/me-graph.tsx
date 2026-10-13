@@ -21,27 +21,32 @@ type GraphNode = {
 const nodes: GraphNode[] = [
   { id: "me", label: site.name.split(" ")[0], x: 50, y: 50, href: "#about" },
 
-  { id: "tech", label: "Technical", x: 27, y: 50, href: "/work", parent: "me", rel: "WORKS_IN" },
-  { id: "growth", label: "Marketing", x: 70, y: 27, href: "/marketing", parent: "me", rel: "RAN" },
-  { id: "quests", label: "Side quests", x: 70, y: 75, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
+  { id: "tech", label: "Technical", x: 24, y: 50, href: "/work", parent: "me", rel: "WORKS_IN" },
+  { id: "growth", label: "Marketing", x: 72, y: 26, href: "/marketing", parent: "me", rel: "RAN" },
+  { id: "quests", label: "Side quests", x: 80, y: 72, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
 
-  { id: "slm", label: "Small language models", x: 14, y: 14, href: "/work/infosys#fine-tuning-for-specificity", parent: "tech", rel: "FINE_TUNES" },
-  { id: "rag", label: "RAG", x: 36, y: 9, href: "/work/infosys#retrieval-so-the-model-doesnt-go-stale", parent: "tech", rel: "RETRIEVES_WITH" },
-  { id: "agents", label: "AI agents", x: 9, y: 34, href: "/work/infosys#agent-workflows", parent: "tech", rel: "ORCHESTRATES" },
-  { id: "paper", label: "IEEE paper", x: 9, y: 66, href: "/work#achievements", parent: "tech", rel: "PUBLISHED" },
-  { id: "graphs", label: "Graph databases", x: 14, y: 84, href: "/work/knowledge-lens#modelling-failure-as-a-graph", parent: "tech", rel: "QUERIES" },
-  { id: "backend", label: "Backend APIs", x: 36, y: 90, href: "/work/infosys#the-backend-around-it", parent: "tech", rel: "BUILDS" },
+  { id: "slm", label: "Small language models", x: 14, y: 13, href: "/work/infosys#fine-tuning-for-specificity", parent: "tech", rel: "FINE_TUNES" },
+  { id: "rag", label: "RAG", x: 33, y: 8, href: "/work/infosys#retrieval-so-the-model-doesnt-go-stale", parent: "tech", rel: "RETRIEVES_WITH" },
+  { id: "agents", label: "AI agents", x: 8, y: 31, href: "/work/infosys#agent-workflows", parent: "tech", rel: "ORCHESTRATES" },
+  { id: "edu", label: "Education", x: 6, y: 50, href: "/work#education", parent: "tech", rel: "STUDIED" },
+  { id: "paper", label: "IEEE paper", x: 8, y: 68, href: "/work#education", parent: "tech", rel: "PUBLISHED" },
+  { id: "graphs", label: "Graph databases", x: 12, y: 82, href: "/work/knowledge-lens#modelling-failure-as-a-graph", parent: "tech", rel: "QUERIES" },
+  { id: "hackathons", label: "Hackathons", x: 38, y: 74, href: "/work#hackathons", parent: "tech", rel: "JUDGES" },
+  { id: "backend", label: "Backend APIs", x: 26, y: 92, href: "/work/infosys#the-backend-around-it", parent: "tech", rel: "BUILDS" },
 
-  { id: "ethmumbai", label: "ETHMumbai", x: 54, y: 9, href: "/marketing#ethmumbai", parent: "growth", rel: "RAN_SOCIALS_AT" },
-  { id: "under25", label: "Under25 Summit", x: 86, y: 7, href: "/marketing#under25", parent: "growth", rel: "MARKETED" },
-  { id: "dcodeblock", label: "Dcodeblock PR", x: 89, y: 21, href: "/marketing#pr", parent: "growth", rel: "HANDLED" },
-  { id: "reels", label: "Influencer reels", x: 90, y: 35, href: "/marketing#pr", parent: "growth", rel: "FRONTED" },
-  { id: "warpspeed", label: "Warpspeed hackathon", x: 84, y: 49, href: "/marketing#warpspeed", parent: "growth", rel: "VOLUNTEERED_AT" },
+  { id: "ethmumbai", label: "ETHMumbai", x: 52, y: 8, href: "/marketing#ethmumbai", parent: "growth", rel: "RAN_SOCIALS_AT" },
+  { id: "campaigns", label: "Campaigns", x: 66, y: 7, href: "/marketing#under25", parent: "growth", rel: "RAN" },
+  { id: "under25", label: "Under25 internship", x: 85, y: 7, href: "/marketing#under25", parent: "growth", rel: "INTERNED_AT" },
+  { id: "dcodeblock", label: "Dcodeblock PR", x: 90, y: 18, href: "/marketing#pr", parent: "growth", rel: "HANDLED" },
+  { id: "live", label: "Livestreams & meetups", x: 89, y: 30, href: "/marketing#pr", parent: "growth", rel: "HOSTED" },
+  { id: "camera", label: "On camera", x: 91, y: 41, href: "/marketing#pr", parent: "growth", rel: "FRONTED" },
+  { id: "warpspeed", label: "Warpspeed hackathon", x: 79, y: 49, href: "/marketing#warpspeed", parent: "growth", rel: "VOLUNTEERED_AT" },
 
-  { id: "judge", label: "Judge & mentor", x: 89, y: 62, href: "/work#hackathon-judge", parent: "quests", rel: "JUDGED" },
-  { id: "evolve", label: "Evolve 2024 · 1st", x: 90, y: 76, href: "/work#evolve-2024", parent: "quests", rel: "WON" },
-  { id: "languages", label: "5 languages", x: 84, y: 91, href: "/side-quests#languages", parent: "quests", rel: "SPEAKS" },
-  { id: "community", label: "Communities", x: 56, y: 91, href: "/side-quests#toolkit", parent: "quests", rel: "MODERATES" },
+
+  { id: "running", label: "Running", x: 92, y: 60, href: "/side-quests#running", parent: "quests", rel: "RUNS" },
+  { id: "languages", label: "5 languages", x: 91, y: 82, href: "/side-quests#languages", parent: "quests", rel: "SPEAKS" },
+  { id: "baddies", label: "@blrbaddies", x: 85, y: 92, href: "/side-quests#communities", parent: "quests", rel: "CO_FOUNDED" },
+  { id: "crypto", label: "Crypto", x: 73, y: 92, href: "/side-quests#communities", parent: "quests", rel: "BUILDS_IN" },
 ];
 
 const byId = new Map(nodes.map((n) => [n.id, n]));
@@ -174,12 +179,12 @@ const layouts: Record<LayoutId, Map<string, Point>> = (() => {
     nodes.map((n) => [n.id, { x: n.x, y: n.y }]),
   );
 
-  // Top-down tree: leaves staggered along the bottom so labels never collide.
+  // Top-down tree: leaves staggered over four rows along the bottom so labels never collide.
   const tree = new Map<string, Point>([["me", { x: 50, y: 11 }]]);
   leaves.forEach((l, i) =>
     tree.set(l.id, {
       x: 7 + i * (86 / (leaves.length - 1)),
-      y: 66 + (i % 3) * 12,
+      y: 62 + (i % 4) * 9,
     }),
   );
   strands.forEach((st) =>
@@ -192,7 +197,10 @@ const layouts: Record<LayoutId, Map<string, Point>> = (() => {
   // Left-to-right tree.
   const timeline = new Map<string, Point>([["me", { x: 9, y: 50 }]]);
   leaves.forEach((l, i) =>
-    timeline.set(l.id, { x: 84, y: 8 + i * (84 / (leaves.length - 1)) }),
+    timeline.set(l.id, {
+      x: i % 2 ? 87 : 78,
+      y: 5 + i * (90 / (leaves.length - 1)),
+    }),
   );
   strands.forEach((st) =>
     timeline.set(st.id, {

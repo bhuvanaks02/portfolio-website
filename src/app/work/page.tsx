@@ -19,8 +19,49 @@ import {
 export const metadata: Metadata = {
   title: "Engineering",
   description:
-    "Experience, projects, stack, education, publications and achievements.",
+    "Experience, projects, stack, education, publications, hackathons and mentoring.",
 };
+
+type Achievement = (typeof achievements)[number];
+
+function AchievementList({ items }: { items: Achievement[] }) {
+  return (
+    <ul className="mt-4 border-t border-rule">
+      {items.map((item) => (
+        <li
+          key={item.title}
+          id={item.id}
+          className="scroll-mt-20 border-b border-rule py-4"
+        >
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="text-ink-soft">{item.title}</p>
+            <span className="label shrink-0 tabular-nums">{item.year}</span>
+          </div>
+          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-ink-muted">
+            {item.detail}
+          </p>
+          {item.certificate && (
+            <a
+              href={item.certificate.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 block max-w-xs"
+            >
+              <Image
+                src={item.certificate.src}
+                alt={item.certificate.alt}
+                width={item.certificate.width}
+                height={item.certificate.height}
+                sizes="20rem"
+                className="h-auto w-full rounded-lg border border-rule"
+              />
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function ResumePage() {
   return (
@@ -134,7 +175,7 @@ export default function ResumePage() {
         </dl>
       </Section>
 
-      <Section id="achievements" label="Education & achievements">
+      <Section id="education" label="Education & publications">
         <div className="grid gap-12 sm:grid-cols-2">
           <Reveal>
             <h3 className="display text-2xl">Education</h3>
@@ -172,44 +213,23 @@ export default function ResumePage() {
 
           <Reveal delay={0.08}>
             <h3 className="display text-2xl">Recognition</h3>
-            <ul className="mt-4 border-t border-rule">
-              {achievements.map((item) => (
-                <li
-                  key={item.title}
-                  id={item.id}
-                  className="scroll-mt-20 border-b border-rule py-4"
-                >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="text-ink-soft">{item.title}</p>
-                    <span className="label shrink-0 tabular-nums">
-                      {item.year}
-                    </span>
-                  </div>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-                    {item.detail}
-                  </p>
-                  {item.certificate && (
-                    <a
-                      href={item.certificate.src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 block max-w-xs"
-                    >
-                      <Image
-                        src={item.certificate.src}
-                        alt={item.certificate.alt}
-                        width={item.certificate.width}
-                        height={item.certificate.height}
-                        sizes="20rem"
-                        className="h-auto w-full rounded-lg border border-rule"
-                      />
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <AchievementList
+              items={achievements.filter((a) => a.group === "recognition")}
+            />
           </Reveal>
         </div>
+      </Section>
+
+      <Section
+        id="hackathons"
+        label="Hackathons & mentoring"
+        title="Judging, mentoring and winning on the clock."
+      >
+        <Reveal>
+          <AchievementList
+            items={achievements.filter((a) => a.group === "hackathon")}
+          />
+        </Reveal>
       </Section>
     </>
   );

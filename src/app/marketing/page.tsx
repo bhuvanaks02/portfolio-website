@@ -25,8 +25,9 @@ export default function MarketingPage() {
             marketing and PR for Dcodeblock, campaigns, partner management, on-ground operations and social
             media. I was part of the ETHMumbai Mitra Mandal, ran its socials
             and worked on operations for the March 2026 conference and
-            hackathon, and have tried being the face of PR, making reels with
-            influencers for Instagram and X.
+            hackathon, hosted Dcodeblock's livestreams and meetups, and went
+            on camera for PR, making reels and cameos with influencers for
+            Instagram and X.
           </p>
           <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-soft">
             <a

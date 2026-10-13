@@ -25,35 +25,63 @@ export default function SideQuestsPage() {
       </header>
 
       <Section
-        id="quests"
-        label="Quest log"
-        note={`${sideQuests.roles.length} so far`}
-        title="Campaigns, crowds and hackathon floors."
+        id="communities"
+        label="Communities"
+        note={`${sideQuests.communities.length} so far`}
+        title="Crypto and badminton."
       >
         <ul className="border-t border-rule">
-          {sideQuests.roles.map((role, i) => (
+          {sideQuests.communities.map((c, i) => (
             <Reveal
               as="li"
-              key={role.org}
-              id={role.id}
+              key={c.id}
+              id={c.id}
               delay={i * 0.06}
               className="scroll-mt-20 border-b border-rule py-7 sm:py-9"
             >
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="display text-2xl sm:text-3xl">{role.org}</h3>
-                <span className="label">{role.period}</span>
-              </div>
-              <p className="mt-1.5 text-sm text-ink-soft">
-                {[role.title, role.location].filter(Boolean).join(" · ")}
+              <h3 className="display text-2xl sm:text-3xl">
+                {c.href.startsWith("http") ? (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline"
+                  >
+                    {c.name}
+                  </a>
+                ) : (
+                  c.name
+                )}
+              </h3>
+              <p className="mt-1.5 text-sm text-ink-soft">{c.role}</p>
+              <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+                {c.detail}
               </p>
-              <ul className="mt-4 max-w-2xl list-disc space-y-1.5 pl-5 leading-relaxed text-ink-soft">
-                {role.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
             </Reveal>
           ))}
         </ul>
+      </Section>
+
+      <Section id="running" label="Running" title="10Ks and 5Ks.">
+        <Reveal>
+          <p className="max-w-2xl leading-relaxed text-ink-soft">
+            {sideQuests.running.intro}
+          </p>
+          <ul className="mt-6 border-t border-rule">
+            {sideQuests.running.races.map((race) => (
+              <li
+                key={race.name}
+                className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule py-4"
+              >
+                <p className="text-ink-soft">
+                  {race.name}
+                  <span className="text-ink-muted"> · {race.distance}</span>
+                </p>
+                <span className="label tabular-nums">{race.year}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </Section>
 
       <Section id="languages" label="Languages" title="Five, and counting.">

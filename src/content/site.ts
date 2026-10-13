@@ -271,7 +271,7 @@ export const journey: {
     verb: "Learning",
     text: "A computer science degree, a first hackathon win in 2021 and an IEEE paper on graduate admission prediction in 2023.",
     place: "Global Academy of Technology · B.E. Computer Science · CGPA 9.17",
-    href: "/work#achievements",
+    href: "/work#education",
     cta: "Education and the paper",
   },
   {
@@ -313,7 +313,7 @@ export const journey: {
   {
     years: "2024 – 2026",
     verb: "Judging",
-    text: "Judged three college hackathons, one at Global Academy of Technology and two at Dayananda Sagar University, and mentored teams along the way.",
+    text: "Judged and mentored at hackathons: Global Academy of Technology, Dayananda Sagar University and the iQOO hackathon grand finale in October 2026.",
     place: "Hackathon judge and mentor",
     href: "/work#hackathon-judge",
     cta: "Recognition",
@@ -455,7 +455,7 @@ export const internships: {
 /** Everything that is not tech. More to come. */
 export const sideQuests = {
   intro:
-    "The parts of me that do not compile. Marketing campaigns, hackathon floors, community servers and a few too many languages.",
+    "The parts of me that do not compile. Communities, crypto, badminton, running and a few too many languages.",
 
   roles: [
     {
@@ -481,12 +481,13 @@ export const sideQuests = {
     {
       id: "pr",
       org: "Dcodeblock",
-      title: "Marketing & PR · Face of PR",
+      title: "Marketing & PR · Livestream and meetup host · On camera",
       period: "",
       location: "",
       points: [
         "Handled marketing and PR for Dcodeblock.",
-        "Tried being the face of PR: worked with a few influencers and community figures and made reels with them for Instagram and X.",
+        "Hosted Dcodeblock's livestreams and meetups.",
+        "Went on camera for PR: worked with influencers and community figures on reels and cameos for Instagram and X.",
       ],
     },
     {
@@ -518,6 +519,37 @@ export const sideQuests = {
       points: ["Volunteered on the ground for Devfolio's Warpspeed hackathon."],
     },
   ],
+
+  communities: [
+    {
+      id: "crypto",
+      name: "Crypto",
+      role: "Community member and builder",
+      detail:
+        "Active in the crypto community through ETHMumbai's Mitra Mandal, and building FinVoice, which settles split bills on-chain on Base.",
+      href: "/marketing#ethmumbai",
+    },
+    {
+      id: "blrbaddies",
+      name: "@blrbaddies",
+      role: "Co-founder",
+      detail:
+        "Co-founded a badminton community for Bengaluru players and ran it for a few months.",
+      href: "https://x.com/blrbaddies",
+    },
+  ],
+
+  running: {
+    intro:
+      "I have run 10Ks and 5Ks a few times. The most recent 10K was at the Kodagu Monsoon Half Marathon in 2024.",
+    races: [
+      {
+        name: "Kodagu Monsoon Half Marathon",
+        year: "2024",
+        distance: "10K",
+      },
+    ],
+  },
 
   languages: ["English", "Hindi", "Kannada", "Marathi", "Korean"],
 
@@ -582,6 +614,8 @@ export const publications: {
 
 export const achievements: {
   id: string;
+  /** Where it is shown on the Engineering page. */
+  group: "hackathon" | "recognition";
   title: string;
   detail: string;
   year: string;
@@ -590,9 +624,10 @@ export const achievements: {
 }[] = [
   {
     id: "hackathon-judge",
+    group: "hackathon",
     title: "Hackathon judge and mentor",
     detail:
-      "Invited to judge three college hackathons: one at Global Academy of Technology, and twice at Dayananda Sagar University, including the 24-hour La Casa De Code (Techflix Season 2) in February 2026. Also mentored teams at hackathons.",
+      "Invited to judge and mentor at hackathons at Global Academy of Technology and, twice, Dayananda Sagar University, including the 24-hour La Casa De Code (Techflix Season 2) in February 2026.",
     year: "2024 – 2026",
     certificate: {
       src: "/certificates/dsu-techflix-judge.jpg",
@@ -602,7 +637,16 @@ export const achievements: {
     },
   },
   {
+    id: "iqoo-hackathon",
+    group: "hackathon",
+    title: "Mentor and judge, iQOO hackathon grand finale",
+    detail:
+      "Mentored teams and judged at the grand finale of the iQOO hackathon, 9th to 11th October 2026.",
+    year: "2026",
+  },
+  {
     id: "star-of-the-month",
+    group: "recognition",
     title: "Star of the Month, Knowledge Lens",
     detail:
       "Recognised as Best New Comer for performance and excellence at work, October 2024.",
@@ -616,6 +660,7 @@ export const achievements: {
   },
   {
     id: "evolve-2024",
+    group: "hackathon",
     title: "1st place, Evolve 2024",
     detail:
       "Won Evolve 2024, the internal company hackathon at Knowledge Lens, securing 1st place.",
@@ -623,6 +668,7 @@ export const achievements: {
   },
   {
     id: "college-hackathon",
+    group: "hackathon",
     title: "1st place, College Hackathon",
     detail:
       "Built a complete front-end website in HTML and CSS, from scratch, on the clock.",
