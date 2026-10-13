@@ -21,10 +21,10 @@ export async function generateMetadata({
   if (!entry) return {};
 
   return {
-    title: `${entry.company} — ${entry.title}`,
+    title: `${entry.company} · ${entry.title}`,
     description: entry.summary,
     openGraph: {
-      title: `${entry.company} — ${entry.headline}`,
+      title: `${entry.company} · ${entry.headline}`,
       description: entry.summary,
       type: "article",
     },
@@ -49,7 +49,7 @@ export default async function WorkPage({
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-3xl">
           <Link
-            href="/#work"
+            href="/work#work"
             className="label inline-flex items-center gap-2 transition-colors hover:text-ink"
           >
             <span aria-hidden="true">←</span> All work
@@ -104,8 +104,13 @@ export default async function WorkPage({
             <Reveal
               as="section"
               key={section.heading}
+              id={section.heading
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .trim()
+                .replace(/\s+/g, "-")}
               delay={i * 0.04}
-              className="border-b border-rule py-12 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
+              className="scroll-mt-20 border-b border-rule py-12 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
             >
               <h2 className="display text-2xl sm:sticky sm:top-24 sm:self-start">
                 {section.heading}

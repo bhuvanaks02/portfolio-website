@@ -36,7 +36,7 @@ export function ThemeToggle() {
       aria-label={
         theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
       }
-      className="grid size-9 place-items-center rounded-full border border-rule text-ink-muted transition-colors duration-300 hover:border-rule-strong hover:text-ink"
+      className="grid size-9 place-items-center rounded-full border border-rule/50 text-ink-muted transition-colors duration-300 hover:border-rule-strong hover:text-ink"
     >
       {/* Rendered only once mounted, so SSR and client agree. */}
       {theme === null ? (

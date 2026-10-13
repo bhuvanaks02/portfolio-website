@@ -17,14 +17,20 @@ export const site = {
 
   // The one-liner under your name on the home page.
   tagline:
-    "I build AI agents, graph databases and backend systems — teaching small models new tricks and making messy data answer questions.",
+    "Backend developer exploring what AI can do inside real systems.",
 
-  // Longer version, used on /about.
+  // Second sentence of the one-liner, set in italic serif.
+  taglineAside: "Currently learning a little about a lot of things.",
+
+  // Longer version, used in the About section of the landing page.
   bio: [
-    "I'm a software engineer in Bengaluru working where language models meet real data. Most of my time goes to fine-tuning small language models, wiring them to retrieval over vector stores, and making the whole thing run privately on hardware you already own.",
-    "Before that I spent a year inside graph databases — modelling manufacturing plant failures in Neo4j and JanusGraph, tuning Cypher and Gremlin queries until they stopped being the bottleneck, and building the SDK that let the rest of the team draw graphs without writing the same hundred lines again.",
-    "I like problems where the constraint is the interesting part: a 4 GB model instead of an API call, a graph traversal instead of a join, a human in the loop instead of blind trust in a benchmark.",
+    "I'm still learning, and I like it that way. Quick to pick things up, and keen to turn that into work people remember.",
+    "Backend development got me started, AI keeps me busy, and marketing and PR are what I explore out of curiosity.",
+    "For fun, I sing, dance and play badminton, which led me to build a badminton community and run it for a few months. I also speak 5 languages: English, Hindi, Kannada, Marathi and Korean.",
   ],
+
+  // Shape of the portrait on the home page: "circle" or "square".
+  avatarShape: "circle" as "circle" | "square",
 
   availability: {
     open: true,
@@ -36,13 +42,30 @@ export type SocialLink = {
   label: string;
   href: string | null;
   handle: string;
+  /** One line shown on hover beside the link in the hero. */
+  note?: string;
 };
 
-// TODO: fill in the hrefs. Any entry left as null is skipped at render time.
+// Any entry left as null is skipped at render time.
 export const socials: SocialLink[] = [
-  { label: "GitHub", href: null, handle: "@bhuvanaks" },
-  { label: "LinkedIn", href: null, handle: "in/bhuvanaks" },
-  { label: "X", href: null, handle: "@bhuvanaks" },
+  {
+    label: "GitHub",
+    href: "https://github.com/bhuvanaks02",
+    handle: "@bhuvanaks02",
+    note: "graph-viz, HackSeek, FinVoice and the rest",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/bhuvana-ks/",
+    handle: "in/bhuvana-ks",
+    note: "The formal record: roles, dates, education",
+  },
+  {
+    label: "X",
+    href: "https://x.com/KsBhuvana",
+    handle: "@KsBhuvana",
+    note: "Shorter thoughts, less formally",
+  },
   { label: "Email", href: "mailto:" + site.email, handle: site.email },
 ];
 
@@ -69,9 +92,9 @@ export const work: WorkEntry[] = [
     slug: "infosys",
     index: "01",
     company: "Infosys Ltd.",
-    title: "Software Engineer — Specialist Programmer",
+    title: "Software Engineer, Specialist Programmer",
     headline: "Small language models that run on your own hardware",
-    period: "Dec 2024 — Present",
+    period: "Dec 2024 – Present",
     location: "Bengaluru",
     summary:
       "Fine-tuned 3–4B parameter models for support automation, paired them with retrieval so knowledge stays current without retraining, and shipped them quantised to ~4 GB for local inference.",
@@ -87,15 +110,15 @@ export const work: WorkEntry[] = [
       {
         heading: "Fine-tuning for specificity",
         body: [
-          "I fine-tuned small language models — Phi-4-mini (3.8B) and Qwen3 — using parameter-efficient techniques, LoRA and QLoRA, through Unsloth. The training set was roughly 1,500 curated domain-specific question-and-answer pairs spanning about twenty business domains.",
+          "I fine-tuned small language models, Phi-4-mini (3.8B) and Qwen3, using parameter-efficient techniques, LoRA and QLoRA, through Unsloth. The training set was roughly 1,500 curated domain-specific question-and-answer pairs spanning about twenty business domains.",
           "The goal was never general capability. It was making a small model answer these questions, in this voice, with the vocabulary of the domain it was serving. Parameter-efficient tuning made that cheap enough to iterate on rather than a once-a-quarter event.",
         ],
       },
       {
         heading: "Retrieval, so the model doesn't go stale",
         body: [
-          "Fine-tuning fixes tone and shape; it is a poor place to store facts that change. I integrated the tuned models with Retrieval-Augmented Generation over vector databases — ChromaDB and Pinecone — so updated documentation is available to the model the moment it lands, with no retraining cycle.",
-          "That split — behaviour in the weights, knowledge in the index — is what made the system maintainable by people who were never going to babysit training runs.",
+          "Fine-tuning fixes tone and shape; it is a poor place to store facts that change. I integrated the tuned models with Retrieval-Augmented Generation over vector databases, ChromaDB and Pinecone, so updated documentation is available to the model the moment it lands, with no retraining cycle.",
+          "That split, behaviour in the weights and knowledge in the index, is what made the system maintainable by people who were never going to babysit training runs.",
         ],
       },
       {
@@ -107,7 +130,7 @@ export const work: WorkEntry[] = [
       {
         heading: "The backend around it",
         body: [
-          "I built multi-database API integrations and backend services with FastAPI and WebSockets, spanning three or more heterogeneous database systems — document, graph and relational.",
+          "I built multi-database API integrations and backend services with FastAPI and WebSockets, spanning three or more heterogeneous database systems: document, graph and relational.",
           "I also built the end-to-end ML pipeline in Python and MongoDB: ingestion, preprocessing, training and serialisation, so a new domain could go from raw data to a candidate model without manual glue.",
         ],
       },
@@ -115,7 +138,7 @@ export const work: WorkEntry[] = [
         heading: "Keeping a human in the loop",
         body: [
           "Automated metrics were not enough to decide which checkpoint shipped. I built a validation interface in Gradio where reviewers judge candidate outputs directly, feeding automated retraining and champion-model selection.",
-          "It cut manual model-review effort by around 30% — not by removing the human, but by only asking them the questions that actually decided something.",
+          "It cut manual model-review effort by around 30%, not by removing the human, but by only asking them the questions that actually decided something.",
         ],
       },
       {
@@ -149,7 +172,7 @@ export const work: WorkEntry[] = [
     company: "Knowledge Lens",
     title: "Software Engineer",
     headline: "Why did the machine stop? Ask the graph",
-    period: "Aug 2024 — Dec 2024",
+    period: "Aug 2024 – Dec 2024",
     location: "Bengaluru",
     summary:
       "Owned the Root Cause Analysis module for manufacturing plant asset malfunctions, and built V1 of the internal SDK that let every engineer render graph layouts from a single call.",
@@ -164,7 +187,7 @@ export const work: WorkEntry[] = [
       {
         heading: "Modelling failure as a graph",
         body: [
-          "I owned the Root Cause Analysis module for manufacturing plant asset-malfunction analysis — modelling the domain as a graph and storing it across Neo4j and JanusGraph.",
+          "I owned the Root Cause Analysis module for manufacturing plant asset-malfunction analysis, modelling the domain as a graph and storing it across Neo4j and JanusGraph.",
           "The modelling was the real work. Assets, sensors, process steps and failure events each had to become nodes and edges a traversal could actually reason over, rather than a schema that merely looked like the plant diagram.",
         ],
       },
@@ -172,7 +195,7 @@ export const work: WorkEntry[] = [
         heading: "An SDK, so nobody rewrote the drawing code",
         body: [
           "Every engineer who wanted to see a graph was writing their own layout, styling and rendering code. I built V1 of the company's internal backend SDK: multiple graph layouts behind a single unified function call.",
-          "It cut graph-visualisation boilerplate by roughly 50% for the engineering team, and — more usefully — made the output consistent. The same graph looked the same no matter who rendered it.",
+          "It cut graph-visualisation boilerplate by roughly 50% for the engineering team, and, more usefully, made the output consistent. The same graph looked the same no matter who rendered it.",
         ],
       },
     ],
@@ -184,7 +207,7 @@ export const work: WorkEntry[] = [
     company: "Knowledge Lens",
     title: "Software Engineer Intern",
     headline: "Making slow graph queries fast",
-    period: "Feb 2024 — Aug 2024",
+    period: "Feb 2024 – Aug 2024",
     location: "Bengaluru",
     summary:
       "Owned the WebSocket API behind the FTDM chatbot, cut graph query time by 40%, and built a Gremlin graph visualiser from scratch.",
@@ -198,7 +221,7 @@ export const work: WorkEntry[] = [
       {
         heading: "Real-time chatbot plumbing",
         body: [
-          "I handled the WebSocket API for the FTDM chatbot feature — the transport between a user asking a question and a graph that had to answer while they were still watching.",
+          "I handled the WebSocket API for the FTDM chatbot feature: the transport between a user asking a question and a graph that had to answer while they were still watching.",
         ],
       },
       {
@@ -211,7 +234,7 @@ export const work: WorkEntry[] = [
         heading: "Seeing the graph, and upgrading Kafka",
         body: [
           "I built a Gremlin graph visualiser with vis.js and Python so the team could look at what they were querying.",
-          "I also led the Kafka version upgrade for Jublient's client module — the kind of task that is entirely invisible when it goes well.",
+          "I also led the Kafka version upgrade for Jublient's client module, the kind of task that is entirely invisible when it goes well.",
         ],
       },
     ],
@@ -228,6 +251,75 @@ export const work: WorkEntry[] = [
   },
 ];
 
+/* -------------------------------- journey -------------------------------- */
+
+const role = (slug: string) => work.find((w) => w.slug === slug)!;
+
+/** The timeline on the home page, oldest first. */
+export const journey: {
+  years: string;
+  verb: string;
+  text: string;
+  place: string;
+  /** A line worth keeping from that stretch. Optional. */
+  lesson?: string;
+  href: string;
+  cta: string;
+}[] = [
+  {
+    years: "2020 – 2024",
+    verb: "Learning",
+    text: "A computer science degree, a first hackathon win in 2021 and an IEEE paper on graduate admission prediction in 2023.",
+    place: "Global Academy of Technology · B.E. Computer Science · CGPA 9.17",
+    href: "/work#achievements",
+    cta: "Education and the paper",
+  },
+  {
+    years: "2023 – 2026",
+    verb: "Organising",
+    text: "Marketing and PR, explored out of curiosity. Over a month of campaigns and summit-day operations for the Under25 Summit, on-ground volunteering at Devfolio's Warpspeed, PR for Dcodeblock with reels alongside influencers on Instagram and X, and social media and operations for ETHMumbai 2026 as part of its Mitra Mandal.",
+    place: "Under25 · Warpspeed · Dcodeblock · ETHMumbai",
+    href: "/marketing",
+    cta: "Marketing work",
+  },
+  {
+    years: "Feb – Aug 2024",
+    verb: "Querying",
+    text: role("knowledge-lens-intern").summary,
+    place: "Knowledge Lens · Software Engineer Intern",
+    lesson: "A correct query and a usable query are two different things.",
+    href: "/work/knowledge-lens-intern",
+    cta: "Case study",
+  },
+  {
+    years: "Aug – Dec 2024",
+    verb: "Modelling",
+    text: `${role("knowledge-lens").summary} Won 1st place at Evolve 2024, the company's internal hackathon.`,
+    place: "Knowledge Lens · Software Engineer",
+    lesson:
+      "When an asset malfunctions, the cause is rarely the thing that failed. It is two or three hops upstream.",
+    href: "/work/knowledge-lens",
+    cta: "Case study",
+  },
+  {
+    years: "Dec 2024 – now",
+    verb: "Tuning",
+    text: role("infosys").summary,
+    place: "Infosys · Specialist Programmer",
+    lesson: "Behaviour in the weights, knowledge in the index.",
+    href: "/work/infosys",
+    cta: "Case study",
+  },
+  {
+    years: "2024 – 2026",
+    verb: "Judging",
+    text: "Judged three college hackathons, one at Global Academy of Technology and two at Dayananda Sagar University, and mentored teams along the way.",
+    place: "Hackathon judge and mentor",
+    href: "/work#hackathon-judge",
+    cta: "Recognition",
+  },
+];
+
 /* ------------------------------- projects -------------------------------- */
 
 export type Project = {
@@ -239,24 +331,205 @@ export type Project = {
   year: string;
 };
 
-/**
- * TODO: your projects go here.
- *
- * Add 2–4 entries in this shape and the Projects section fills itself in:
- *
- *   {
- *     name: "Graph Whisperer",
- *     pitch: "Ask a Neo4j database questions in English; get Cypher back.",
- *     stack: ["Python", "FastAPI", "Neo4j", "Ollama"],
- *     repo: "https://github.com/…",
- *     live: null,
- *     year: "2025",
- *   },
- *
- * While the array is empty the section renders a quiet placeholder rather
- * than an empty hole.
- */
-export const projects: Project[] = [];
+const github = "https://github.com/bhuvanaks02";
+
+/** Pulled from github.com/bhuvanaks02, newest first. */
+export const projects: Project[] = [
+  {
+    name: "graph-viz",
+    pitch:
+      "Turns JanusGraph Gremlin traversal paths into interactive node-and-edge graphs with vis.js, so you can see what a query actually walked.",
+    stack: ["Python", "Jupyter", "Gremlin", "JanusGraph", "vis.js"],
+    repo: `${github}/graph-viz`,
+    live: null,
+    year: "2026",
+  },
+  {
+    name: "HackSeek",
+    pitch:
+      "Find hackathons worldwide: scrapers pull listings from Devpost, Unstop, Devfolio and MLH, and you filter by place, date and theme, or just ask the chatbot.",
+    stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Docker"],
+    repo: `${github}/Hack-Seek`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "FinVoice",
+    pitch:
+      "Voice-first money management: say what you spent or want to order, split the bill with a group, and settle it on-chain on Base.",
+    stack: ["Python", "React", "TypeScript", "Solidity", "Neo4j"],
+    repo: `${github}/FinVoice`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "Twitter content tool",
+    pitch:
+      "Pick viral tweets from your niche, add your own raw thoughts, and get drafts back in your voice. Still a product plan, no code yet.",
+    stack: ["Product plan"],
+    repo: `${github}/twitter-content-tool`,
+    live: null,
+    year: "2025",
+  },
+  {
+    name: "graph-layouts",
+    pitch:
+      "A Python SDK that loads a graph layout by name (Kamada-Kawai, hierarchy and others), with room to register your own.",
+    stack: ["Python", "SDK design", "Graph layouts"],
+    repo: `${github}/layout-generator`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Travel Book",
+    pitch:
+      "A digital scrapbook for storing the places you have been and the memories that came with them.",
+    stack: ["JavaScript", "Full-stack"],
+    repo: `${github}/travel_book`,
+    live: "https://travel-book-ten.vercel.app",
+    year: "2024",
+  },
+  {
+    name: "WebSockets messenger",
+    pitch:
+      "A small React chat front-end built to practise real-time messaging over Pusher.",
+    stack: ["React", "JavaScript", "Pusher"],
+    repo: `${github}/webockets-messenger-app`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Blog sentiment analysis",
+    pitch:
+      "Scrapes a list of blog links with BeautifulSoup and scores the sentiment of each article with NLTK.",
+    stack: ["Python", "BeautifulSoup", "NLTK"],
+    repo: `${github}/NLP-sentiment-analysis`,
+    live: null,
+    year: "2024",
+  },
+  {
+    name: "Graduate admission prediction",
+    pitch:
+      "Data exploration plus a head-to-head of logistic regression, SVM, random forest and k-nearest neighbours on admission data. This is the code behind the CIISCA 2023 paper.",
+    stack: ["Python", "Jupyter", "Machine learning"],
+    repo: `${github}/Graduate-Admission-Prediction`,
+    live: null,
+    year: "2023",
+  },
+  {
+    name: "Speech recognition",
+    pitch:
+      "Listens, transcribes speech to text, then reads it back in a synthesised voice.",
+    stack: ["Python", "SpeechRecognition", "pyttsx3"],
+    repo: `${github}/speech-recognition`,
+    live: null,
+    year: "2023",
+  },
+];
+
+/* --------------------------- earlier experience -------------------------- */
+
+/** Short roles that do not get a full case study page. */
+export const internships: {
+  company: string;
+  title: string;
+  period: string;
+  location: string;
+  points: string[];
+}[] = [
+  {
+    company: "Technofly Pvt Ltd.",
+    title: "Data Science Intern",
+    period: "Nov 2023 – Dec 2023",
+    location: "Bengaluru",
+    points: [
+      "Worked in Python with NumPy, Pandas, Tkinter and TensorFlow.",
+      "Explored machine learning and deep learning algorithms, including YOLO and Keras classification.",
+      "Built a mini-project on the Google Speech API that converts voice to text and back to an automated voice.",
+    ],
+  },
+];
+
+/* ------------------------------ side quests ------------------------------ */
+
+/** Everything that is not tech. More to come. */
+export const sideQuests = {
+  intro:
+    "The parts of me that do not compile. Marketing campaigns, hackathon floors, community servers and a few too many languages.",
+
+  roles: [
+    {
+      id: "ethmumbai",
+      org: "ETHMumbai",
+      title: "Mitra Mandal member · Social media & operations",
+      period: "Sep 2025 – Mar 2026",
+      location: "Mumbai",
+      href: "https://www.ethmumbai.in/",
+      image: {
+        src: "/mitra-mandal.png",
+        alt: "The ETHMumbai Mitra Mandal team portraits on ethmumbai.in, including Bhuvana",
+        caption: "The ETHMumbai Mitra Mandal, as shown on ethmumbai.in.",
+        width: 1875,
+        height: 877,
+      },
+      points: [
+        "Part of the ETHMumbai Mitra Mandal, the community team behind ETHMumbai 2026, the Ethereum conference and hackathon held in March 2026.",
+        "Handled ETHMumbai's social media for around six months, from the build-up through to the conference and hackathon dates.",
+        "Worked on operations for the conference and hackathon.",
+      ],
+    },
+    {
+      id: "pr",
+      org: "Dcodeblock",
+      title: "Marketing & PR · Face of PR",
+      period: "",
+      location: "",
+      points: [
+        "Handled marketing and PR for Dcodeblock.",
+        "Tried being the face of PR: worked with a few influencers and community figures and made reels with them for Instagram and X.",
+      ],
+    },
+    {
+      id: "under25",
+      org: "Under25",
+      title: "Intern",
+      period: "Feb 2023 – Mar 2023",
+      location: "Bengaluru",
+      image: {
+        src: "/certificates/under25-internship.png",
+        alt: "Under 25 Summit 2023 internship completion certificate for Bhuvana K S, signed by the co-founders",
+        caption:
+          "Internship completion certificate, Under 25 Summit 2023. Open the PDF.",
+        href: "/certificates/under25-internship.pdf",
+        width: 910,
+        height: 1287,
+      },
+      points: [
+        "Worked for over a month on marketing and campaigns for the Under25 Summit 2023.",
+        "Raised on-ground awareness of the Under25 community and worked on-ground operations on the summit days.",
+      ],
+    },
+    {
+      id: "warpspeed",
+      org: "Warpspeed 2023, Devfolio",
+      title: "Volunteer · On-ground operations",
+      period: "May 2023",
+      location: "Bengaluru",
+      points: ["Volunteered on the ground for Devfolio's Warpspeed hackathon."],
+    },
+  ],
+
+  languages: ["English", "Hindi", "Kannada", "Marathi", "Korean"],
+
+  toolkit: [
+    "Event management",
+    "Discord & Telegram moderation",
+    "Figma",
+    "Canva",
+    "Notion",
+    "Google Sheets & Slides",
+  ],
+};
 
 /* ---------------------------- everything else ---------------------------- */
 
@@ -287,7 +560,7 @@ export const education = {
   degree: "B.E. in Computer Science",
   school: "Global Academy of Technology",
   location: "Bengaluru",
-  period: "2020 — 2024",
+  period: "2020 – 2024",
   detail: "CGPA 9.17",
 };
 
@@ -307,20 +580,50 @@ export const publications: {
   },
 ];
 
-export const achievements = [
+export const achievements: {
+  id: string;
+  title: string;
+  detail: string;
+  year: string;
+  /** Scan of the certificate. Optional. */
+  certificate?: { src: string; alt: string; width: number; height: number };
+}[] = [
   {
-    title: "Hackathon judge, three times over",
+    id: "hackathon-judge",
+    title: "Hackathon judge and mentor",
     detail:
-      "Invited to judge three college hackathons — at Global Academy of Technology, and twice at Dayananda Sagar University.",
-    year: "2024 — 2025",
+      "Invited to judge three college hackathons: one at Global Academy of Technology, and twice at Dayananda Sagar University, including the 24-hour La Casa De Code (Techflix Season 2) in February 2026. Also mentored teams at hackathons.",
+    year: "2024 – 2026",
+    certificate: {
+      src: "/certificates/dsu-techflix-judge.jpg",
+      alt: "Certificate from Dayananda Sagar University recognising Bhuvana K S as a judge for the 24-hour internal hackathon La Casa De Code, 27th–28th February 2026",
+      width: 1600,
+      height: 1131,
+    },
   },
   {
-    title: "1st place — Evolve 2024",
-    detail: "Won the office-wide hackathon at Knowledge Lens.",
+    id: "star-of-the-month",
+    title: "Star of the Month, Knowledge Lens",
+    detail:
+      "Recognised as Best New Comer for performance and excellence at work, October 2024.",
+    year: "2024",
+    certificate: {
+      src: "/certificates/knowledge-lens-star-of-the-month.jpg",
+      alt: "Knowledge Lens Star of the Month certificate of achievement for Bhuvana K S, Best New Comer, October 2024",
+      width: 800,
+      height: 589,
+    },
+  },
+  {
+    id: "evolve-2024",
+    title: "1st place, Evolve 2024",
+    detail:
+      "Won Evolve 2024, the internal company hackathon at Knowledge Lens, securing 1st place.",
     year: "2024",
   },
   {
-    title: "1st place — College Hackathon",
+    id: "college-hackathon",
+    title: "1st place, College Hackathon",
     detail:
       "Built a complete front-end website in HTML and CSS, from scratch, on the clock.",
     year: "2021",
@@ -328,7 +631,7 @@ export const achievements = [
 ];
 
 export const nav: { label: string; href: string; external?: boolean }[] = [
-  { label: "Work", href: "/#work" },
-  { label: "About", href: "/about" },
-  { label: "Résumé", href: site.resume, external: true },
+  { label: "Engineering", href: "/work" },
+  { label: "Marketing", href: "/marketing" },
+  { label: "Side quests", href: "/side-quests" },
 ];
