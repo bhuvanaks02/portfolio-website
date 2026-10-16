@@ -343,7 +343,7 @@ export const journey: {
     verb: "Automating",
     text: role("infosys").summary,
     place: "Infosys · Specialist Programmer",
-    lesson: "Behaviour in the weights, knowledge in the index.",
+    lesson: "The best systems are the ones that need you less.",
     href: "/work/infosys",
     cta: "Experience",
   },
