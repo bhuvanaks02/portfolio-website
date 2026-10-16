@@ -19,7 +19,7 @@ export function SiteFooter() {
             </h2>
             <a
               href={`mailto:${site.email}`}
-              className="link-underline mt-6 inline-block text-lg text-accent"
+              className="link-underline mt-5 inline-block text-sm text-accent sm:text-base"
             >
               {site.email}
             </a>

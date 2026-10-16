@@ -330,7 +330,7 @@ export const journey: {
   },
   {
     years: "Aug – Dec 2024",
-    verb: "Modelling",
+    verb: "Shipping",
     text: role("knowledge-lens").summary,
     place: "Knowledge Lens · Software Engineer",
     lesson:
@@ -340,7 +340,7 @@ export const journey: {
   },
   {
     years: "Dec 2024 – now",
-    verb: "Tuning",
+    verb: "Automating",
     text: role("infosys").summary,
     place: "Infosys · Specialist Programmer",
     lesson: "Behaviour in the weights, knowledge in the index.",
@@ -349,7 +349,7 @@ export const journey: {
   },
   {
     years: "2024 – 2026",
-    verb: "Judging",
+    verb: "Mentoring",
     text: "Judged and mentored at hackathons: Global Academy of Technology, Dayananda Sagar University and the iQOO hackathon grand finale in October 2026.",
     place: "Hackathon judge and mentor",
     href: "/work#hackathon-judge",
