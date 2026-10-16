@@ -98,11 +98,11 @@ export function Hero() {
 
         <motion.div
           {...rise(0.24)}
-          className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3"
+          className="mt-10 flex flex-col gap-7 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3"
         >
           <Link
             href="/work"
-            className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
           >
             Engineering
             <span
@@ -112,12 +112,16 @@ export function Hero() {
               →
             </span>
           </Link>
+          {/* On phones: contact on its own, set off by a hairline; the wrappers
+              vanish from sm up, so the desktop row is unchanged. */}
+          <div className="flex flex-col gap-4 border-t border-rule/50 pt-6 sm:contents">
           <a
             href={`mailto:${site.email}`}
-            className="link-underline text-sm text-ink-soft"
+            className="link-underline self-start text-sm text-ink-soft"
           >
             {site.email}
           </a>
+          <div className="flex flex-wrap gap-x-6 gap-y-3 sm:contents">
           {links
             .filter((s) => !s.href?.startsWith("mailto:"))
             .map((s) => (
@@ -143,6 +147,8 @@ export function Hero() {
                 )}
               </span>
             ))}
+          </div>
+          </div>
         </motion.div>
 
         <motion.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
