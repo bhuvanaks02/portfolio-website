@@ -102,6 +102,33 @@ body {
   border-radius: 2px;
 }
 
+/* Theme toggle: show the sun in dark mode and the moon in light mode, from CSS
+   alone, so the right icon is there on first paint. */
+.theme-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-sun {
+  display: block;
+}
+:root[data-theme="dark"] .theme-moon {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-sun {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-moon {
+    display: none;
+  }
+}
+
+/* While the theme flips, skip every fade so the change is instant. */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
 /* Set by the custom cursor once it has mounted; it replaces the native one. */
 html.has-cursor,
 html.has-cursor * {
