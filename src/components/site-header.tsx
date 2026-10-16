@@ -70,7 +70,7 @@ export function SiteHeader() {
             download
             aria-label="Download résumé (PDF)"
             title="Download résumé (PDF)"
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-3 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
           >
             <svg
               viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ export function SiteHeader() {
             >
               <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14" />
             </svg>
-            <span className="hidden sm:inline">Résumé</span>
+            <span>Résumé</span>
           </a>
           <span className="sm:ml-2">
             <ThemeToggle />
