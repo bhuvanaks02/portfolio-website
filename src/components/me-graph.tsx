@@ -437,7 +437,7 @@ export function MeGraph() {
     <figure>
       <div
         ref={plate}
-        className="relative aspect-[2/1] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[16/9]"
+        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[16/9]"
         style={{
           backgroundImage:
             "radial-gradient(var(--rule) 1px, transparent 1px)",

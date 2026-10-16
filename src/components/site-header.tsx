@@ -34,7 +34,7 @@ export function SiteHeader() {
     <header
       className={`sticky top-0 z-40 transition-colors duration-500 ${
         lifted
-          ? "border-b border-rule/30 bg-paper/85 backdrop-blur-md"
+          ? "border-b border-rule/30 bg-paper backdrop-blur-md sm:bg-paper/85"
           : "border-b border-transparent"
       }`}
     >

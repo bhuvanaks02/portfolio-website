@@ -125,10 +125,29 @@ html.has-cursor * {
 
 @utility label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  /* 12px on phones, where 11px mono is hard to read. */
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-muted);
+}
+
+/* One text scale for phones: labels 12, small text 15, body 16, so the same
+   kind of text is the same size on every page. Larger screens are unchanged. */
+@media (max-width: 639.98px) {
+  .text-sm {
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
+  }
+  .text-xs {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+}
+@media (min-width: 640px) {
+  .label {
+    font-size: 0.6875rem;
+  }
 }
 
 @utility display {
