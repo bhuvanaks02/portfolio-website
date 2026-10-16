@@ -24,12 +24,7 @@ export default function SideQuestsPage() {
         </div>
       </header>
 
-      <Section
-        id="communities"
-        label="Communities"
-        note={`${sideQuests.communities.length} so far`}
-        title="Crypto and badminton."
-      >
+      <Section id="communities" label="Communities">
         <ul className="border-t border-rule">
           {sideQuests.communities.map((c, i) => (
             <Reveal
@@ -84,6 +79,50 @@ export default function SideQuestsPage() {
         </Reveal>
       </Section>
 
+      <Section id="reels" label="Reels">
+        <Reveal>
+          <p className="max-w-2xl leading-relaxed text-ink-soft">
+            A few Instagram reels made in collaboration with pages like{" "}
+            <a
+              href="https://www.instagram.com/ballerdailyinc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline"
+            >
+              @ballerdailyinc
+            </a>
+            ,{" "}
+            <a
+              href="https://www.instagram.com/startupdailyinc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline"
+            >
+              @startupdailyinc
+            </a>
+            {" "}and others, just for fun.
+          </p>
+          {/* Instagram's own embed page, loaded only as each one nears the screen. */}
+          <ul className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
+            {sideQuests.reels.map((href, i) => (
+              <li key={href} className="shrink-0 snap-start">
+                {/* Instagram's player is 328×580; scaled to ~62% so the row stays quiet. */}
+                <div className="h-[360px] w-[203px] overflow-hidden rounded-xl border border-rule bg-paper">
+                  <iframe
+                    src={`${href}embed`}
+                    title={`Instagram reel ${i + 1} of ${sideQuests.reels.length}`}
+                    loading="lazy"
+                    allowFullScreen
+                    scrolling="no"
+                    className="h-[580px] w-[328px] origin-top-left scale-[0.62] border-0"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </Section>
+
       <Section id="languages" label="Languages" title="Five, and counting.">
         <Reveal>
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
@@ -108,14 +147,6 @@ export default function SideQuestsPage() {
               </li>
             ))}
           </ul>
-        </Reveal>
-      </Section>
-
-      <Section id="more" label="To be continued">
-        <Reveal>
-          <p className="max-w-xl font-serif text-xl italic leading-snug text-ink-soft">
-            More side quests are on their way to this page.
-          </p>
         </Reveal>
       </Section>
     </>

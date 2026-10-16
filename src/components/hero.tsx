@@ -145,7 +145,7 @@ export function Hero() {
             ))}
         </motion.div>
 
-        <motion.p {...rise(0.32)} className="label mt-14">
+        <motion.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
           {site.role} · {site.location}
         </motion.p>
       </div>

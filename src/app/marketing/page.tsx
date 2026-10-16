@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { CertificateThumb } from "@/components/certificate-thumb";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { site, sideQuests } from "@/content/site";
@@ -8,8 +9,24 @@ import { site, sideQuests } from "@/content/site";
 export const metadata: Metadata = {
   title: "Marketing",
   description:
-    "Marketing, PR, social media and on-ground operations for Dcodeblock, Under25, Warpspeed and ETHMumbai.",
+    "Marketing, PR, social media and on-ground operations for Pukecast, Dcodeblock, Under25, Warpspeed, HackALeague and ETHMumbai.",
 };
+
+type Role = (typeof sideQuests.roles)[number];
+
+/** Portrait documents get a narrower column so they don't tower over the text. */
+function isPortrait(role: Role) {
+  return "image" in role && !!role.image && role.image.height > role.image.width;
+}
+
+/** Wide photos run under the text; certificates and tall images sit beside it. */
+function imageBeside(role: Role) {
+  return (
+    "image" in role &&
+    !!role.image &&
+    role.image.width / role.image.height <= 1.6
+  );
+}
 
 export default function MarketingPage() {
   return (
@@ -21,13 +38,9 @@ export default function MarketingPage() {
             Campaigns, communities and hackathon floors.
           </h1>
           <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
-            Something I explored out of curiosity, to learn something new:
-            marketing and PR for Dcodeblock, campaigns, partner management, on-ground operations and social
-            media. I was part of the ETHMumbai Mitra Mandal, ran its socials
-            and worked on operations for the March 2026 conference and
-            hackathon, hosted Dcodeblock's livestreams and meetups, and went
-            on camera for PR, making reels and cameos with influencers for
-            Instagram and X.
+            Marketing, PR and on-ground operations, explored out of curiosity:
+            a Web3 agency, a conference and hackathon, livestreams and
+            meetups.
           </p>
           <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-soft">
             <a
@@ -81,6 +94,16 @@ export default function MarketingPage() {
               delay={i * 0.06}
               className="scroll-mt-20 border-b border-rule py-7 sm:py-9"
             >
+              <div
+                className={
+                  imageBeside(role)
+                    ? isPortrait(role)
+                      ? "grid gap-6 md:grid-cols-[minmax(0,1fr)_9rem] md:gap-10"
+                      : "grid gap-6 md:grid-cols-[minmax(0,1fr)_16rem] md:gap-10"
+                    : undefined
+                }
+              >
+              <div>
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="display text-2xl sm:text-3xl">
                   {"href" in role && role.href ? (
@@ -106,40 +129,68 @@ export default function MarketingPage() {
                   <li key={point}>{point}</li>
                 ))}
               </ul>
-              {"image" in role && role.image && (
-                <figure
-                  className={`mt-6 ${
-                    role.image.width > role.image.height
-                      ? "max-w-3xl"
-                      : "max-w-sm"
-                  }`}
-                >
-                  {"href" in role.image && role.image.href ? (
+              {"gallery" in role && role.gallery && (
+                <div className="mt-6 grid max-w-3xl gap-4 sm:grid-cols-2">
+                  {role.gallery.map((shot) => (
+                    <CertificateThumb
+                      key={shot.src}
+                      {...shot}
+                      className="max-w-none"
+                    />
+                  ))}
+                </div>
+              )}
+              {"image" in role && role.image && "href" in role.image && (
+                <p className="mt-4 text-sm">
+                  <a
+                    href={role.image.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline text-ink-soft"
+                  >
+                    Certificate (PDF)
+                  </a>
+                </p>
+              )}
+              {"links" in role && role.links && (
+                <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-soft">
+                  {role.links.map((link) => (
                     <a
-                      href={role.image.href}
+                      key={link.href}
+                      href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={role.image.caption}
+                      className="link-underline"
                     >
-                      <Image
-                        src={role.image.src}
-                        alt={role.image.alt}
-                        width={role.image.width}
-                        height={role.image.height}
-                        sizes="24rem"
-                        className="h-auto w-full rounded-2xl border border-rule"
-                      />
+                      {link.label}
                     </a>
-                  ) : (
-                    <Image
-                      src={role.image.src}
-                      alt={role.image.alt}
-                      width={role.image.width}
-                      height={role.image.height}
-                      sizes="(min-width: 768px) 48rem, 100vw"
-                      className="h-auto w-full rounded-2xl border border-rule"
-                    />
-                  )}
+                  ))}
+                </p>
+              )}
+              </div>
+              {"image" in role && role.image && imageBeside(role) && (
+                <CertificateThumb
+                  src={role.image.src}
+                  alt={role.image.alt}
+                  width={role.image.width}
+                  height={role.image.height}
+                  caption={role.image.caption}
+                  className={`${
+                    isPortrait(role) ? "max-w-[9rem]" : "max-w-[16rem]"
+                  } md:justify-self-end`}
+                />
+              )}
+              </div>
+              {"image" in role && role.image && !imageBeside(role) && (
+                <figure className="mt-6 max-w-3xl">
+                  <Image
+                    src={role.image.src}
+                    alt={role.image.alt}
+                    width={role.image.width}
+                    height={role.image.height}
+                    sizes="(min-width: 768px) 48rem, 100vw"
+                    className="h-auto w-full rounded-2xl border border-rule"
+                  />
                   <figcaption className="mt-2 text-sm text-ink-muted">
                     {role.image.caption}
                   </figcaption>

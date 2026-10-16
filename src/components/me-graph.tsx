@@ -25,21 +25,20 @@ const nodes: GraphNode[] = [
   { id: "growth", label: "Marketing", x: 72, y: 26, href: "/marketing", parent: "me", rel: "RAN" },
   { id: "quests", label: "Side quests", x: 80, y: 72, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
 
-  { id: "slm", label: "Small language models", x: 14, y: 13, href: "/work/infosys#fine-tuning-for-specificity", parent: "tech", rel: "FINE_TUNES" },
-  { id: "rag", label: "RAG", x: 33, y: 8, href: "/work/infosys#retrieval-so-the-model-doesnt-go-stale", parent: "tech", rel: "RETRIEVES_WITH" },
-  { id: "agents", label: "AI agents", x: 8, y: 31, href: "/work/infosys#agent-workflows", parent: "tech", rel: "ORCHESTRATES" },
+  { id: "slm", label: "Small language models", x: 14, y: 13, href: "/work/infosys#small-language-models", parent: "tech", rel: "FINE_TUNES" },
+  { id: "rag", label: "RAG", x: 33, y: 8, href: "/work/infosys#retrieval-and-agents", parent: "tech", rel: "RETRIEVES_WITH" },
+  { id: "agents", label: "AI agents", x: 8, y: 31, href: "/work/infosys#retrieval-and-agents", parent: "tech", rel: "ORCHESTRATES" },
   { id: "edu", label: "Education", x: 6, y: 50, href: "/work#education", parent: "tech", rel: "STUDIED" },
   { id: "paper", label: "IEEE paper", x: 8, y: 68, href: "/work#education", parent: "tech", rel: "PUBLISHED" },
-  { id: "graphs", label: "Graph databases", x: 12, y: 82, href: "/work/knowledge-lens#modelling-failure-as-a-graph", parent: "tech", rel: "QUERIES" },
+  { id: "graphs", label: "Graph databases", x: 12, y: 82, href: "/work/knowledge-lens#root-cause-analysis", parent: "tech", rel: "QUERIES" },
   { id: "hackathons", label: "Hackathons", x: 38, y: 74, href: "/work#hackathons", parent: "tech", rel: "JUDGES" },
-  { id: "backend", label: "Backend APIs", x: 26, y: 92, href: "/work/infosys#the-backend-around-it", parent: "tech", rel: "BUILDS" },
+  { id: "backend", label: "Backend APIs", x: 26, y: 92, href: "/work/infosys#database-connectors", parent: "tech", rel: "BUILDS" },
 
   { id: "ethmumbai", label: "ETHMumbai", x: 52, y: 8, href: "/marketing#ethmumbai", parent: "growth", rel: "RAN_SOCIALS_AT" },
   { id: "campaigns", label: "Campaigns", x: 66, y: 7, href: "/marketing#under25", parent: "growth", rel: "RAN" },
   { id: "under25", label: "Under25 internship", x: 85, y: 7, href: "/marketing#under25", parent: "growth", rel: "INTERNED_AT" },
   { id: "dcodeblock", label: "Dcodeblock PR", x: 90, y: 18, href: "/marketing#pr", parent: "growth", rel: "HANDLED" },
   { id: "live", label: "Livestreams & meetups", x: 89, y: 30, href: "/marketing#pr", parent: "growth", rel: "HOSTED" },
-  { id: "camera", label: "On camera", x: 91, y: 41, href: "/marketing#pr", parent: "growth", rel: "FRONTED" },
   { id: "warpspeed", label: "Warpspeed hackathon", x: 79, y: 49, href: "/marketing#warpspeed", parent: "growth", rel: "VOLUNTEERED_AT" },
 
 

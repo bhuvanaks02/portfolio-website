@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
+import { CertificateThumb } from "@/components/certificate-thumb";
 import { ProjectGrid } from "@/components/project-grid";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
@@ -27,38 +27,50 @@ type Achievement = (typeof achievements)[number];
 function AchievementList({ items }: { items: Achievement[] }) {
   return (
     <ul className="mt-4 border-t border-rule">
-      {items.map((item) => (
+      {items.map((item) => {
+        const media = item.certificate ?? item.photo;
+        return (
         <li
           key={item.title}
           id={item.id}
           className="scroll-mt-20 border-b border-rule py-4"
         >
-          <div className="flex items-baseline justify-between gap-4">
-            <p className="text-ink-soft">{item.title}</p>
-            <span className="label shrink-0 tabular-nums">{item.year}</span>
-          </div>
-          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-ink-muted">
-            {item.detail}
-          </p>
-          {item.certificate && (
-            <a
-              href={item.certificate.src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 block max-w-xs"
-            >
-              <Image
-                src={item.certificate.src}
-                alt={item.certificate.alt}
-                width={item.certificate.width}
-                height={item.certificate.height}
-                sizes="20rem"
-                className="h-auto w-full rounded-lg border border-rule"
+          <div
+            className={
+              media
+                ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_14rem] md:gap-8"
+                : undefined
+            }
+          >
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="text-ink-soft">{item.title}</p>
+                <span className="label shrink-0 tabular-nums">{item.year}</span>
+              </div>
+              <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-ink-muted">
+                {item.detail}
+              </p>
+            </div>
+            {media && (
+              <CertificateThumb
+                src={media.src}
+                alt={media.alt}
+                width={media.width}
+                height={media.height}
+                className="max-w-[14rem] md:justify-self-end"
               />
-            </a>
+            )}
+          </div>
+          {item.gallery && (
+            <div className="mt-5 grid max-w-xl gap-4 sm:grid-cols-2">
+              {item.gallery.map((shot) => (
+                <CertificateThumb key={shot.src} {...shot} className="max-w-none" />
+              ))}
+            </div>
           )}
         </li>
-      ))}
+        );
+      })}
     </ul>
   );
 }
@@ -74,30 +86,11 @@ export default function ResumePage() {
           </h1>
           <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
             {site.role} in {site.location}. Everything technical in one place.
-            Each role opens into a full case study.
+            Each role opens into its own page.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a
-              href={site.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              One-page PDF
-              <span
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              >
-                ↗
-              </span>
-            </a>
-            <a
-              href={`mailto:${site.email}`}
-              className="link-underline text-sm text-ink-soft"
-            >
-              {site.email}
-            </a>
-          </div>
+          <p className="mt-4 max-w-2xl text-sm text-ink-muted">
+            A downloadable one-page resume is in the navbar above.
+          </p>
         </div>
       </header>
 
@@ -105,7 +98,7 @@ export default function ResumePage() {
         id="work"
         label="Experience"
         note={`${work.length + internships.length} roles`}
-        title="Three years of shipping AI, graphs and the plumbing in between."
+        title="Three years of shipping AI and graph systems."
       >
         <WorkIndex />
 
@@ -176,20 +169,29 @@ export default function ResumePage() {
       </Section>
 
       <Section id="education" label="Education & publications">
-        <div className="grid gap-12 sm:grid-cols-2">
+        <div>
           <Reveal>
-            <h3 className="display text-2xl">Education</h3>
-            <p className="mt-4 text-ink-soft">{education.degree}</p>
-            <p className="mt-1 text-sm text-ink-muted">
-              {education.school}, {education.location}
-            </p>
-            <p className="label mt-3">
-              {education.period} · {education.detail}
-            </p>
+            <div className="grid grid-cols-[minmax(0,1fr)_6.5rem] items-center gap-6 sm:grid-cols-[minmax(0,1fr)_8rem] sm:gap-10">
+              <div>
+                <h3 className="display text-2xl">Education</h3>
+                <p className="mt-4 text-ink-soft">{education.degree}</p>
+                <p className="mt-1 text-sm text-ink-muted">
+                  {education.school}, {education.location}
+                </p>
+                <p className="label mt-3">
+                  {education.period} · {education.detail}
+                </p>
+              </div>
+              <CertificateThumb
+                {...education.photo}
+                className="max-w-[8rem] justify-self-end"
+                crop="aspect-square object-cover object-[50%_30%]"
+              />
+            </div>
 
             <h3 className="display mt-12 text-2xl">Published</h3>
             {publications.map((pub) => (
-              <div key={pub.title} className="mt-4">
+              <div key={pub.title} className="mt-4 max-w-xl">
                 <p className="text-ink-soft">
                   {pub.href ? (
                     <a
@@ -209,13 +211,6 @@ export default function ResumePage() {
                 </p>
               </div>
             ))}
-          </Reveal>
-
-          <Reveal delay={0.08}>
-            <h3 className="display text-2xl">Recognition</h3>
-            <AchievementList
-              items={achievements.filter((a) => a.group === "recognition")}
-            />
           </Reveal>
         </div>
       </Section>

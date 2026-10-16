@@ -9,50 +9,12 @@ import {
   projects,
   sideQuests,
   site,
-  socials,
   work,
 } from "@/content/site";
 
 const glance = [
   { label: "Now", value: work[0].company },
   { label: "Speaks", value: sideQuests.languages.join(" · ") },
-];
-
-type FindCard = {
-  label: string;
-  title: string;
-  body: string;
-  href: string | null;
-  cta: string;
-};
-
-const githubLink = socials.find((s) => s.label === "GitHub")!;
-
-/** Where to find the work and the person, one card each. */
-const findCards: FindCard[] = [
-  {
-    label: "GitHub",
-    title: githubLink.handle,
-    body: `${projects.length} public projects, from a graph visualiser to a hackathon finder and a voice-first money app.`,
-    href: githubLink.href,
-    cta: "See the code",
-  },
-  ...socials
-    .filter((s) => s.label !== "GitHub" && s.href)
-    .map((s) => ({
-      label: s.label,
-      title: s.handle,
-      body: s.note ?? "",
-      href: s.href,
-      cta: s.label === "Email" ? "Say hello" : `Open ${s.label}`,
-    })),
-  {
-    label: "Resume",
-    title: "One-page PDF",
-    body: "Roles, projects, education and the paper on a single page.",
-    href: site.resume,
-    cta: "Download",
-  },
 ];
 
 /** The three strands, one short card each; the detail lives on their pages. */
@@ -77,7 +39,7 @@ const gist = [
     href: "/side-quests",
     label: "Side quests",
     title: "Everything else",
-    body: "Crypto, badminton, running, languages and the things that do not compile.",
+    body: "Communities, crypto, badminton, running and languages.",
     note: `${sideQuests.communities.length} communities · running`,
     cta: "Side quests",
   },
@@ -126,58 +88,6 @@ export default function HomePage() {
               ))}
             </dl>
           </Reveal>
-        </div>
-
-        <div className="mt-16">
-          <Reveal>
-            <p className="label">Find me elsewhere</p>
-          </Reveal>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {findCards.map((card, i) => {
-              const external = card.href?.startsWith("http");
-              const inner = (
-                <>
-                  <p className="label">{card.label}</p>
-                  <h3 className="display mt-3 text-xl leading-snug sm:text-2xl">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
-                    {card.body}
-                  </p>
-                  {card.href && (
-                    <p className="mt-5 text-sm text-ink-soft transition-colors duration-300 group-hover:text-accent">
-                      {card.cta}{" "}
-                      <span
-                        aria-hidden="true"
-                        className="inline-block transition-transform duration-300 group-hover:translate-x-1"
-                      >
-                        {external ? "↗" : "→"}
-                      </span>
-                    </p>
-                  )}
-                </>
-              );
-              const box =
-                "group flex h-full flex-col rounded-2xl border border-rule p-6";
-              return (
-                <Reveal key={card.label} delay={i * 0.05}>
-                  {card.href ? (
-                    <a
-                      href={card.href}
-                      {...(external
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className={`${box} transition-[background-color,border-color,transform] duration-300 hover:-translate-y-0.5 hover:border-rule-strong hover:bg-paper-raised`}
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <div className={box}>{inner}</div>
-                  )}
-                </Reveal>
-              );
-            })}
-          </div>
         </div>
       </Section>
 

@@ -25,7 +25,7 @@ export const site = {
   // Longer version, used in the About section of the landing page.
   bio: [
     "I'm still learning, and I like it that way. Quick to pick things up, and keen to turn that into work people remember.",
-    "Backend development got me started, AI keeps me busy, and marketing and PR are what I explore out of curiosity.",
+    "Backend development got me started, my current work is around AI, and marketing and PR are what I explore out of curiosity.",
     "For fun, I sing, dance and play badminton, which led me to build a badminton community and run it for a few months. I also speak 5 languages: English, Hindi, Kannada, Marathi and Korean.",
   ],
 
@@ -52,7 +52,7 @@ export const socials: SocialLink[] = [
     label: "GitHub",
     href: "https://github.com/bhuvanaks02",
     handle: "@bhuvanaks02",
-    note: "graph-viz, HackSeek, FinVoice and the rest",
+    note: "graph-viz, FinVoice and the rest",
   },
   {
     label: "LinkedIn",
@@ -65,6 +65,12 @@ export const socials: SocialLink[] = [
     href: "https://x.com/KsBhuvana",
     handle: "@KsBhuvana",
     note: "Shorter thoughts, less formally",
+  },
+  {
+    label: "Telegram",
+    href: "https://t.me/Bhuvanaks",
+    handle: "@Bhuvanaks",
+    note: "Quickest way to reach me, just in case",
   },
   { label: "Email", href: "mailto:" + site.email, handle: site.email },
 ];
@@ -82,9 +88,27 @@ export type WorkEntry = {
   summary: string;
   /** Short framing of the problem, shown at the top of the case study. */
   context: string;
-  highlights: { label: string; value: string }[];
-  sections: { heading: string; body: string[] }[];
+  /** Optional figures shown as a grid; leave out and the grid is hidden. */
+  highlights?: { label: string; value: string }[];
+  sections: {
+    heading: string;
+    body: string[];
+    /** An optional photo shown under the text; opens full size on tap. */
+    image?: {
+      src: string;
+      alt: string;
+      width: number;
+      height: number;
+      caption?: string;
+    };
+  }[];
   stack: string[];
+  /** An award from this role, shown on its case study. */
+  recognition?: {
+    title: string;
+    detail: string;
+    certificate: { src: string; alt: string; width: number; height: number };
+  };
 };
 
 export const work: WorkEntry[] = [
@@ -93,76 +117,63 @@ export const work: WorkEntry[] = [
     index: "01",
     company: "Infosys Ltd.",
     title: "Software Engineer, Specialist Programmer",
-    headline: "Small language models that run on your own hardware",
+    headline: "From churn models to agents that run the system",
     period: "Dec 2024 – Present",
     location: "Bengaluru",
     summary:
-      "Fine-tuned 3–4B parameter models for support automation, paired them with retrieval so knowledge stays current without retraining, and shipped them quantised to ~4 GB for local inference.",
+      "Churn models and retraining pipelines, connectors for 10+ databases, locally deployed small language models, and now skills and plugins for agentic AI.",
     context:
-      "Support automation across roughly twenty business domains needed answers that were specific, current and private. A hosted frontier model was the obvious path and the wrong one: the data could not leave, the cost per ticket did not scale, and every knowledge change would have meant another training run.",
+      "Five phases, one thread: getting models and data to work reliably inside real systems.",
     highlights: [
-      { label: "Manual review effort", value: "−30%" },
+      { label: "Databases connected", value: "10+" },
+      { label: "Manual work automated", value: "40%" },
       { label: "Deployed model size", value: "~4 GB" },
-      { label: "Business domains", value: "~20" },
-      { label: "Curated Q&A pairs", value: "~1,500" },
+      { label: "Now", value: "Agentic AI" },
     ],
     sections: [
       {
-        heading: "Fine-tuning for specificity",
+        heading: "Churn prediction",
         body: [
-          "I fine-tuned small language models, Phi-4-mini (3.8B) and Qwen3, using parameter-efficient techniques, LoRA and QLoRA, through Unsloth. The training set was roughly 1,500 curated domain-specific question-and-answer pairs spanning about twenty business domains.",
-          "The goal was never general capability. It was making a small model answer these questions, in this voice, with the vocabulary of the domain it was serving. Parameter-efficient tuning made that cheap enough to iterate on rather than a once-a-quarter event.",
+          "Built customer-churn prediction models and automated pipelines to retrain them, so keeping a model current no longer needed manual effort.",
         ],
       },
       {
-        heading: "Retrieval, so the model doesn't go stale",
+        heading: "Refining the codebase",
         body: [
-          "Fine-tuning fixes tone and shape; it is a poor place to store facts that change. I integrated the tuned models with Retrieval-Augmented Generation over vector databases, ChromaDB and Pinecone, so updated documentation is available to the model the moment it lands, with no retraining cycle.",
-          "That split, behaviour in the weights and knowledge in the index, is what made the system maintainable by people who were never going to babysit training runs.",
+          "Reworked existing Python code with better libraries and techniques for performance.",
         ],
       },
       {
-        heading: "Local, quantised, private",
+        heading: "Database connectors",
         body: [
-          "I deployed the models 4-bit quantised, about 4 GB on disk, locally through Ollama. No cloud dependency, no data leaving the environment, and an inference cost that does not scale with ticket volume.",
+          "Pure-Python connectors for 10+ databases and storage systems, relational, document, vector and cloud, used by an orchestrator agent.",
         ],
       },
       {
-        heading: "The backend around it",
+        heading: "Small language models",
         body: [
-          "I built multi-database API integrations and backend services with FastAPI and WebSockets, spanning three or more heterogeneous database systems: document, graph and relational.",
-          "I also built the end-to-end ML pipeline in Python and MongoDB: ingestion, preprocessing, training and serialisation, so a new domain could go from raw data to a candidate model without manual glue.",
+          "Learnt the full path: data cleaning, Q&A preparation, domain pre-training, LoRA and QLoRA on Qwen and Phi, then DPO.",
         ],
       },
       {
-        heading: "Keeping a human in the loop",
+        heading: "Retrieval and agents",
         body: [
-          "Automated metrics were not enough to decide which checkpoint shipped. I built a validation interface in Gradio where reviewers judge candidate outputs directly, feeding automated retraining and champion-model selection.",
-          "It cut manual model-review effort by around 30%, not by removing the human, but by only asking them the questions that actually decided something.",
-        ],
-      },
-      {
-        heading: "Agent workflows",
-        body: [
-          "Most recently I have been integrating AI agent workflows using MAF, so backend modules can hand multi-step tasks to an agent rather than hard-coding every branch.",
+          "A short stint on RAG, then Microsoft Agent Framework. Now building skills and plugins for agents.",
         ],
       },
     ],
     stack: [
       "Python",
-      "Phi-4-mini",
-      "Qwen3",
-      "LoRA / QLoRA",
-      "Unsloth",
-      "Hugging Face",
-      "Ollama",
-      "RAG",
-      "ChromaDB",
-      "Pinecone",
       "FastAPI",
-      "WebSockets",
       "MongoDB",
-      "Gradio",
+      "PostgreSQL",
+      "Pinecone",
+      "ChromaDB",
+      "Qwen",
+      "Phi",
+      "LoRA / QLoRA",
+      "DPO",
+      "Ollama",
       "MAF",
     ],
   },
@@ -175,9 +186,9 @@ export const work: WorkEntry[] = [
     period: "Aug 2024 – Dec 2024",
     location: "Bengaluru",
     summary:
-      "Owned the Root Cause Analysis module for manufacturing plant asset malfunctions, and built V1 of the internal SDK that let every engineer render graph layouts from a single call.",
+      "Owned the Root Cause Analysis module for plant asset malfunctions, and built V1 of the internal SDK for graph layouts.",
     context:
-      "When an asset on a plant floor malfunctions, the cause is rarely the thing that failed. It is upstream, two or three hops away, in a relationship nobody wrote down. That is a graph problem, and it was mine to own.",
+      "When a plant asset fails, the cause is usually upstream. That is a graph problem, and it was mine to own.",
     highlights: [
       { label: "Visualisation boilerplate", value: "−50%" },
       { label: "Graph engines", value: "Neo4j + JanusGraph" },
@@ -185,21 +196,30 @@ export const work: WorkEntry[] = [
     ],
     sections: [
       {
-        heading: "Modelling failure as a graph",
+        heading: "Root cause analysis",
         body: [
-          "I owned the Root Cause Analysis module for manufacturing plant asset-malfunction analysis, modelling the domain as a graph and storing it across Neo4j and JanusGraph.",
-          "The modelling was the real work. Assets, sensors, process steps and failure events each had to become nodes and edges a traversal could actually reason over, rather than a schema that merely looked like the plant diagram.",
+          "Owned the module for manufacturing asset-malfunction analysis, with the plant modelled as a graph across Neo4j and JanusGraph.",
         ],
       },
       {
-        heading: "An SDK, so nobody rewrote the drawing code",
+        heading: "Internal SDK",
         body: [
-          "Every engineer who wanted to see a graph was writing their own layout, styling and rendering code. I built V1 of the company's internal backend SDK: multiple graph layouts behind a single unified function call.",
-          "It cut graph-visualisation boilerplate by roughly 50% for the engineering team, and, more usefully, made the output consistent. The same graph looked the same no matter who rendered it.",
+          "Built V1 of the internal SDK to make rendering graph layouts easier: multiple layouts behind a single call, with consistent output for the team.",
         ],
       },
     ],
     stack: ["Python", "Neo4j", "JanusGraph", "Cypher", "Gremlin", "SDK design"],
+    recognition: {
+      title: "Star of the Month, Best New Comer",
+      detail:
+        "Recognised for performance and excellence at work, October 2024.",
+      certificate: {
+        src: "/certificates/knowledge-lens-star-of-the-month.jpg",
+        alt: "Knowledge Lens Star of the Month certificate of achievement for Bhuvana K S, Best New Comer, October 2024",
+        width: 800,
+        height: 589,
+      },
+    },
   },
   {
     slug: "knowledge-lens-intern",
@@ -210,31 +230,47 @@ export const work: WorkEntry[] = [
     period: "Feb 2024 – Aug 2024",
     location: "Bengaluru",
     summary:
-      "Owned the WebSocket API behind the FTDM chatbot, cut graph query time by 40%, and built a Gremlin graph visualiser from scratch.",
+      "Owned the WebSocket API behind the FTDM chatbot, optimised graph queries, and explored frontend, graph databases and data science along the way.",
     context:
-      "My first role, and the fastest way I learned that a correct query and a usable query are two different things.",
+      "My first role, and where I learned that a correct query and a usable query are different things.",
     highlights: [
       { label: "Query performance", value: "+40%" },
       { label: "Data retrieval time", value: "−25%" },
     ],
     sections: [
       {
-        heading: "Real-time chatbot plumbing",
-        body: [
-          "I handled the WebSocket API for the FTDM chatbot feature: the transport between a user asking a question and a graph that had to answer while they were still watching.",
-        ],
+        heading: "Chatbot API",
+        body: ["Owned the WebSocket API behind the FTDM chatbot."],
       },
       {
         heading: "Query optimisation",
         body: [
-          "I optimised Cypher and Gremlin queries across Neo4j and JanusGraph, landing 40% faster query performance and a 25% reduction in data-retrieval time. Mostly this meant traversing in the direction the index supported, and stopping the query from walking parts of the graph the answer never depended on.",
+          "Optimised Cypher and Gremlin queries across Neo4j and JanusGraph.",
         ],
       },
       {
-        heading: "Seeing the graph, and upgrading Kafka",
+        heading: "Graph visualiser",
         body: [
-          "I built a Gremlin graph visualiser with vis.js and Python so the team could look at what they were querying.",
-          "I also led the Kafka version upgrade for Jublient's client module, the kind of task that is entirely invisible when it goes well.",
+          "JanusGraph had no satisfactory visualiser at the time, so I built a Jupyter notebook: load a connection and a query, and it draws the nodes and edges of the result.",
+        ],
+      },
+      {
+        heading: "Evolve 2024 win",
+        body: [
+          "Won 1st place at Evolve 2024, Knowledge Lens's internal hackathon. We collected ID-card images of employees, annotated them and trained a face-recognition model for the office attendance system.",
+        ],
+        image: {
+          src: "/photos/evolve-2024-winner.jpg",
+          alt: "Bhuvana with the winning team at Evolve 2024, the Knowledge Lens internal hackathon",
+          width: 2000,
+          height: 1334,
+          caption: "With the winning team at Evolve 2024.",
+        },
+      },
+      {
+        heading: "Domains explored",
+        body: [
+          "The internship was a wide start: frontend with React, graph databases, and data science, including data cleaning.",
         ],
       },
     ],
@@ -246,7 +282,8 @@ export const work: WorkEntry[] = [
       "Cypher",
       "Gremlin",
       "vis.js",
-      "Kafka",
+      "React",
+      "Data cleaning",
     ],
   },
 ];
@@ -277,29 +314,29 @@ export const journey: {
   {
     years: "2023 – 2026",
     verb: "Organising",
-    text: "Marketing and PR, explored out of curiosity. Over a month of campaigns and summit-day operations for the Under25 Summit, on-ground volunteering at Devfolio's Warpspeed, PR for Dcodeblock with reels alongside influencers on Instagram and X, and social media and operations for ETHMumbai 2026 as part of its Mitra Mandal.",
-    place: "Under25 · Warpspeed · Dcodeblock · ETHMumbai",
+    text: "Marketing and PR, explored out of curiosity. A year of outreach and research at Web3 agency Pukecast, campaigns and ops for the Under25 Summit, marketing for HackALeague 2.0, marketing and PR plus livestreams and meetups for Dcodeblock, and social media and operations for ETHMumbai 2026.",
+    place: "Pukecast · Under25 · Warpspeed · HackALeague · Dcodeblock · ETHMumbai",
     href: "/marketing",
     cta: "Marketing work",
   },
   {
     years: "Feb – Aug 2024",
     verb: "Querying",
-    text: role("knowledge-lens-intern").summary,
+    text: `${role("knowledge-lens-intern").summary} Won 1st place at Evolve 2024, the company's internal hackathon.`,
     place: "Knowledge Lens · Software Engineer Intern",
     lesson: "A correct query and a usable query are two different things.",
     href: "/work/knowledge-lens-intern",
-    cta: "Case study",
+    cta: "Experience",
   },
   {
     years: "Aug – Dec 2024",
     verb: "Modelling",
-    text: `${role("knowledge-lens").summary} Won 1st place at Evolve 2024, the company's internal hackathon.`,
+    text: role("knowledge-lens").summary,
     place: "Knowledge Lens · Software Engineer",
     lesson:
       "When an asset malfunctions, the cause is rarely the thing that failed. It is two or three hops upstream.",
     href: "/work/knowledge-lens",
-    cta: "Case study",
+    cta: "Experience",
   },
   {
     years: "Dec 2024 – now",
@@ -308,7 +345,7 @@ export const journey: {
     place: "Infosys · Specialist Programmer",
     lesson: "Behaviour in the weights, knowledge in the index.",
     href: "/work/infosys",
-    cta: "Case study",
+    cta: "Experience",
   },
   {
     years: "2024 – 2026",
@@ -345,29 +382,11 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
-    name: "HackSeek",
-    pitch:
-      "Find hackathons worldwide: scrapers pull listings from Devpost, Unstop, Devfolio and MLH, and you filter by place, date and theme, or just ask the chatbot.",
-    stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Docker"],
-    repo: `${github}/Hack-Seek`,
-    live: null,
-    year: "2025",
-  },
-  {
     name: "FinVoice",
     pitch:
       "Voice-first money management: say what you spent or want to order, split the bill with a group, and settle it on-chain on Base.",
     stack: ["Python", "React", "TypeScript", "Solidity", "Neo4j"],
     repo: `${github}/FinVoice`,
-    live: null,
-    year: "2025",
-  },
-  {
-    name: "Twitter content tool",
-    pitch:
-      "Pick viral tweets from your niche, add your own raw thoughts, and get drafts back in your voice. Still a product plan, no code yet.",
-    stack: ["Product plan"],
-    repo: `${github}/twitter-content-tool`,
     live: null,
     year: "2025",
   },
@@ -455,9 +474,20 @@ export const internships: {
 /** Everything that is not tech. More to come. */
 export const sideQuests = {
   intro:
-    "The parts of me that do not compile. Communities, crypto, badminton, running and a few too many languages.",
+    "What I do when I'm not building: communities, crypto, badminton, running and a few languages.",
 
   roles: [
+    {
+      id: "pukecast",
+      org: "Pukecast",
+      title: "Community & operations contributor · Contract, part-time",
+      period: "~1 year",
+      location: "Web3 marketing agency, Asia",
+      points: [
+        "Outreach and partner-meeting materials, as key support for external communications.",
+        "Management support, and quick research on companies and KOLs to inform strategy.",
+      ],
+    },
     {
       id: "ethmumbai",
       org: "ETHMumbai",
@@ -465,6 +495,10 @@ export const sideQuests = {
       period: "Sep 2025 – Mar 2026",
       location: "Mumbai",
       href: "https://www.ethmumbai.in/",
+      links: [
+        { label: "ethmumbai.in", href: "https://www.ethmumbai.in/" },
+        { label: "@ethmumbai on X", href: "https://x.com/ethmumbai" },
+      ],
       image: {
         src: "/mitra-mandal.png",
         alt: "The ETHMumbai Mitra Mandal team portraits on ethmumbai.in, including Bhuvana",
@@ -473,41 +507,67 @@ export const sideQuests = {
         height: 877,
       },
       points: [
-        "Part of the ETHMumbai Mitra Mandal, the community team behind ETHMumbai 2026, the Ethereum conference and hackathon held in March 2026.",
-        "Handled ETHMumbai's social media for around six months, from the build-up through to the conference and hackathon dates.",
-        "Worked on operations for the conference and hackathon.",
+        "Part of the Mitra Mandal, the community team behind ETHMumbai 2026, the Ethereum conference and hackathon held in March 2026.",
+        "Ran its social media for about six months and worked on operations for the event.",
       ],
     },
     {
       id: "pr",
       org: "Dcodeblock",
-      title: "Marketing & PR · Livestream and meetup host · On camera",
+      title: "Marketing & PR · Livestream and meetup host",
       period: "",
       location: "",
+      gallery: [
+        {
+          src: "/screenshots/CLicks%20from%20the%20virtual%20host%20Day%203.png",
+          alt: "Screenshot from the Dcodeblock livestream, day 3, with Bhuvana as virtual host",
+          caption: "Day 3, as virtual host.",
+          width: 1917,
+          height: 882,
+        },
+        {
+          src: "/screenshots/Day%204%20Virtual%20host%20at%20dcodeblock.png",
+          alt: "Screenshot from the Dcodeblock livestream, day 4, with Bhuvana as virtual host",
+          caption: "Day 4, as virtual host.",
+          width: 903,
+          height: 410,
+        },
+        {
+          src: "/screenshots/Day%205%20of%20being%20a%20virtual%20host%20at%20DCodeBlock%20with%20Austin%20Griffith.png",
+          alt: "Screenshot from the Dcodeblock livestream, day 5, hosting with Austin Griffith",
+          caption: "Day 5, hosting with Austin Griffith.",
+          width: 1901,
+          height: 884,
+        },
+        {
+          src: "/screenshots/Click%20from%20virtual%20host%20PR%20Dcodeblock%20day%205%20austin%20griffith.png",
+          alt: "Screenshot from the Dcodeblock livestream, day 5, on camera during the PR segment with Austin Griffith",
+          caption: "Day 5, on camera for PR.",
+          width: 1914,
+          height: 880,
+        },
+      ],
       points: [
-        "Handled marketing and PR for Dcodeblock.",
-        "Hosted Dcodeblock's livestreams and meetups.",
-        "Went on camera for PR: worked with influencers and community figures on reels and cameos for Instagram and X.",
+        "Marketing and PR, and host of the livestreams and meetups.",
       ],
     },
     {
       id: "under25",
       org: "Under25",
-      title: "Intern",
+      title: "Student volunteer & event coordinator · Intern",
       period: "Feb 2023 – Mar 2023",
       location: "Bengaluru",
       image: {
         src: "/certificates/under25-internship.png",
         alt: "Under 25 Summit 2023 internship completion certificate for Bhuvana K S, signed by the co-founders",
-        caption:
-          "Internship completion certificate, Under 25 Summit 2023. Open the PDF.",
+        caption: "Internship certificate",
         href: "/certificates/under25-internship.pdf",
         width: 910,
         height: 1287,
       },
       points: [
-        "Worked for over a month on marketing and campaigns for the Under25 Summit 2023.",
-        "Raised on-ground awareness of the Under25 community and worked on-ground operations on the summit days.",
+        "Marketing and campaigns for the Under25 Summit 2023, plus on-ground awareness and operations on summit days.",
+        "Coordinated volunteer teams and logistics for large student events.",
       ],
     },
     {
@@ -518,6 +578,42 @@ export const sideQuests = {
       location: "Bengaluru",
       points: ["Volunteered on the ground for Devfolio's Warpspeed hackathon."],
     },
+    {
+      id: "event-ops",
+      org: "Hackathons & industry events",
+      title: "Operations volunteer · Multiple events",
+      period: "",
+      location: "",
+      points: [
+        "On-ground operations at multiple industry hackathons, keeping events running smoothly under pressure.",
+      ],
+    },
+    {
+      id: "hackaleague",
+      org: "HackALeague 2.0",
+      title: "Marketing coordinator",
+      period: "Feb 2024",
+      location: "Bengaluru",
+      image: {
+        src: "/photos/Marketing%20coordinator%20at%20Global%20Academy%20of%20Technology.JPG",
+        alt: "Bhuvana as marketing coordinator at Global Academy of Technology",
+        caption: "Marketing coordinator, Global Academy of Technology.",
+        width: 6000,
+        height: 4000,
+      },
+      points: [
+        "Marketing coordinator for HackALeague 2.0, Global Academy of Technology's flagship hackathon.",
+      ],
+    },
+  ],
+
+  /** Instagram reels made with @ballerdailyinc and @startupdailyinc. */
+  reels: [
+    "https://www.instagram.com/reel/DH_EPSxoGwL/",
+    "https://www.instagram.com/reel/DDE9BXgo7De/",
+    "https://www.instagram.com/reel/DDpApp4TY0i/",
+    "https://www.instagram.com/reel/Ddl2w_vTSmm/",
+    "https://www.instagram.com/reel/DNxubvrUgTF/",
   ],
 
   communities: [
@@ -526,7 +622,7 @@ export const sideQuests = {
       name: "Crypto",
       role: "Community member and builder",
       detail:
-        "Active in the crypto community through ETHMumbai's Mitra Mandal, and building FinVoice, which settles split bills on-chain on Base.",
+        "Active through ETHMumbai's Mitra Mandal and SheFi Season 14, and building FinVoice, which settles split bills on-chain on Base.",
       href: "/marketing#ethmumbai",
     },
     {
@@ -534,14 +630,14 @@ export const sideQuests = {
       name: "@blrbaddies",
       role: "Co-founder",
       detail:
-        "Co-founded a badminton community for Bengaluru players and ran it for a few months.",
+        "Co-founded and ran a badminton community for Bengaluru players.",
       href: "https://x.com/blrbaddies",
     },
   ],
 
   running: {
     intro:
-      "I have run 10Ks and 5Ks a few times. The most recent 10K was at the Kodagu Monsoon Half Marathon in 2024.",
+      "A few 10Ks and 5Ks so far, most recently the Kodagu Monsoon Half Marathon 10K in 2024.",
     races: [
       {
         name: "Kodagu Monsoon Half Marathon",
@@ -583,12 +679,19 @@ export const skills: { group: string; items: string[] }[] = [
   { group: "Backend", items: ["FastAPI", "WebSockets"] },
   {
     group: "Databases",
-    items: ["MongoDB", "Neo4j", "JanusGraph", "ChromaDB", "Pinecone"],
+    items: ["PostgreSQL", "MongoDB", "Neo4j", "JanusGraph", "ChromaDB", "Pinecone"],
   },
   { group: "Tools", items: ["Git", "Gradio", "vis.js"] },
 ];
 
 export const education = {
+  photo: {
+      src: "/photos/graduation%20day.jpg",
+      alt: "Bhuvana on graduation day at Global Academy of Technology",
+      caption: "Graduation day",
+      width: 1536,
+      height: 2048,
+    },
   degree: "B.E. in Computer Science",
   school: "Global Academy of Technology",
   location: "Bengaluru",
@@ -607,27 +710,30 @@ export const publications: {
     venue:
       "IEEE International Conference on Intelligent Systems, Communication and Applications (CIISCA 2023)",
     year: "2023",
-    // TODO: link to the paper.
-    href: null,
+    href: "https://ieeexplore.ieee.org/abstract/document/10403588",
   },
 ];
 
 export const achievements: {
   id: string;
   /** Where it is shown on the Engineering page. */
-  group: "hackathon" | "recognition";
+  group: "hackathon";
   title: string;
   detail: string;
   year: string;
   /** Scan of the certificate. Optional. */
   certificate?: { src: string; alt: string; width: number; height: number };
+  /** A photo from the day. Optional. */
+  photo?: { src: string; alt: string; width: number; height: number };
+  /** More photos from the day, shown under the entry. Optional. */
+  gallery?: { src: string; alt: string; width: number; height: number }[];
 }[] = [
   {
     id: "hackathon-judge",
     group: "hackathon",
     title: "Hackathon judge and mentor",
     detail:
-      "Invited to judge and mentor at hackathons at Global Academy of Technology and, twice, Dayananda Sagar University, including the 24-hour La Casa De Code (Techflix Season 2) in February 2026.",
+      "Invited to judge and mentor at hackathons, and to judge Dayananda Sagar University's Techflix two years running, Seasons 1 and 2, including the 24-hour La Casa De Code (Season 2) in February 2026.",
     year: "2024 – 2026",
     certificate: {
       src: "/certificates/dsu-techflix-judge.jpg",
@@ -643,20 +749,20 @@ export const achievements: {
     detail:
       "Mentored teams and judged at the grand finale of the iQOO hackathon, 9th to 11th October 2026.",
     year: "2026",
+    photo: {
+      src: "/photos/iqoo-hackathon-mentor.jpg",
+      alt: "Bhuvana mentoring at the iQOO hackathon grand finale",
+      width: 3879,
+      height: 5818,
+    },
   },
   {
-    id: "star-of-the-month",
-    group: "recognition",
-    title: "Star of the Month, Knowledge Lens",
+    id: "hal-3",
+    group: "hackathon",
+    title: "Alumni judge, HackALeague 3.0",
     detail:
-      "Recognised as Best New Comer for performance and excellence at work, October 2024.",
-    year: "2024",
-    certificate: {
-      src: "/certificates/knowledge-lens-star-of-the-month.jpg",
-      alt: "Knowledge Lens Star of the Month certificate of achievement for Bhuvana K S, Best New Comer, October 2024",
-      width: 800,
-      height: 589,
-    },
+      "Went back to Global Academy of Technology as an alumni judge for HackALeague 3.0, February 2025.",
+    year: "2025",
   },
   {
     id: "evolve-2024",
@@ -665,6 +771,12 @@ export const achievements: {
     detail:
       "Won Evolve 2024, the internal company hackathon at Knowledge Lens, securing 1st place.",
     year: "2024",
+    photo: {
+      src: "/photos/evolve-2024-winner.jpg",
+      alt: "Bhuvana with the winning team at Evolve 2024, the Knowledge Lens internal hackathon",
+      width: 2000,
+      height: 1334,
+    },
   },
   {
     id: "college-hackathon",

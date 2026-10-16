@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CertificateThumb } from "@/components/certificate-thumb";
 import { Reveal } from "@/components/reveal";
 import { work } from "@/content/site";
 
@@ -40,8 +41,22 @@ export default async function WorkPage({
   const entry = work.find((w) => w.slug === slug);
   if (!entry) notFound();
 
-  const position = work.findIndex((w) => w.slug === slug);
-  const next = work[(position + 1) % work.length];
+  // The grid is optional and sizes itself to however many figures a role has.
+  const highlights = entry.highlights ?? [];
+  const highlightCols: Record<number, string> = {
+    1: "sm:grid-cols-1",
+    2: "sm:grid-cols-2",
+    3: "sm:grid-cols-3",
+    4: "sm:grid-cols-4",
+  };
+
+  const position =work.findIndex((w) => w.slug === slug);
+  // The last role leads back to the homepage instead of looping to the first.
+  const next = work[position + 1];
+  const nextHref = next ? `/work/${next.slug}` : "/";
+  const nextLabel = next ? "Next" : "Back to";
+  const nextTitle = next ? next.company : "Homepage";
+  const nextNote = next?.headline;
 
   return (
     <article>
@@ -80,11 +95,16 @@ export default async function WorkPage({
       </section>
 
       {/* ------------------------------ highlights -------------------------- */}
+      {highlights.length > 0 && (
       <section className="px-4 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-rule bg-rule sm:grid-cols-4">
-              {entry.highlights.map((h) => (
+            <dl
+              className={`grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-rule bg-rule ${
+                highlightCols[Math.min(highlights.length, 4)]
+              }`}
+            >
+              {highlights.map((h) => (
                 <div key={h.label} className="bg-paper px-5 py-6">
                   <dt className="label">{h.label}</dt>
                   <dd className="display mt-2 text-2xl tabular-nums">
@@ -96,6 +116,7 @@ export default async function WorkPage({
           </Reveal>
         </div>
       </section>
+      )}
 
       {/* -------------------------------- body ------------------------------ */}
       <div className="px-4 sm:px-8">
@@ -115,17 +136,56 @@ export default async function WorkPage({
               <h2 className="display text-2xl sm:sticky sm:top-24 sm:self-start">
                 {section.heading}
               </h2>
-              <div className="mt-4 space-y-4 sm:mt-0">
-                {section.body.map((paragraph, j) => (
-                  <p key={j} className="leading-relaxed text-ink-soft">
-                    {paragraph}
-                  </p>
-                ))}
+              <div
+                className={`mt-4 sm:mt-0 ${
+                  section.image
+                    ? "grid gap-6 md:grid-cols-[minmax(0,1fr)_12rem] md:gap-8"
+                    : ""
+                }`}
+              >
+                <div className="space-y-4">
+                  {section.body.map((paragraph, j) => (
+                    <p key={j} className="leading-relaxed text-ink-soft">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+                {section.image && (
+                  <CertificateThumb
+                    {...section.image}
+                    className="max-w-[12rem] md:justify-self-end"
+                  />
+                )}
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+
+      {/* ----------------------------- recognition -------------------------- */}
+      {entry.recognition && (
+        <section className="px-4 pb-4 sm:px-8">
+          <div className="mx-auto max-w-3xl border-b border-rule pb-12">
+            <Reveal>
+              <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_13rem] sm:gap-10">
+                <div>
+                  <p className="label">Recognition</p>
+                  <h2 className="display mt-3 text-2xl">
+                    {entry.recognition.title}
+                  </h2>
+                  <p className="mt-3 leading-relaxed text-ink-soft">
+                    {entry.recognition.detail}
+                  </p>
+                </div>
+                <CertificateThumb
+                  {...entry.recognition.certificate}
+                  className="max-w-[13rem] sm:justify-self-end"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* -------------------------------- stack ----------------------------- */}
       <section className="px-4 py-14 sm:px-8 sm:py-16">
@@ -151,17 +211,17 @@ export default async function WorkPage({
         <section className="border-t border-rule px-4 sm:px-8">
           <div className="mx-auto max-w-3xl">
             <Link
-              href={`/work/${next.slug}`}
+              href={nextHref}
               className="group flex items-baseline justify-between gap-6 py-12"
             >
               <span>
-                <span className="label">Next</span>
-                <span className="display mt-2 block text-3xl">
-                  {next.company}
-                </span>
-                <span className="mt-1.5 block font-serif text-lg italic text-ink-muted">
-                  {next.headline}
-                </span>
+                <span className="label">{nextLabel}</span>
+                <span className="display mt-2 block text-3xl">{nextTitle}</span>
+                {nextNote && (
+                  <span className="mt-1.5 block font-serif text-lg italic text-ink-muted">
+                    {nextNote}
+                  </span>
+                )}
               </span>
               <span
                 aria-hidden="true"
