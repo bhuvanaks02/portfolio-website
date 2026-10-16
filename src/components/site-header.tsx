@@ -28,23 +28,35 @@ export function SiteHeader() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-8">
+      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-3 sm:px-8">
         <Link
           href="/"
           aria-current={pathname === "/" ? "page" : undefined}
-          className="-ml-4 rounded-full px-4 py-1.5 text-sm text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
+          className="-ml-1.5 whitespace-nowrap rounded-full px-2 py-1.5 text-[13px] text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink sm:-ml-4 sm:px-4 sm:text-sm"
         >
-          Home
+          <svg
+            viewBox="0 0 24 24"
+            className="size-[18px] sm:hidden"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 11 12 4l8 7M6 10v9h12v-9" />
+          </svg>
+          <span className="sr-only sm:not-sr-only">Home</span>
         </Link>
 
-        <nav className="flex items-center gap-1.5 sm:gap-3">
+        <nav className="flex items-center gap-0 sm:gap-3">
           {nav.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="rounded-full px-3 py-1.5 text-sm text-ink-soft sm:px-4 transition-colors duration-300 hover:bg-accent-soft hover:text-ink"
+              className="whitespace-nowrap rounded-full px-1 py-1.5 text-[13px] text-ink-soft transition-colors duration-300 hover:bg-accent-soft hover:text-ink sm:px-4 sm:text-sm"
             >
               {item.label}
               {item.external && (
@@ -60,7 +72,7 @@ export function SiteHeader() {
             download
             aria-label="Download résumé (PDF)"
             title="Download résumé (PDF)"
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-2 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
           >
             <svg
               viewBox="0 0 24 24"
@@ -76,7 +88,7 @@ export function SiteHeader() {
             </svg>
             <span className="hidden sm:inline">Résumé</span>
           </a>
-          <span className="ml-1 sm:ml-2">
+          <span className="sm:ml-2">
             <ThemeToggle />
           </span>
         </nav>
