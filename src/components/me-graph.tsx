@@ -307,7 +307,8 @@ export function MeGraph() {
   useEffect(() => {
     const el = plate.current;
     if (!el) return;
-    const calm = reduced ? 0 : 1;
+    // Visitors who ask for reduced motion get a gentler version, not a frozen one.
+    const calm = reduced ? 0.5 : 1;
 
     const bodies = new Map<string, Body>(
       nodes.map((n) => [n.id, { ox: 0, oy: 0, vx: 0, vy: 0 }]),
@@ -574,7 +575,7 @@ export function MeGraph() {
                 draggable={false}
                 onPointerDown={(e) => {
                   // Drag with a mouse or pen; touch keeps scrolling the page.
-                  if (reduced || e.pointerType === "touch") return;
+                  if (e.pointerType === "touch") return;
                   const p = local(e);
                   drag.current = {
                     id: n.id,
