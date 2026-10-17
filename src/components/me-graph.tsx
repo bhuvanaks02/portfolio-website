@@ -74,7 +74,7 @@ function descendantsOf(id: string): GraphNode[] {
 type Body = { ox: number; oy: number; vx: number; vy: number };
 
 type Point = { x: number; y: number };
-type LayoutId = "radial" | "tree" | "timeline" | "kamada";
+type LayoutId = "radial" | "tree" | "timeline" | "kamada" | "stack";
 
 const kidsOf = (id: string) => nodes.filter((n) => n.parent === id);
 const strands = nodes.filter((n) => depth(n) === 1);
@@ -210,7 +210,18 @@ const layouts: Record<LayoutId, Map<string, Point>> = (() => {
 
   const kamada = kamadaKawai();
 
-  return { radial, tree, timeline, kamada };
+  // Phones: a tall tree. The centre on top, the strands as three columns, and
+  // each strand's nodes stacked beneath it, so every node fits and none overlap.
+  const stack = new Map<string, Point>([["me", { x: 50, y: 6 }]]);
+  const column: Record<string, number> = { tech: 18, growth: 50, quests: 82 };
+  strands.forEach((st) => {
+    stack.set(st.id, { x: column[st.id], y: 17 });
+    kidsOf(st.id).forEach((k, i) =>
+      stack.set(k.id, { x: column[st.id], y: 28 + i * 9.1 }),
+    );
+  });
+
+  return { radial, tree, timeline, kamada, stack };
 })();
 
 const layoutOptions: { id: LayoutId; label: string; icon: React.ReactNode }[] =
@@ -271,9 +282,10 @@ const layoutOptions: { id: LayoutId; label: string; icon: React.ReactNode }[] =
   ];
 
 const nodeStyle = [
-  "bg-ink px-4 py-2 font-serif text-xl text-paper sm:text-2xl",
-  "border border-rule-strong bg-paper px-3.5 py-1.5 font-serif text-lg text-ink sm:text-xl",
-  "hidden border border-rule bg-paper px-2.5 py-1 font-mono text-[0.6875rem] text-ink-soft sm:block",
+  "whitespace-nowrap bg-ink px-4 py-2 font-serif text-xl text-paper sm:text-2xl",
+  "whitespace-nowrap border border-rule-strong bg-paper px-3.5 py-1.5 font-serif text-lg text-ink sm:text-xl",
+  // On phones the labels wrap inside a narrow column; from sm up they stay on one line.
+  "max-w-[6.5rem] whitespace-normal border border-rule bg-paper px-2 py-1 text-center font-mono text-[0.6875rem] leading-tight text-ink-soft sm:max-w-none sm:whitespace-nowrap sm:px-2.5 sm:text-left",
 ];
 
 export function MeGraph() {
@@ -308,14 +320,19 @@ export function MeGraph() {
     const el = plate.current;
     if (!el) return;
     // Visitors who ask for reduced motion get a gentler version, not a frozen one.
-    const calm = reduced ? 0.5 : 1;
+    const baseCalm = reduced ? 0.5 : 1;
+    // Phones are tight, so the nodes drift far less there.
+    const small = window.matchMedia("(max-width: 639.98px)");
 
     const bodies = new Map<string, Body>(
       nodes.map((n) => [n.id, { ox: 0, oy: 0, vx: 0, vy: 0 }]),
     );
     // Current home position of each node; eases toward the chosen layout.
     const pos = new Map<string, Point>(
-      nodes.map((n) => [n.id, { x: n.x, y: n.y }]),
+      nodes.map((n) => {
+        const start = small.matches ? layouts.stack.get(n.id)! : n;
+        return [n.id, { x: start.x, y: start.y }];
+      }),
     );
     let raf = 0;
     let last = performance.now();
@@ -327,7 +344,8 @@ export function MeGraph() {
       const w = el.clientWidth;
       const h = el.clientHeight;
 
-      const target = layouts[layoutRef.current];
+      const target = layouts[small.matches ? "stack" : layoutRef.current];
+      const calm = baseCalm * (small.matches ? 0.2 : 1);
       const ease = 1 - Math.exp(-5 * dt);
 
       nodes.forEach((n, i) => {
@@ -437,7 +455,7 @@ export function MeGraph() {
     <figure>
       <div
         ref={plate}
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[16/9]"
+        className="relative aspect-[4/8] overflow-hidden rounded-2xl border border-rule bg-paper-raised sm:aspect-[16/9]"
         style={{
           backgroundImage:
             "radial-gradient(var(--rule) 1px, transparent 1px)",
@@ -483,8 +501,6 @@ export function MeGraph() {
                   vectorEffect="non-scaling-stroke"
                   strokeWidth={lit ? 1.5 : 1}
                   className={`transition-[stroke,opacity] duration-300 ${
-                    depth(n) === 2 ? "hidden sm:block" : ""
-                  } ${
                     lit
                       ? "stroke-accent"
                       : active
@@ -505,9 +521,7 @@ export function MeGraph() {
                 if (el) packetEls.current.set(n.id, el);
               }}
               aria-hidden="true"
-              className={`pointer-events-none absolute size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent ${
-                depth(n) === 2 ? "hidden sm:block" : ""
-              }`}
+              className="pointer-events-none absolute size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
               style={{ left: `${byId.get(n.parent!)!.x}%`, top: `${byId.get(n.parent!)!.y}%`, opacity: 0 }}
             />
           ))}
@@ -603,7 +617,7 @@ export function MeGraph() {
                 onPointerEnter={() => setActive(n.id)}
                 onFocus={() => setActive(n.id)}
                 onBlur={() => setActive(null)}
-                className={`relative block cursor-grab touch-pan-y select-none whitespace-nowrap rounded-full transition-[opacity,border-color,color,transform] duration-300 hover:scale-110 active:cursor-grabbing ${nodeStyle[d]} ${
+                className={`relative block cursor-grab touch-pan-y select-none rounded-full transition-[opacity,border-color,color,transform] duration-300 hover:scale-110 active:cursor-grabbing ${nodeStyle[d]} ${
                   lit && d > 0 ? "border-accent text-accent" : ""
                 } ${active && !lit ? "opacity-40" : ""}`}
               >
@@ -618,7 +632,7 @@ export function MeGraph() {
       <div
         role="group"
         aria-label="Graph layout"
-        className="mt-3 flex items-center justify-end gap-1.5"
+        className="mt-3 hidden items-center justify-end gap-1.5 sm:flex"
       >
         <span className="label mr-1.5">Layout</span>
         {layoutOptions.map((o) => (
