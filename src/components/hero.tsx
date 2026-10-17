@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { site, socials } from "@/content/site";
+import { site } from "@/content/site";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -39,8 +39,6 @@ export function Hero() {
             ease: [0.22, 1, 0.36, 1] as const,
           },
         };
-
-  const links = socials.filter((s) => s.href);
 
   return (
     <section className="px-4 pt-16 pb-12 sm:px-8 sm:pt-28 sm:pb-16">
@@ -98,11 +96,11 @@ export function Hero() {
 
         <motion.div
           {...rise(0.24)}
-          className="mt-10 flex flex-col gap-7 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3"
+          className="mt-10"
         >
           <Link
             href="/work"
-            className="group inline-flex items-center gap-2 self-start rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
           >
             Engineering
             <span
@@ -112,43 +110,6 @@ export function Hero() {
               →
             </span>
           </Link>
-          {/* On phones: contact on its own, set off by a hairline; the wrappers
-              vanish from sm up, so the desktop row is unchanged. */}
-          <div className="flex flex-col gap-4 border-t border-rule/50 pt-6 sm:contents">
-          <a
-            href={`mailto:${site.email}`}
-            className="link-underline self-start text-sm text-ink-soft"
-          >
-            {site.email}
-          </a>
-          <div className="flex flex-wrap gap-x-6 gap-y-3 sm:contents">
-          {links
-            .filter((s) => !s.href?.startsWith("mailto:"))
-            .map((s) => (
-              <span key={s.label} className="group relative">
-                <a
-                  href={s.href as string}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-underline text-sm text-ink-soft"
-                >
-                  {s.label}
-                </a>
-                {s.note && (
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute bottom-full left-0 z-10 mb-3 hidden w-max sm:block max-w-56 translate-y-1 rounded-xl border border-rule bg-paper-raised px-3.5 py-2.5 opacity-0 shadow-sm transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100"
-                  >
-                    <span className="label block">{s.handle}</span>
-                    <span className="mt-1 block text-sm leading-snug text-ink-soft">
-                      {s.note}
-                    </span>
-                  </span>
-                )}
-              </span>
-            ))}
-          </div>
-          </div>
         </motion.div>
 
         <motion.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
