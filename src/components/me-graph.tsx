@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -25,14 +25,14 @@ const nodes: GraphNode[] = [
   { id: "growth", label: "Marketing", x: 72, y: 26, href: "/marketing", parent: "me", rel: "RAN" },
   { id: "quests", label: "Side quests", x: 80, y: 72, href: "/side-quests", parent: "me", rel: "PICKS_UP" },
 
-  { id: "slm", label: "Small language models", x: 14, y: 13, href: "/work/infosys#small-language-models", parent: "tech", rel: "FINE_TUNES" },
-  { id: "rag", label: "RAG", x: 33, y: 8, href: "/work/infosys#retrieval-and-agents", parent: "tech", rel: "RETRIEVES_WITH" },
-  { id: "agents", label: "AI agents", x: 8, y: 31, href: "/work/infosys#retrieval-and-agents", parent: "tech", rel: "ORCHESTRATES" },
+  { id: "slm", label: "Small language models", x: 14, y: 13, href: "/work#infosys-small-language-models", parent: "tech", rel: "FINE_TUNES" },
+  { id: "rag", label: "RAG", x: 33, y: 8, href: "/work#infosys-retrieval-and-agents", parent: "tech", rel: "RETRIEVES_WITH" },
+  { id: "agents", label: "AI agents", x: 8, y: 31, href: "/work#infosys-retrieval-and-agents", parent: "tech", rel: "ORCHESTRATES" },
   { id: "edu", label: "Education", x: 6, y: 50, href: "/work#education", parent: "tech", rel: "STUDIED" },
   { id: "paper", label: "IEEE paper", x: 8, y: 68, href: "/work#education", parent: "tech", rel: "PUBLISHED" },
-  { id: "graphs", label: "Graph databases", x: 12, y: 82, href: "/work/knowledge-lens#root-cause-analysis", parent: "tech", rel: "QUERIES" },
+  { id: "graphs", label: "Graph databases", x: 12, y: 82, href: "/work#knowledge-lens-root-cause-analysis", parent: "tech", rel: "QUERIES" },
   { id: "hackathons", label: "Hackathons", x: 38, y: 74, href: "/work#hackathons", parent: "tech", rel: "JUDGES" },
-  { id: "backend", label: "Backend APIs", x: 26, y: 92, href: "/work/infosys#database-connectors", parent: "tech", rel: "BUILDS" },
+  { id: "backend", label: "Backend APIs", x: 26, y: 92, href: "/work#infosys-database-connectors", parent: "tech", rel: "BUILDS" },
 
   { id: "ethmumbai", label: "ETHMumbai", x: 52, y: 8, href: "/marketing#ethmumbai", parent: "growth", rel: "RAN_SOCIALS_AT" },
   { id: "campaigns", label: "Campaigns", x: 66, y: 7, href: "/marketing#under25", parent: "growth", rel: "RAN" },
@@ -337,7 +337,19 @@ export function MeGraph() {
     let raf = 0;
     let last = performance.now();
 
+    // No point animating what nobody can see.
+    let onScreen = true;
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+    });
+    io.observe(el);
+
     const tick = (now: number) => {
+      if (!onScreen || document.hidden) {
+        last = now;
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const t = now / 1000;
@@ -443,7 +455,10 @@ export function MeGraph() {
     };
 
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+    };
   }, [reduced]);
 
   const local = (e: React.PointerEvent) => {
@@ -554,7 +569,7 @@ export function MeGraph() {
           const d = depth(n);
           const lit = onPath.has(n.id);
           return (
-            <motion.div
+            <m.div
               key={n.id}
               className="absolute -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${n.x}%`, top: `${n.y}%` }}
@@ -624,7 +639,7 @@ export function MeGraph() {
                 {n.label}
               </Link>
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

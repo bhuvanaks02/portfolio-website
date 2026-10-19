@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { site, work } from "@/content/site";
+import { site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -10,10 +10,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/work`, lastModified: now, priority: 0.9 },
     { url: `${site.url}/marketing`, lastModified: now, priority: 0.7 },
     { url: `${site.url}/side-quests`, lastModified: now, priority: 0.6 },
-    ...work.map((entry) => ({
-      url: `${site.url}/work/${entry.slug}`,
-      lastModified: now,
-      priority: 0.7,
-    })),
   ];
 }

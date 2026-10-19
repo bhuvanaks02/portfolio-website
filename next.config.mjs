@@ -32,6 +32,8 @@ const nextConfig = {
       // The hidden retro site is plain HTML in public/retro.
       { source: "/retro", destination: "/retro/index.html", permanent: false },
       { source: "/about", destination: "/", permanent: false },
+      // Each role now lives on the Engineering page.
+      { source: "/work/:slug", destination: "/work#:slug", permanent: true },
     ];
   },
 };

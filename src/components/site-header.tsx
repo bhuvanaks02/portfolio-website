@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll } from "framer-motion";
+import { m, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -141,7 +141,7 @@ export function SiteHeader() {
         </div>
       )}
       {/* How far down the page you are, drawn along the header's edge. */}
-      <motion.span
+      <m.span
         aria-hidden="true"
         style={{ scaleX: scrollYProgress }}
         className="absolute inset-x-0 -bottom-px h-px origin-left bg-accent/30"

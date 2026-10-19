@@ -82,12 +82,12 @@ export type WorkEntry = {
   index: string;
   company: string;
   title: string;
-  headline: string;
+  headline?: string;
   period: string;
   location: string;
-  summary: string;
+  summary?: string;
   /** Short framing of the problem, shown at the top of the case study. */
-  context: string;
+  context?: string;
   /** Optional figures shown as a grid; leave out and the grid is hidden. */
   highlights?: { label: string; value: string }[];
   sections: {
@@ -117,26 +117,9 @@ export const work: WorkEntry[] = [
     index: "01",
     company: "Infosys Ltd.",
     title: "Software Engineer, Specialist Programmer",
-    headline: "From churn models to agents that run the system",
     period: "Dec 2024 – Present",
     location: "Bengaluru",
-    summary:
-      "Churn models and retraining pipelines, connectors for 10+ databases, locally deployed small language models, and now skills and plugins for agentic AI.",
-    context:
-      "Five phases, one thread: getting models and data to work reliably inside real systems.",
-    highlights: [
-      { label: "Databases connected", value: "10+" },
-      { label: "Manual work automated", value: "40%" },
-      { label: "Deployed model size", value: "~4 GB" },
-      { label: "Now", value: "Agentic AI" },
-    ],
     sections: [
-      {
-        heading: "Churn prediction",
-        body: [
-          "Built customer-churn prediction models and automated pipelines to retrain them, so keeping a model current no longer needed manual effort.",
-        ],
-      },
       {
         heading: "Refining the codebase",
         body: [
@@ -189,11 +172,6 @@ export const work: WorkEntry[] = [
       "Owned the Root Cause Analysis module for plant asset malfunctions, and built V1 of the internal SDK for graph layouts.",
     context:
       "When a plant asset fails, the cause is usually upstream. That is a graph problem, and it was mine to own.",
-    highlights: [
-      { label: "Visualisation boilerplate", value: "−50%" },
-      { label: "Graph engines", value: "Neo4j + JanusGraph" },
-      { label: "Module ownership", value: "End to end" },
-    ],
     sections: [
       {
         heading: "Root cause analysis",
@@ -267,12 +245,6 @@ export const work: WorkEntry[] = [
           caption: "With the winning team at Evolve 2024.",
         },
       },
-      {
-        heading: "Domains explored",
-        body: [
-          "The internship was a wide start: frontend with React, graph databases, and data science, including data cleaning.",
-        ],
-      },
     ],
     stack: [
       "Python",
@@ -285,75 +257,6 @@ export const work: WorkEntry[] = [
       "React",
       "Data cleaning",
     ],
-  },
-];
-
-/* -------------------------------- journey -------------------------------- */
-
-const role = (slug: string) => work.find((w) => w.slug === slug)!;
-
-/** The timeline on the home page, oldest first. */
-export const journey: {
-  years: string;
-  verb: string;
-  text: string;
-  place: string;
-  /** A line worth keeping from that stretch. Optional. */
-  lesson?: string;
-  href: string;
-  cta: string;
-}[] = [
-  {
-    years: "2020 – 2024",
-    verb: "Learning",
-    text: "A computer science degree, a first hackathon win in 2021 and an IEEE paper on graduate admission prediction in 2023.",
-    place: "Global Academy of Technology · B.E. Computer Science · CGPA 9.17",
-    href: "/work#education",
-    cta: "Education and the paper",
-  },
-  {
-    years: "2023 – 2026",
-    verb: "Organising",
-    text: "Marketing and PR, explored out of curiosity. A year of outreach and research at Web3 agency Pukecast, campaigns and ops for the Under25 Summit, marketing for HackALeague 2.0, marketing and PR plus livestreams and meetups for Dcodeblock, and social media and operations for ETHMumbai 2026.",
-    place: "Pukecast · Under25 · Warpspeed · HackALeague · Dcodeblock · ETHMumbai",
-    href: "/marketing",
-    cta: "Marketing work",
-  },
-  {
-    years: "Feb – Aug 2024",
-    verb: "Querying",
-    text: `${role("knowledge-lens-intern").summary} Won 1st place at Evolve 2024, the company's internal hackathon.`,
-    place: "Knowledge Lens · Software Engineer Intern",
-    lesson: "A correct query and a usable query are two different things.",
-    href: "/work/knowledge-lens-intern",
-    cta: "Experience",
-  },
-  {
-    years: "Aug – Dec 2024",
-    verb: "Shipping",
-    text: role("knowledge-lens").summary,
-    place: "Knowledge Lens · Software Engineer",
-    lesson:
-      "When an asset malfunctions, the cause is rarely the thing that failed. It is two or three hops upstream.",
-    href: "/work/knowledge-lens",
-    cta: "Experience",
-  },
-  {
-    years: "Dec 2024 – now",
-    verb: "Automating",
-    text: role("infosys").summary,
-    place: "Infosys · Specialist Programmer",
-    lesson: "The best systems are the ones that need you less.",
-    href: "/work/infosys",
-    cta: "Experience",
-  },
-  {
-    years: "2024 – 2026",
-    verb: "Mentoring",
-    text: "Judged and mentored at hackathons: Global Academy of Technology, Dayananda Sagar University and the iQOO hackathon grand finale in October 2026.",
-    place: "Hackathon judge and mentor",
-    href: "/work#hackathon-judge",
-    cta: "Recognition",
   },
 ];
 
@@ -768,15 +671,8 @@ export const achievements: {
     id: "evolve-2024",
     group: "hackathon",
     title: "1st place, Evolve 2024",
-    detail:
-      "Won Evolve 2024, the internal company hackathon at Knowledge Lens, securing 1st place.",
+    detail: "Knowledge Lens's internal hackathon.",
     year: "2024",
-    photo: {
-      src: "/photos/evolve-2024-winner.jpg",
-      alt: "Bhuvana with the winning team at Evolve 2024, the Knowledge Lens internal hackathon",
-      width: 2000,
-      height: 1334,
-    },
   },
   {
     id: "college-hackathon",

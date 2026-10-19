@@ -86,10 +86,6 @@ export default function ResumePage() {
           </h1>
           <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
             {site.role} in {site.location}. Everything technical in one place.
-            Each role opens into its own page.
-          </p>
-          <p className="mt-4 max-w-2xl text-sm text-ink-muted">
-            A downloadable one-page resume is in the navbar above.
           </p>
         </div>
       </header>

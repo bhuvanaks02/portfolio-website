@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 
 /**
@@ -72,7 +72,7 @@ export function Cursor() {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <motion.span
+      <m.span
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: pressed ? 0.7 : hovering ? 1.7 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
@@ -80,7 +80,7 @@ export function Cursor() {
           hovering ? "border-accent bg-accent/10" : "border-rule-strong"
         }`}
       />
-      <motion.span
+      <m.span
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}
         animate={{ scale: hovering ? 0.5 : 1 }}
         className="absolute left-0 top-0 size-1.5 rounded-full bg-accent"

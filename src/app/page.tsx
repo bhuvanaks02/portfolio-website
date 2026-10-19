@@ -1,8 +1,7 @@
 ﻿import Link from "next/link";
 
 import { Hero } from "@/components/hero";
-import { Journey } from "@/components/journey";
-import { MeGraph } from "@/components/me-graph";
+import { LazyGraph } from "@/components/lazy-graph";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import {
@@ -12,10 +11,7 @@ import {
   work,
 } from "@/content/site";
 
-const glance = [
-  { label: "Now", value: work[0].company },
-  { label: "Speaks", value: sideQuests.languages.join(" · ") },
-];
+const glance = [{ label: "Now", value: work[0].company }];
 
 /** The three strands, one short card each; the detail lives on their pages. */
 const gist = [
@@ -52,7 +48,7 @@ export default function HomePage() {
 
       <div className="px-4 pb-16 sm:px-8 sm:pb-24">
         <div className="mx-auto max-w-5xl">
-          <MeGraph />
+          <LazyGraph />
         </div>
       </div>
 
@@ -91,16 +87,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section
-        id="path"
-        label="02 · The path"
-        note="2020 – now"
-        title="From back then to now, one step at a time."
-      >
-        <Journey />
-      </Section>
-
-      <Section id="gist" label="03 · The gist" title="What I do, in three parts.">
+      <Section id="gist" label="02 · The gist" title="What I do, in three parts.">
         <div className="grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-3">
           {gist.map((strand, i) => (
             <Reveal key={strand.label} delay={i * 0.06} className="bg-paper">

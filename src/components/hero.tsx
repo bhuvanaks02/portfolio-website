@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -46,7 +46,7 @@ export function Hero() {
         <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
           <div className="min-w-0">
             {site.availability.open && (
-              <motion.p
+              <m.p
                 {...rise(0)}
                 className="label flex items-center gap-2 text-accent"
               >
@@ -55,15 +55,15 @@ export function Hero() {
                   <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
                 </span>
                 {site.availability.label}
-              </motion.p>
+              </m.p>
             )}
 
-            <motion.h1 {...rise(0.08)} className="display mt-7 text-display">
+            <m.h1 {...rise(0.08)} className="display mt-7 text-display">
               {site.name}
-            </motion.h1>
+            </m.h1>
           </div>
 
-          <motion.div {...rise(0.05)} className="shrink-0">
+          <m.div {...rise(0.05)} className="shrink-0">
             <div
               onClick={
                 isDev
@@ -84,17 +84,17 @@ export function Hero() {
                 priority
               />
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.p
+        <m.p
           {...rise(0.16)}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl"
         >
           <Tagline />
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           {...rise(0.24)}
           className="mt-10"
         >
@@ -110,11 +110,11 @@ export function Hero() {
               →
             </span>
           </Link>
-        </motion.div>
+        </m.div>
 
-        <motion.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
+        <m.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
           {site.role} · {site.location}
-        </motion.p>
+        </m.p>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 
 import { Cursor } from "@/components/cursor";
+import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { site } from "@/content/site";
@@ -87,10 +88,12 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <Cursor />
+        <MotionProvider>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+          <Cursor />
+        </MotionProvider>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 type Props = {
   src: string;
@@ -32,12 +32,17 @@ export function CertificateThumb({
   crop,
 }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
+  // The full-size copy is only mounted once the photo has been opened.
+  const [opened, setOpened] = useState(false);
 
   return (
     <figure className={`w-full ${className}`}>
       <button
         type="button"
-        onClick={() => dialog.current?.showModal()}
+        onClick={() => {
+          setOpened(true);
+          dialog.current?.showModal();
+        }}
         aria-label={`Open full size: ${alt}`}
         className="block w-full cursor-zoom-in"
       >
@@ -91,14 +96,16 @@ export function CertificateThumb({
         }}
         className="m-auto max-h-[92vh] max-w-[92vw] overflow-auto rounded-xl bg-paper p-2 backdrop:bg-black/70"
       >
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          sizes="92vw"
-          className="h-auto max-h-[86vh] w-auto max-w-full rounded-lg"
-        />
+        {opened && (
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            sizes="92vw"
+            className="h-auto max-h-[86vh] w-auto max-w-full rounded-lg"
+          />
+        )}
         <form method="dialog" className="mt-2 flex justify-end">
           <button className="rounded-full px-4 py-1.5 text-sm text-ink-soft hover:bg-accent-soft hover:text-ink">
             Close

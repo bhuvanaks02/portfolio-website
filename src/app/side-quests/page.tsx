@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { LazyReel } from "@/components/lazy-reel";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { sideQuests } from "@/content/site";
@@ -102,21 +103,13 @@ export default function SideQuestsPage() {
             </a>
             {" "}and others, just for fun.
           </p>
-          {/* Instagram's own embed page, loaded only as each one nears the screen. */}
-          <ul className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
+                    <ul className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
             {sideQuests.reels.map((href, i) => (
               <li key={href} className="shrink-0 snap-start">
-                {/* Instagram's player is 328×580; scaled to ~62% so the row stays quiet. */}
-                <div className="h-[360px] w-[203px] overflow-hidden rounded-xl border border-rule bg-paper">
-                  <iframe
-                    src={`${href}embed`}
-                    title={`Instagram reel ${i + 1} of ${sideQuests.reels.length}`}
-                    loading="lazy"
-                    allowFullScreen
-                    scrolling="no"
-                    className="h-[580px] w-[328px] origin-top-left scale-[0.62] border-0"
-                  />
-                </div>
+                <LazyReel
+                  href={href}
+                  title={`Instagram reel ${i + 1} of ${sideQuests.reels.length}`}
+                />
               </li>
             ))}
           </ul>

@@ -1,39 +1,106 @@
-import Link from "next/link";
-
+import { CertificateThumb } from "@/components/certificate-thumb";
 import { Reveal } from "@/components/reveal";
 import { work } from "@/content/site";
 
+/** Anchor id for a section inside a role, e.g. "infosys-small-language-models". */
+export function sectionId(slug: string, heading: string) {
+  return `${slug}-${heading
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")}`;
+}
+
+/** Every role, in full, on the Engineering page. */
 export function WorkIndex() {
   return (
     <ul className="border-t border-rule">
-      {work.map((entry, i) => (
-        <Reveal as="li" key={entry.slug} delay={i * 0.06}>
-          <Link
-            href={`/work/${entry.slug}`}
-            className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-5 gap-y-2 border-b border-rule py-7 transition-colors duration-300 hover:bg-accent-soft/60 sm:gap-x-8 sm:py-9"
-          >
-            <span className="label pt-1 tabular-nums">{entry.index}</span>
+      {work.map((entry) => (
+        <Reveal
+          as="li"
+          key={entry.slug}
+          id={entry.slug}
+          className="scroll-mt-20 border-b border-rule py-10 sm:py-14"
+        >
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="label tabular-nums">{entry.index}</span>
+            <h3 className="display text-3xl sm:text-4xl">{entry.company}</h3>
+            <span className="label">{entry.period}</span>
+          </div>
+          <p className="mt-2 text-sm text-ink-soft">
+            {entry.title} · {entry.location}
+          </p>
+          {entry.headline && (
+            <p className="mt-4 max-w-2xl font-serif text-xl italic leading-snug text-ink-muted">
+              {entry.headline}
+            </p>
+          )}
 
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="display text-2xl sm:text-3xl">
-                  {entry.company}
-                </h3>
-                <span className="label">{entry.period}</span>
+          {entry.highlights && entry.highlights.length > 0 && (
+            <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-10">
+              {entry.highlights.map((h) => (
+                <div key={h.label}>
+                  <dd className="display text-2xl tabular-nums">{h.value}</dd>
+                  <dt className="label mt-1">{h.label}</dt>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          {entry.context && (
+            <p className="mt-7 max-w-2xl leading-relaxed text-ink-soft">
+              {entry.context}
+            </p>
+          )}
+
+          <div className="mt-8 border-t border-rule">
+            {entry.sections.map((section) => (
+              <div
+                key={section.heading}
+                id={sectionId(entry.slug, section.heading)}
+                className="scroll-mt-20 border-b border-rule py-5 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
+              >
+                <h4 className="display text-xl">{section.heading}</h4>
+                <div
+                  className={`mt-2 sm:mt-0 ${
+                    section.image
+                      ? "grid gap-5 md:grid-cols-[minmax(0,1fr)_10rem] md:gap-8"
+                      : ""
+                  }`}
+                >
+                  <div className="space-y-3">
+                    {section.body.map((paragraph, j) => (
+                      <p key={j} className="leading-relaxed text-ink-soft">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                  {section.image && (
+                    <CertificateThumb
+                      {...section.image}
+                      className="max-w-[10rem] md:justify-self-end"
+                    />
+                  )}
+                </div>
               </div>
-              <p className="mt-1.5 text-sm text-ink-soft">{entry.title}</p>
-              <p className="mt-3 max-w-xl font-serif text-lg italic leading-snug text-ink-muted">
-                {entry.headline}
-              </p>
-            </div>
+            ))}
+          </div>
 
-            <span
-              aria-hidden="true"
-              className="self-center text-xl text-ink-muted transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
-            >
-              →
-            </span>
-          </Link>
+          {entry.recognition && (
+            <div className="mt-6 grid gap-5 sm:grid-cols-[minmax(0,1fr)_10rem] sm:gap-8">
+              <div>
+                <p className="label">Recognition</p>
+                <p className="display mt-2 text-xl">{entry.recognition.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {entry.recognition.detail}
+                </p>
+              </div>
+              <CertificateThumb
+                {...entry.recognition.certificate}
+                className="max-w-[10rem] sm:justify-self-end"
+              />
+            </div>
+          )}
         </Reveal>
       ))}
     </ul>
