@@ -303,7 +303,7 @@ export function MeGraph() {
 
   const plate = useRef<HTMLDivElement>(null);
   const nodeEls = useRef(new Map<string, HTMLDivElement>());
-  const lineEls = useRef(new Map<string, SVGLineElement>());
+  const lineEls = useRef(new Map<string, SVGPathElement>());
   const relEls = useRef(new Map<string, HTMLSpanElement>());
   const packetEls = useRef(new Map<string, HTMLSpanElement>());
   const pointer = useRef<{ x: number; y: number } | null>(null);
@@ -319,23 +319,35 @@ export function MeGraph() {
   useEffect(() => {
     const el = plate.current;
     if (!el) return;
-    // Visitors who ask for reduced motion get a gentler version, not a frozen one.
     const baseCalm = reduced ? 0.5 : 1;
     // Phones are tight, so the nodes drift far less there.
     const small = window.matchMedia("(max-width: 639.98px)");
 
-    const bodies = new Map<string, Body>(
-      nodes.map((n) => [n.id, { ox: 0, oy: 0, vx: 0, vy: 0 }]),
-    );
+    // Everything is looked up once, up front; the frame loop below only does
+    // arithmetic and one transform write per element, with no layout reads.
+    const count = nodes.length;
+    const index = new Map(nodes.map((n, i) => [n.id, i]));
+    const parentOf = nodes.map((n) => (n.parent ? index.get(n.parent)! : -1));
+    const depths = nodes.map((n) => depth(n));
+    const bodies: Body[] = nodes.map(() => ({ ox: 0, oy: 0, vx: 0, vy: 0 }));
     // Current home position of each node; eases toward the chosen layout.
-    const pos = new Map<string, Point>(
-      nodes.map((n) => {
-        const start = small.matches ? layouts.stack.get(n.id)! : n;
-        return [n.id, { x: start.x, y: start.y }];
-      }),
-    );
-    let raf = 0;
-    let last = performance.now();
+    const pos: Point[] = nodes.map((n) => {
+      const start = small.matches ? layouts.stack.get(n.id)! : n;
+      return { x: start.x, y: start.y };
+    });
+    const nodeEl = nodes.map((n) => nodeEls.current.get(n.id));
+    const lineEl = nodes.map((n) => lineEls.current.get(n.id));
+    const packetEl = nodes.map((n) => packetEls.current.get(n.id));
+    const relEl = nodes.map((n) => relEls.current.get(n.id));
+
+    // The plate's size, read only when it changes.
+    let w = el.clientWidth;
+    let h = el.clientHeight;
+    const ro = new ResizeObserver(() => {
+      w = el.clientWidth;
+      h = el.clientHeight;
+    });
+    ro.observe(el);
 
     // No point animating what nobody can see.
     let onScreen = true;
@@ -344,31 +356,49 @@ export function MeGraph() {
     });
     io.observe(el);
 
+    // Stop the moment a link is clicked, so the page change gets the whole CPU.
+    let pausedUntil = 0;
+    const onClick = (e: Event) => {
+      if ((e.target as Element | null)?.closest?.("a[href]")) {
+        pausedUntil = performance.now() + 2500;
+      }
+    };
+    document.addEventListener("click", onClick, true);
+
+    let raf = 0;
+    let last = performance.now();
+    let lastDraw = 0;
+
     const tick = (now: number) => {
-      if (!onScreen || document.hidden) {
+      raf = requestAnimationFrame(tick);
+      if (!onScreen || document.hidden || now < pausedUntil) {
         last = now;
-        raf = requestAnimationFrame(tick);
         return;
       }
+      // About 30 frames a second on phones; the drift is slow enough not to show.
+      const isSmall = small.matches;
+      if (isSmall && now - lastDraw < 30) return;
+      lastDraw = now;
+
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const t = now / 1000;
-      const w = el.clientWidth;
-      const h = el.clientHeight;
-
-      const target = layouts[small.matches ? "stack" : layoutRef.current];
-      const calm = baseCalm * (small.matches ? 0.2 : 1);
+      const target = layouts[isSmall ? "stack" : layoutRef.current];
+      const calm = baseCalm * (isSmall ? 0.2 : 1);
       const ease = 1 - Math.exp(-5 * dt);
+      const dr = drag.current;
+      const ptr = pointer.current;
 
-      nodes.forEach((n, i) => {
-        const b = bodies.get(n.id)!;
-        const home = pos.get(n.id)!;
+      for (let i = 0; i < count; i++) {
+        const n = nodes[i];
+        const b = bodies[i];
+        const home = pos[i];
         const goal = target.get(n.id)!;
         home.x += (goal.x - home.x) * ease;
         home.y += (goal.y - home.y) * ease;
         const hx = (home.x / 100) * w;
         const hy = (home.y / 100) * h;
-        const d = depth(n);
+        const d = depths[i];
         const amp = (d === 0 ? 5 : d === 1 ? 12 : 17) * calm;
 
         // A slow, per-node wander so the whole graph is always breathing.
@@ -376,21 +406,20 @@ export function MeGraph() {
         let ty = Math.cos(t * (0.8 + (i % 4) * 0.22) + i * 2.3) * amp;
 
         // Children trail their parent, so a strand moves as one.
-        if (n.parent) {
-          const p = bodies.get(n.parent)!;
+        if (parentOf[i] >= 0) {
+          const p = bodies[parentOf[i]];
           tx += p.ox * 0.6;
           ty += p.oy * 0.6;
         }
 
-        const dr = drag.current;
         const dragged = dr?.id === n.id;
         if (dr && dragged) {
           tx = dr.x - hx;
           ty = dr.y - hy;
-        } else if (pointer.current && !dr) {
+        } else if (ptr && !dr) {
           // Nodes lean toward the cursor, more the closer it gets.
-          const dx = pointer.current.x - hx;
-          const dy = pointer.current.y - hy;
+          const dx = ptr.x - hx;
+          const dy = ptr.y - hy;
           const dist = Math.hypot(dx, dy) || 1;
           const pull = Math.max(0, 1 - dist / 260) * 26 * calm;
           tx += (dx / dist) * pull;
@@ -407,57 +436,44 @@ export function MeGraph() {
         b.ox += b.vx * dt;
         b.oy += b.vy * dt;
 
-        const nodeEl = nodeEls.current.get(n.id);
-        if (nodeEl) {
-          nodeEl.style.transform = `translate(${b.ox}px, ${b.oy}px)`;
-          const wrap = nodeEl.parentElement;
-          if (wrap) {
-            wrap.style.left = `${home.x}%`;
-            wrap.style.top = `${home.y}%`;
-          }
-        }
-      });
+        // One transform per node; the wrapper stays put, so nothing re-lays-out.
+        const e = nodeEl[i];
+        if (e) e.style.transform = `translate(${hx + b.ox}px, ${hy + b.oy}px)`;
+      }
 
-      nodes.forEach((n) => {
-        if (!n.parent) return;
-        const a = bodies.get(n.parent)!;
-        const b = bodies.get(n.id)!;
-        const pa = pos.get(n.parent)!;
-        const pn = pos.get(n.id)!;
-        const x1 = pa.x + (a.ox / w) * 100;
-        const y1 = pa.y + (a.oy / h) * 100;
-        const x2 = pn.x + (b.ox / w) * 100;
-        const y2 = pn.y + (b.oy / h) * 100;
-        const line = lineEls.current.get(n.id);
-        if (line) {
-          line.setAttribute("x1", String(x1));
-          line.setAttribute("y1", String(y1));
-          line.setAttribute("x2", String(x2));
-          line.setAttribute("y2", String(y2));
-        }
-        const packet = packetEls.current.get(n.id);
+      for (let i = 0; i < count; i++) {
+        const pi = parentOf[i];
+        if (pi < 0) continue;
+        const a = bodies[pi];
+        const b = bodies[i];
+        const x1 = pos[pi].x + (a.ox / w) * 100;
+        const y1 = pos[pi].y + (a.oy / h) * 100;
+        const x2 = pos[i].x + (b.ox / w) * 100;
+        const y2 = pos[i].y + (b.oy / h) * 100;
+        const line = lineEl[i];
+        if (line) line.setAttribute("d", `M${x1} ${y1}L${x2} ${y2}`);
+        const packet = packetEl[i];
         if (packet) {
           // Each edge sends a little pulse from parent to child, on loop.
-          const idx = nodes.indexOf(n);
-          const f = ((t * (0.22 + (idx % 4) * 0.05) + idx * 0.37) % 1 + 1) % 1;
-          packet.style.left = `${x1 + (x2 - x1) * f}%`;
-          packet.style.top = `${y1 + (y2 - y1) * f}%`;
+          const f = ((t * (0.22 + (i % 4) * 0.05) + i * 0.37) % 1 + 1) % 1;
+          const px = ((x1 + (x2 - x1) * f) / 100) * w;
+          const py = ((y1 + (y2 - y1) * f) / 100) * h;
+          packet.style.transform = `translate(${px}px, ${py}px)`;
           packet.style.opacity = String(Math.sin(f * Math.PI) * calm);
         }
-        const rel = relEls.current.get(n.id);
-        if (rel) {
-          rel.style.left = `${(x1 + x2) / 2}%`;
-          rel.style.top = `${(y1 + y2) / 2}%`;
+        const rel = relEl[i];
+        if (rel && !isSmall) {
+          rel.style.transform = `translate(${(((x1 + x2) / 2) / 100) * w}px, ${(((y1 + y2) / 2) / 100) * h}px)`;
         }
-      });
-
-      raf = requestAnimationFrame(tick);
+      }
     };
 
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
+      ro.disconnect();
+      document.removeEventListener("click", onClick, true);
     };
   }, [reduced]);
 
@@ -504,15 +520,13 @@ export function MeGraph() {
               const parent = byId.get(n.parent!)!;
               const lit = onPath.has(n.id);
               return (
-                <line
+                <path
                   key={n.id}
                   ref={(el) => {
                     if (el) lineEls.current.set(n.id, el);
                   }}
-                  x1={parent.x}
-                  y1={parent.y}
-                  x2={n.x}
-                  y2={n.y}
+                  d={`M${parent.x} ${parent.y}L${n.x} ${n.y}`}
+                  fill="none"
                   vectorEffect="non-scaling-stroke"
                   strokeWidth={lit ? 1.5 : 1}
                   className={`transition-[stroke,opacity] duration-300 ${
@@ -537,14 +551,13 @@ export function MeGraph() {
               }}
               aria-hidden="true"
               className="pointer-events-none absolute size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
-              style={{ left: `${byId.get(n.parent!)!.x}%`, top: `${byId.get(n.parent!)!.y}%`, opacity: 0 }}
+              style={{ left: 0, top: 0, opacity: 0 }}
             />
           ))}
 
         {nodes
           .filter((n) => n.parent && n.rel)
           .map((n) => {
-            const parent = byId.get(n.parent!)!;
             return (
               <span
                 key={`rel-${n.id}`}
@@ -555,10 +568,7 @@ export function MeGraph() {
                 className={`pointer-events-none absolute hidden -translate-x-1/2 -translate-y-1/2 rounded bg-paper-raised px-1.5 font-mono text-[0.625rem] tracking-wide text-accent transition-opacity duration-300 sm:block ${
                   onPath.has(n.id) ? "opacity-100" : "opacity-0"
                 }`}
-                style={{
-                  left: `${(parent.x + n.x) / 2}%`,
-                  top: `${(parent.y + n.y) / 2}%`,
-                }}
+                style={{ left: 0, top: 0 }}
               >
                 {n.rel}
               </span>
@@ -572,7 +582,7 @@ export function MeGraph() {
             <m.div
               key={n.id}
               className="absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${n.x}%`, top: `${n.y}%` }}
+              style={{ left: 0, top: 0 }}
               initial={reduced ? false : { opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{

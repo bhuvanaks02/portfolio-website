@@ -8,8 +8,14 @@ const nextConfig = {
     // source photos are only processed once.
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365,
+    // Fewer breakpoints means fewer resized copies to generate and cache.
+    deviceSizes: [390, 640, 828, 1080, 1440],
+    imageSizes: [128, 256, 384],
   },
   experimental: {
+    // Keep prefetched pages in the client router cache, so moving between the
+    // tabs and coming back is instant instead of refetching.
+    staleTimes: { dynamic: 30, static: 300 },
     // Import only the framer-motion pieces that are used.
     optimizePackageImports: ["framer-motion"],
   },

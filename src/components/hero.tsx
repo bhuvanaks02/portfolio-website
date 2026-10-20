@@ -1,8 +1,6 @@
 "use client";
 
-import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 import { site } from "@/content/site";
@@ -23,31 +21,20 @@ function Tagline() {
 }
 
 export function Hero() {
-  const reduced = useReducedMotion();
   // In dev, clicking the portrait flips its shape so the two can be compared.
   const [shape, setShape] = useState(site.avatarShape);
 
-  const rise = (delay: number) =>
-    reduced
-      ? {}
-      : {
-          initial: { opacity: 0, y: 22 },
-          animate: { opacity: 1, y: 0 },
-          transition: {
-            duration: 0.85,
-            delay,
-            ease: [0.22, 1, 0.36, 1] as const,
-          },
-        };
-
   return (
-    <section className="px-4 pt-16 pb-12 sm:px-8 sm:pt-28 sm:pb-16">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative overflow-hidden px-4 pt-16 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 right-0 size-[28rem] rounded-full bg-accent-soft opacity-70 blur-3xl sm:right-[8%]"
+      />
+      <div className="relative mx-auto max-w-5xl">
         <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
           <div className="min-w-0">
             {site.availability.open && (
-              <m.p
-                {...rise(0)}
+              <p data-rise style={{ animationDelay: "0s" }}
                 className="label flex items-center gap-2 text-accent"
               >
                 <span className="relative flex size-1.5">
@@ -55,15 +42,15 @@ export function Hero() {
                   <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
                 </span>
                 {site.availability.label}
-              </m.p>
+              </p>
             )}
 
-            <m.h1 {...rise(0.08)} className="display mt-7 text-display">
+            <h1 data-rise style={{ animationDelay: "0.08s" }} className="display mt-7 text-display">
               {site.name}
-            </m.h1>
+            </h1>
           </div>
 
-          <m.div {...rise(0.05)} className="shrink-0">
+          <div data-rise style={{ animationDelay: "0.05s" }} className="shrink-0">
             <div
               onClick={
                 isDev
@@ -71,50 +58,28 @@ export function Hero() {
                   : undefined
               }
               title={isDev ? `Click to toggle shape (${shape})` : undefined}
-              className={`relative size-32 overflow-hidden border border-rule bg-paper-raised transition-[border-radius] duration-300 sm:size-40 ${
+              className={`relative size-32 overflow-hidden border border-rule bg-paper-raised ring-4 ring-accent-soft ring-offset-4 ring-offset-paper transition-[border-radius] duration-300 sm:size-44 ${
                 shape === "circle" ? "rounded-full" : "rounded-2xl"
               } ${isDev ? "cursor-pointer" : ""}`}
             >
               <Image
-                src="/avatar.jpg"
+                src="/avatar-web.jpg"
                 alt={`Portrait of ${site.name}`}
                 fill
-                sizes="(min-width: 640px) 10rem, 8rem"
+                sizes="(min-width: 640px) 11rem, 8rem"
                 className="object-cover"
                 priority
               />
             </div>
-          </m.div>
+          </div>
         </div>
 
-        <m.p
-          {...rise(0.16)}
-          className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl"
+        <p data-rise style={{ animationDelay: "0.16s" }}
+          className="mt-10 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-relaxed text-ink-soft sm:text-xl"
         >
           <Tagline />
-        </m.p>
+        </p>
 
-        <m.div
-          {...rise(0.24)}
-          className="mt-10"
-        >
-          <Link
-            href="/work"
-            className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5"
-          >
-            Engineering
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
-            >
-              →
-            </span>
-          </Link>
-        </m.div>
-
-        <m.p {...rise(0.32)} className="label mt-14 text-[0.8125rem]! sm:text-sm!">
-          {site.role} · {site.location}
-        </m.p>
       </div>
     </section>
   );

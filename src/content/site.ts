@@ -386,6 +386,8 @@ export const sideQuests = {
       title: "Community & operations contributor · Contract, part-time",
       period: "~1 year",
       location: "Web3 marketing agency, Asia",
+      href: "https://x.com/pukecast",
+      links: [{ label: "@pukecast on X", href: "https://x.com/pukecast" }],
       points: [
         "Outreach and partner-meeting materials, as key support for external communications.",
         "Management support, and quick research on companies and KOLs to inform strategy.",
@@ -498,7 +500,7 @@ export const sideQuests = {
       period: "Feb 2024",
       location: "Bengaluru",
       image: {
-        src: "/photos/Marketing%20coordinator%20at%20Global%20Academy%20of%20Technology.JPG",
+        src: "/photos/hackaleague-marketing-coordinator.jpg",
         alt: "Bhuvana as marketing coordinator at Global Academy of Technology",
         caption: "Marketing coordinator, Global Academy of Technology.",
         width: 6000,
@@ -653,7 +655,7 @@ export const achievements: {
       "Mentored teams and judged at the grand finale of the iQOO hackathon, 9th to 11th October 2026.",
     year: "2026",
     photo: {
-      src: "/photos/iqoo-hackathon-mentor.jpg",
+      src: "/photos/iqoo-hackathon-mentor-web.jpg",
       alt: "Bhuvana mentoring at the iQOO hackathon grand finale",
       width: 3879,
       height: 5818,

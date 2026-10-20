@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { LazyReel } from "@/components/lazy-reel";
+import { PageNav } from "@/components/page-nav";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { sideQuests } from "@/content/site";
@@ -15,7 +16,7 @@ export default function SideQuestsPage() {
     <>
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
-          <p className="label">Side quests</p>
+          <p className="label text-accent">Side quests</p>
           <h1 className="display mt-5 max-w-3xl text-title">
             Everything that is not tech.
           </h1>
@@ -49,7 +50,7 @@ export default function SideQuestsPage() {
                   c.name
                 )}
               </h3>
-              <p className="mt-1.5 text-sm text-ink-soft">{c.role}</p>
+              <p className="mt-1.5 text-sm text-accent">{c.role}</p>
               <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
                 {c.detail}
               </p>
@@ -73,7 +74,9 @@ export default function SideQuestsPage() {
                   {race.name}
                   <span className="text-ink-muted"> · {race.distance}</span>
                 </p>
-                <span className="label tabular-nums">{race.year}</span>
+                <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+                  {race.year}
+                </span>
               </li>
             ))}
           </ul>
@@ -120,7 +123,10 @@ export default function SideQuestsPage() {
         <Reveal>
           <ul className="flex flex-wrap gap-x-8 gap-y-3">
             {sideQuests.languages.map((language) => (
-              <li key={language} className="display text-3xl sm:text-4xl">
+              <li
+                key={language}
+                className="display text-3xl text-accent sm:text-4xl"
+              >
                 {language}
               </li>
             ))}
@@ -134,7 +140,7 @@ export default function SideQuestsPage() {
             {sideQuests.toolkit.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-rule px-3 py-1 text-sm text-ink-soft"
+                className="rounded-full bg-accent-soft px-3 py-1 text-sm text-ink"
               >
                 {item}
               </li>
@@ -142,6 +148,10 @@ export default function SideQuestsPage() {
           </ul>
         </Reveal>
       </Section>
+      <PageNav
+        back={{ href: "/marketing", label: "Marketing" }}
+        next={{ href: "/", label: "Homepage" }}
+      />
     </>
   );
 }

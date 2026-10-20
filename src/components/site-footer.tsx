@@ -8,10 +8,10 @@ export function SiteFooter() {
   return (
     <footer
       id="contact"
-      className="border-t border-rule px-4 py-16 sm:px-8 sm:py-24"
+      className="border-t border-rule px-4 py-10 sm:px-8 sm:py-16"
     >
       <div className="mx-auto max-w-5xl">
-        <div className="grid gap-12 sm:grid-cols-[1.4fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr]">
           <div>
             <p className="label">Contact</p>
             <h2 className="display mt-4 text-section max-w-md">
@@ -47,15 +47,9 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-2 border-t border-rule pt-6 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.name}. {site.location}.
-          </p>
-          <p className="font-mono">
-            Built with Next.js &amp; Tailwind.
-            <RetroDoor />
-          </p>
-        </div>
+        <p className="mt-8 text-right text-xs text-ink-muted">
+          <RetroDoor />
+        </p>
       </div>
     </footer>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { CertificateThumb } from "@/components/certificate-thumb";
+import { PageNav } from "@/components/page-nav";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { site, sideQuests } from "@/content/site";
@@ -33,7 +34,7 @@ export default function MarketingPage() {
     <>
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
-          <p className="label">Marketing</p>
+          <p className="label text-accent">Marketing</p>
           <h1 className="display mt-5 max-w-3xl text-title">
             Campaigns, communities and hackathon floors.
           </h1>
@@ -58,6 +59,14 @@ export default function MarketingPage() {
               className="link-underline"
             >
               @ethmumbai
+            </a>
+            <a
+              href="https://x.com/pukecast"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline"
+            >
+              @pukecast
             </a>
             <a
               href="https://x.com/KsBhuvana"
@@ -104,7 +113,7 @@ export default function MarketingPage() {
                 }
               >
               <div>
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                 <h3 className="display text-2xl sm:text-3xl">
                   {"href" in role && role.href ? (
                     <a
@@ -119,10 +128,17 @@ export default function MarketingPage() {
                     role.org
                   )}
                 </h3>
-                <span className="label">{role.period}</span>
+                {role.period && (
+                  <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+                    {role.period}
+                  </span>
+                )}
               </div>
-              <p className="mt-1.5 text-sm text-ink-soft">
-                {[role.title, role.location].filter(Boolean).join(" · ")}
+              <p className="mt-1.5 text-sm">
+                <span className="text-accent">{role.title}</span>
+                {role.location && (
+                  <span className="text-ink-muted"> · {role.location}</span>
+                )}
               </p>
               <ul className="mt-4 max-w-2xl list-disc space-y-1.5 pl-5 leading-relaxed text-ink-soft">
                 {role.points.map((point) => (
@@ -207,7 +223,7 @@ export default function MarketingPage() {
             {sideQuests.toolkit.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-rule px-3 py-1 text-sm text-ink-soft"
+                className="rounded-full bg-accent-soft px-3 py-1 text-sm text-ink"
               >
                 {item}
               </li>
@@ -215,6 +231,10 @@ export default function MarketingPage() {
           </ul>
         </Reveal>
       </Section>
+      <PageNav
+        back={{ href: "/work", label: "Engineering" }}
+        next={{ href: "/side-quests", label: "Side quests" }}
+      />
     </>
   );
 }

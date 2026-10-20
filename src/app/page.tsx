@@ -11,7 +11,11 @@ import {
   work,
 } from "@/content/site";
 
-const glance = [{ label: "Now", value: work[0].company }];
+const glance = [
+  { label: "Now", value: work[0].company },
+  { label: "Role", value: site.role },
+  { label: "Based in", value: site.location },
+];
 
 /** The three strands, one short card each; the detail lives on their pages. */
 const gist = [

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { CertificateThumb } from "@/components/certificate-thumb";
 import { ProjectGrid } from "@/components/project-grid";
+import { PageNav } from "@/components/page-nav";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { WorkIndex } from "@/components/work-index";
@@ -80,7 +81,7 @@ export default function ResumePage() {
     <>
       <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
-          <p className="label">Engineering</p>
+          <p className="label text-accent">Engineering</p>
           <h1 className="display mt-5 max-w-3xl text-title">
             AI agents, graph databases and the backend systems around them.
           </h1>
@@ -153,7 +154,7 @@ export default function ResumePage() {
                 {group.items.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-rule px-3 py-1 text-sm text-ink-soft"
+                    className="rounded-full bg-accent-soft px-3 py-1 text-sm text-ink"
                   >
                     {item}
                   </span>
@@ -222,6 +223,10 @@ export default function ResumePage() {
           />
         </Reveal>
       </Section>
+      <PageNav
+        back={{ href: "/", label: "Homepage" }}
+        next={{ href: "/marketing", label: "Marketing" }}
+      />
     </>
   );
 }

@@ -13,11 +13,11 @@ type SectionProps = {
 
 export function Section({ id, label, title, note, children }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-16 border-t border-rule px-4 py-12 sm:px-8 sm:py-24">
+    <section id={id} className="defer-paint scroll-mt-16 border-t border-rule px-4 py-12 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <div className="flex items-baseline justify-between gap-6">
-            <p className="label">{label}</p>
+            <p className="label text-accent">{label}</p>
             {note && <p className="label">{note}</p>}
           </div>
           {title && (

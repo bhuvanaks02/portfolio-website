@@ -20,15 +20,19 @@ export function WorkIndex() {
           as="li"
           key={entry.slug}
           id={entry.slug}
-          className="scroll-mt-20 border-b border-rule py-10 sm:py-14"
+          className="defer-paint scroll-mt-20 border-b border-rule py-10 sm:py-14"
         >
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="label tabular-nums">{entry.index}</span>
-            <h3 className="display text-3xl sm:text-4xl">{entry.company}</h3>
-            <span className="label">{entry.period}</span>
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <h3 className="display text-3xl leading-tight sm:text-4xl">
+              {entry.company}
+            </h3>
+            <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+              {entry.period}
+            </span>
           </div>
           <p className="mt-2 text-sm text-ink-soft">
-            {entry.title} · {entry.location}
+            <span className="text-accent">{entry.title}</span>
+            <span className="text-ink-muted"> · {entry.location}</span>
           </p>
           {entry.headline && (
             <p className="mt-4 max-w-2xl font-serif text-xl italic leading-snug text-ink-muted">
