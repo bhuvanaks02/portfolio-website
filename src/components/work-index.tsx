@@ -34,11 +34,6 @@ export function WorkIndex() {
             <span className="text-accent">{entry.title}</span>
             <span className="text-ink-muted"> · {entry.location}</span>
           </p>
-          {entry.headline && (
-            <p className="mt-4 max-w-2xl font-serif text-xl italic leading-snug text-ink-muted">
-              {entry.headline}
-            </p>
-          )}
 
           {entry.highlights && entry.highlights.length > 0 && (
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:flex sm:flex-wrap sm:gap-x-10">
