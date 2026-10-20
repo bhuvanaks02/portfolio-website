@@ -101,7 +101,7 @@ export default function MarketingPage() {
               key={role.org}
               id={role.id}
               delay={i * 0.06}
-              className="scroll-mt-20 border-b border-rule py-9 sm:py-9"
+              className="scroll-mt-20 border-b border-rule py-9 last:border-b-0 sm:py-9"
             >
               <div
                 className={

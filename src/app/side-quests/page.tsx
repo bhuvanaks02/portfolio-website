@@ -34,7 +34,7 @@ export default function SideQuestsPage() {
               key={c.id}
               id={c.id}
               delay={i * 0.06}
-              className="scroll-mt-20 border-b border-rule py-9 sm:py-9"
+              className="scroll-mt-20 border-b border-rule py-9 last:border-b-0 sm:py-9"
             >
               <h3 className="display text-2xl sm:text-3xl">
                 {c.href.startsWith("http") ? (
