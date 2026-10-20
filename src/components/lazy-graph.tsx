@@ -22,5 +22,12 @@ const MeGraph = dynamic(
 /** The graph and its code are only fetched as it nears the screen. */
 export function LazyGraph() {
   const [ref, near] = useNearScreen<HTMLDivElement>("400px");
-  return <div ref={ref}>{near ? <MeGraph /> : <Placeholder />}</div>;
+  return (
+    <div ref={ref}>
+      {near ? <MeGraph /> : <Placeholder />}
+      <p className="label mt-4 text-center sm:hidden">
+        Best experienced on a laptop or a bigger screen
+      </p>
+    </div>
+  );
 }
