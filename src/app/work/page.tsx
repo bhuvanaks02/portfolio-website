@@ -98,36 +98,6 @@ export default function ResumePage() {
         title="Three years of shipping AI and graph systems."
       >
         <WorkIndex />
-
-        <div className="mt-12">
-          <Reveal>
-            <p className="label">Earlier</p>
-          </Reveal>
-          <ul className="mt-4 border-t border-rule">
-            {internships.map((role) => (
-              <Reveal
-                as="li"
-                key={role.company}
-                className="border-b border-rule py-6 last:border-b-0"
-              >
-                <div className="flex items-start justify-between gap-x-4">
-                  <p className="min-w-0 text-ink-soft">
-                    <span className="font-medium">{role.company}</span>
-                    <span className="text-ink-muted"> · {role.title}</span>
-                  </p>
-                  <span className="label shrink-0 whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
-                    {role.period}
-                  </span>
-                </div>
-                <ul className="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-muted">
-                  {role.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
       </Section>
 
       <Section

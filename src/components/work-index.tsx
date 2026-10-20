@@ -1,6 +1,6 @@
 import { CertificateThumb } from "@/components/certificate-thumb";
 import { Reveal } from "@/components/reveal";
-import { work } from "@/content/site";
+import { internships, work } from "@/content/site";
 
 /** Anchor id for a section inside a role, e.g. "infosys-small-language-models". */
 export function sectionId(slug: string, heading: string) {
@@ -83,6 +83,31 @@ export function WorkIndex() {
               />
             </div>
           )}
+        </Reveal>
+      ))}
+      {internships.map((role) => (
+        <Reveal
+          as="li"
+          key={role.company}
+          className="defer-paint scroll-mt-20 border-b border-rule py-12 last:border-b-0 sm:py-14"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <h3 className="display text-3xl leading-tight sm:text-4xl">
+              {role.company}
+            </h3>
+            <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
+              {role.period}
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-ink-soft">
+            <span className="text-accent">{role.title}</span>
+            <span className="text-ink-muted"> · {role.location}</span>
+          </p>
+          <ul className="mt-6 max-w-2xl list-disc space-y-2 pl-5 leading-relaxed text-ink-soft">
+            {role.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
         </Reveal>
       ))}
     </ul>
