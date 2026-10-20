@@ -40,7 +40,7 @@ export function WorkIndex() {
               <div
                 key={section.heading}
                 id={sectionId(entry.slug, section.heading)}
-                className="scroll-mt-20 border-b border-rule py-6 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
+                className="scroll-mt-20 border-b border-rule py-6 last:border-b-0 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
               >
                 <h4 className="display text-xl">{section.heading}</h4>
                 <div

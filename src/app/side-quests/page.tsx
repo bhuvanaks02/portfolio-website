@@ -68,7 +68,7 @@ export default function SideQuestsPage() {
             {sideQuests.running.races.map((race) => (
               <li
                 key={race.name}
-                className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule py-4"
+                className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule py-4 last:border-b-0"
               >
                 <p className="text-ink-soft">
                   {race.name}

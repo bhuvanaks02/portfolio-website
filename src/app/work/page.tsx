@@ -34,7 +34,7 @@ function AchievementList({ items }: { items: Achievement[] }) {
         <li
           key={item.title}
           id={item.id}
-          className="scroll-mt-20 border-b border-rule py-4"
+          className="scroll-mt-20 border-b border-rule py-4 last:border-b-0"
         >
           <div
             className={
@@ -108,14 +108,14 @@ export default function ResumePage() {
               <Reveal
                 as="li"
                 key={role.company}
-                className="border-b border-rule py-6"
+                className="border-b border-rule py-6 last:border-b-0"
               >
-                <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-                  <p className="text-ink-soft">
+                <div className="flex items-start justify-between gap-x-4">
+                  <p className="min-w-0 text-ink-soft">
                     <span className="font-medium">{role.company}</span>
                     <span className="text-ink-muted"> · {role.title}</span>
                   </p>
-                  <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
+                  <span className="label shrink-0 whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
                     {role.period}
                   </span>
                 </div>
