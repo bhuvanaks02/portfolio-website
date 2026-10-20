@@ -58,7 +58,7 @@ function AchievementList({ items }: { items: Achievement[] }) {
                 alt={media.alt}
                 width={media.width}
                 height={media.height}
-                className="max-w-[14rem] md:justify-self-end"
+                className="mx-auto max-w-[14rem] md:mx-0 md:justify-self-end"
               />
             )}
           </div>

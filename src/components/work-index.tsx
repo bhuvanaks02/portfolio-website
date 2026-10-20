@@ -60,7 +60,7 @@ export function WorkIndex() {
                   {section.image && (
                     <CertificateThumb
                       {...section.image}
-                      className="max-w-[10rem] md:justify-self-end"
+                      className="mx-auto max-w-[10rem] md:mx-0 md:justify-self-end"
                     />
                   )}
                 </div>
@@ -79,7 +79,7 @@ export function WorkIndex() {
               </div>
               <CertificateThumb
                 {...entry.recognition.certificate}
-                className="max-w-[10rem] sm:justify-self-end"
+                className="mx-auto max-w-[10rem] sm:mx-0 sm:justify-self-end"
               />
             </div>
           )}

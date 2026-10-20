@@ -181,7 +181,7 @@ export default function MarketingPage() {
                   caption={role.image.caption}
                   className={`${
                     isPortrait(role) ? "max-w-[9rem]" : "max-w-[16rem]"
-                  } md:justify-self-end`}
+                  } mx-auto md:mx-0 md:justify-self-end`}
                 />
               )}
               </div>
