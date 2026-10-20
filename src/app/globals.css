@@ -20,9 +20,9 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
 
-  --text-display: clamp(2.5rem, 8vw, 5.75rem);
-  --text-title: clamp(1.875rem, 4.5vw, 3.25rem);
-  --text-section: clamp(1.5rem, 2.6vw, 2rem);
+  --text-display: clamp(2.25rem, 8vw, 5.75rem);
+  --text-title: clamp(1.75rem, 4.5vw, 3.25rem);
+  --text-section: clamp(1.375rem, 2.6vw, 2rem);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -162,9 +162,21 @@ html.has-cursor * {
 /* One text scale for phones: labels 12, small text 15, body 16, so the same
    kind of text is the same size on every page. Larger screens are unchanged. */
 @media (max-width: 639.98px) {
-  .text-sm {
+  body {
     font-size: 0.9375rem;
-    line-height: 1.5rem;
+  }
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.45rem;
+  }
+  .text-base {
+    font-size: 0.9375rem;
+  }
+  .text-lg {
+    font-size: 1rem;
+  }
+  .text-xl {
+    font-size: 1.0625rem;
   }
   .text-xs {
     font-size: 0.8125rem;
@@ -177,10 +189,10 @@ html.has-cursor * {
     letter-spacing: -0.012em;
   }
   .text-3xl {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   .text-2xl {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .leading-relaxed {
     line-height: 1.75;

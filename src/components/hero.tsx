@@ -31,11 +31,11 @@ export function Hero() {
         className="pointer-events-none absolute -top-24 right-0 size-[28rem] rounded-full bg-accent-soft opacity-70 blur-3xl sm:right-[8%]"
       />
       <div className="relative mx-auto max-w-5xl">
-        <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+        <div className="flex flex-col-reverse items-center gap-8 text-center sm:flex-row sm:text-left sm:items-center sm:justify-between sm:gap-10">
           <div className="min-w-0">
             {site.availability.open && (
               <p data-rise style={{ animationDelay: "0s" }}
-                className="label flex items-center gap-2 text-accent"
+                className="label flex items-center justify-center gap-2 text-accent sm:justify-start"
               >
                 <span className="relative flex size-1.5">
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
@@ -75,7 +75,7 @@ export function Hero() {
         </div>
 
         <p data-rise style={{ animationDelay: "0.16s" }}
-          className="mt-8 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-relaxed text-ink-soft sm:text-xl"
+          className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-ink-soft sm:mx-0 sm:border-l-2 sm:border-accent/40 sm:pl-5 sm:text-left sm:text-xl"
         >
           <Tagline />
         </p>

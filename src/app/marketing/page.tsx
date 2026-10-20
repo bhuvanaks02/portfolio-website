@@ -33,17 +33,17 @@ export default function MarketingPage() {
   return (
     <>
       <header className="px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl text-center sm:text-left">
           <p className="label text-accent">Marketing</p>
-          <h1 className="display mt-5 max-w-3xl text-title">
+          <h1 className="display mx-auto mt-5 max-w-3xl text-title sm:mx-0">
             Campaigns, communities and hackathon floors.
           </h1>
-          <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
+          <p className="mx-auto mt-6 max-w-2xl sm:mx-0 leading-relaxed text-ink-soft">
             Marketing, PR and on-ground operations, explored out of curiosity:
             a Web3 agency, a conference and hackathon, livestreams and
             meetups.
           </p>
-          <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-soft">
+          <p className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-sm text-ink-soft sm:justify-start">
             <a
               href="https://www.ethmumbai.in/"
               target="_blank"
@@ -129,7 +129,7 @@ export default function MarketingPage() {
                   )}
                 </h3>
                 {role.period && (
-                  <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+                  <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
                     {role.period}
                   </span>
                 )}

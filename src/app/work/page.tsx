@@ -80,12 +80,12 @@ export default function ResumePage() {
   return (
     <>
       <header className="px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl text-center sm:text-left">
           <p className="label text-accent">Engineering</p>
-          <h1 className="display mt-5 max-w-3xl text-title">
+          <h1 className="display mx-auto mt-5 max-w-3xl text-title sm:mx-0">
             AI agents, graph databases and the backend systems around them.
           </h1>
-          <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">
+          <p className="mx-auto mt-6 max-w-2xl sm:mx-0 leading-relaxed text-ink-soft">
             {site.role} in {site.location}. Everything technical in one place.
           </p>
         </div>
@@ -110,12 +110,14 @@ export default function ResumePage() {
                 key={role.company}
                 className="border-b border-rule py-6"
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
                   <p className="text-ink-soft">
                     <span className="font-medium">{role.company}</span>
                     <span className="text-ink-muted"> · {role.title}</span>
                   </p>
-                  <span className="label tabular-nums">{role.period}</span>
+                  <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
+                    {role.period}
+                  </span>
                 </div>
                 <ul className="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink-muted">
                   {role.points.map((point) => (

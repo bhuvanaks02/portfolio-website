@@ -26,7 +26,7 @@ export function WorkIndex() {
             <h3 className="display text-3xl leading-tight sm:text-4xl">
               {entry.company}
             </h3>
-            <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+            <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1 sm:text-[0.6875rem]!">
               {entry.period}
             </span>
           </div>
@@ -52,7 +52,7 @@ export function WorkIndex() {
             </p>
           )}
 
-          <div className="mt-8 border-t border-rule">
+          <div className="mt-6">
             {entry.sections.map((section) => (
               <div
                 key={section.heading}

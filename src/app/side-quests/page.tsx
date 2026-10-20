@@ -15,12 +15,12 @@ export default function SideQuestsPage() {
   return (
     <>
       <header className="px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl text-center sm:text-left">
           <p className="label text-accent">Side quests</p>
-          <h1 className="display mt-5 max-w-3xl text-title">
+          <h1 className="display mx-auto mt-5 max-w-3xl text-title sm:mx-0">
             Everything that is not tech.
           </h1>
-          <p className="mt-6 max-w-2xl font-serif text-xl italic leading-snug text-ink-soft">
+          <p className="mx-auto mt-6 max-w-2xl sm:mx-0 font-serif text-xl italic leading-snug text-ink-soft">
             {sideQuests.intro}
           </p>
         </div>
@@ -74,7 +74,7 @@ export default function SideQuestsPage() {
                   {race.name}
                   <span className="text-ink-muted"> · {race.distance}</span>
                 </p>
-                <span className="label whitespace-nowrap rounded-full border border-rule px-3 py-1 tabular-nums">
+                <span className="label whitespace-nowrap rounded-full border border-rule px-2.5 py-0.5 text-[0.6875rem]! tabular-nums sm:px-3 sm:py-1">
                   {race.year}
                 </span>
               </li>

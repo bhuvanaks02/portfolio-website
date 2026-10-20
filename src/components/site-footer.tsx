@@ -10,11 +10,11 @@ export function SiteFooter() {
       id="contact"
       className="border-t border-rule px-4 py-10 sm:px-8 sm:py-16"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl text-center sm:text-left">
         <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr]">
           <div>
             <p className="label">Contact</p>
-            <h2 className="display mt-4 text-section max-w-md">
+            <h2 className="display mx-auto mt-4 max-w-md text-section sm:mx-0">
               Got something to build, run or figure out? Let&apos;s talk.
             </h2>
             <a
@@ -47,7 +47,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-8 text-right text-xs text-ink-muted">
+        <p className="mt-8 text-center sm:text-right text-xs text-ink-muted">
           <RetroDoor />
         </p>
       </div>
