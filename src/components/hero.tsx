@@ -25,7 +25,7 @@ export function Hero() {
   const [shape, setShape] = useState(site.avatarShape);
 
   return (
-    <section className="relative overflow-hidden px-4 pt-16 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
+    <section className="relative overflow-hidden px-4 pt-14 pb-16 sm:px-8 sm:pt-28 sm:pb-20">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 right-0 size-[28rem] rounded-full bg-accent-soft opacity-70 blur-3xl sm:right-[8%]"
@@ -75,7 +75,7 @@ export function Hero() {
         </div>
 
         <p data-rise style={{ animationDelay: "0.16s" }}
-          className="mt-10 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-relaxed text-ink-soft sm:text-xl"
+          className="mt-8 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-relaxed text-ink-soft sm:text-xl"
         >
           <Tagline />
         </p>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function SideQuestsPage() {
   return (
     <>
-      <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
+      <header className="px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
           <p className="label text-accent">Side quests</p>
           <h1 className="display mt-5 max-w-3xl text-title">
@@ -34,7 +34,7 @@ export default function SideQuestsPage() {
               key={c.id}
               id={c.id}
               delay={i * 0.06}
-              className="scroll-mt-20 border-b border-rule py-7 sm:py-9"
+              className="scroll-mt-20 border-b border-rule py-9 sm:py-9"
             >
               <h3 className="display text-2xl sm:text-3xl">
                 {c.href.startsWith("http") ? (

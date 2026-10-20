@@ -79,7 +79,7 @@ function AchievementList({ items }: { items: Achievement[] }) {
 export default function ResumePage() {
   return (
     <>
-      <header className="px-4 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
+      <header className="px-4 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-16">
         <div className="mx-auto max-w-5xl">
           <p className="label text-accent">Engineering</p>
           <h1 className="display mt-5 max-w-3xl text-title">

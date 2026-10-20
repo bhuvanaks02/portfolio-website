@@ -20,8 +20,8 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
 
-  --text-display: clamp(2.75rem, 8vw, 5.75rem);
-  --text-title: clamp(2rem, 4.5vw, 3.25rem);
+  --text-display: clamp(2.5rem, 8vw, 5.75rem);
+  --text-title: clamp(1.875rem, 4.5vw, 3.25rem);
   --text-section: clamp(1.5rem, 2.6vw, 2rem);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -169,6 +169,21 @@ html.has-cursor * {
   .text-xs {
     font-size: 0.8125rem;
     line-height: 1.25rem;
+  }
+  /* Serif headings are set tight for desktop; on a phone, wrapped lines need
+     air between them, and body copy reads better with a little more leading. */
+  .display {
+    line-height: 1.12;
+    letter-spacing: -0.012em;
+  }
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  .leading-relaxed {
+    line-height: 1.75;
   }
 }
 @media (min-width: 640px) {

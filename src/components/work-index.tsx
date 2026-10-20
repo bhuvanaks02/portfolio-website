@@ -20,7 +20,7 @@ export function WorkIndex() {
           as="li"
           key={entry.slug}
           id={entry.slug}
-          className="defer-paint scroll-mt-20 border-b border-rule py-10 sm:py-14"
+          className="defer-paint scroll-mt-20 border-b border-rule py-12 sm:py-14"
         >
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <h3 className="display text-3xl leading-tight sm:text-4xl">
@@ -41,7 +41,7 @@ export function WorkIndex() {
           )}
 
           {entry.highlights && entry.highlights.length > 0 && (
-            <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-10">
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:flex sm:flex-wrap sm:gap-x-10">
               {entry.highlights.map((h) => (
                 <div key={h.label}>
                   <dd className="display text-2xl tabular-nums">{h.value}</dd>
@@ -62,7 +62,7 @@ export function WorkIndex() {
               <div
                 key={section.heading}
                 id={sectionId(entry.slug, section.heading)}
-                className="scroll-mt-20 border-b border-rule py-5 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
+                className="scroll-mt-20 border-b border-rule py-6 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-10"
               >
                 <h4 className="display text-xl">{section.heading}</h4>
                 <div
@@ -72,7 +72,7 @@ export function WorkIndex() {
                       : ""
                   }`}
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {section.body.map((paragraph, j) => (
                       <p key={j} className="leading-relaxed text-ink-soft">
                         {paragraph}
