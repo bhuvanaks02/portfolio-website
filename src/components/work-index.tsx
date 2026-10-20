@@ -35,23 +35,6 @@ export function WorkIndex() {
             <span className="text-ink-muted"> · {entry.location}</span>
           </p>
 
-          {entry.highlights && entry.highlights.length > 0 && (
-            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:flex sm:flex-wrap sm:gap-x-10">
-              {entry.highlights.map((h) => (
-                <div key={h.label}>
-                  <dd className="display text-2xl tabular-nums">{h.value}</dd>
-                  <dt className="label mt-1">{h.label}</dt>
-                </div>
-              ))}
-            </dl>
-          )}
-
-          {entry.context && (
-            <p className="mt-7 max-w-2xl leading-relaxed text-ink-soft">
-              {entry.context}
-            </p>
-          )}
-
           <div className="mt-6">
             {entry.sections.map((section) => (
               <div
