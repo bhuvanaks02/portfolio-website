@@ -462,14 +462,12 @@ export const sideQuests = {
       title: "Student volunteer & event coordinator · Intern",
       period: "Feb 2023 – Mar 2023",
       location: "Bengaluru",
-      image: {
-        src: "/certificates/under25-internship.png",
-        alt: "Under 25 Summit 2023 internship completion certificate for Bhuvana K S, signed by the co-founders",
-        caption: "Internship certificate",
-        href: "/certificates/under25-internship.pdf",
-        width: 910,
-        height: 1287,
-      },
+      links: [
+        {
+          label: "View internship certificate ↗",
+          href: "/certificates/under25-internship.pdf",
+        },
+      ],
       points: [
         "Marketing and campaigns for the Under25 Summit 2023, plus on-ground awareness and operations on summit days.",
         "Coordinated volunteer teams and logistics for large student events.",

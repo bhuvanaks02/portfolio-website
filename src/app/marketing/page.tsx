@@ -156,18 +156,6 @@ export default function MarketingPage() {
                   ))}
                 </div>
               )}
-              {"image" in role && role.image && "href" in role.image && (
-                <p className="mt-4 text-sm">
-                  <a
-                    href={role.image.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline text-ink-soft"
-                  >
-                    Certificate (PDF)
-                  </a>
-                </p>
-              )}
               {"links" in role && role.links && (
                 <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-soft">
                   {role.links.map((link) => (
