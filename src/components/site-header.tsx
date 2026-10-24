@@ -66,6 +66,27 @@ export function SiteHeader() {
           ))}
           <span className="mx-2 hidden h-4 w-px bg-rule/50 sm:block" />
           <a
+            href={`mailto:${site.email}`}
+            aria-label="Send me an email"
+            title={site.email}
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-rule/50 px-2.5 text-sm text-ink-soft transition-colors duration-300 hover:border-rule-strong hover:text-ink sm:px-3.5"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="size-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+              <path d="m4 7.5 8 6 8-6" />
+            </svg>
+            <span className="hidden sm:inline">Contact</span>
+          </a>
+          <
             href={site.resume}
             download
             aria-label="Download résumé (PDF)"
