@@ -86,7 +86,7 @@ export function SiteHeader() {
             </svg>
             <span className="hidden sm:inline">Contact</span>
           </a>
-          <
+          <a
             href={site.resume}
             download
             aria-label="Download résumé (PDF)"
